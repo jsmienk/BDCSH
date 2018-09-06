@@ -6,5 +6,11 @@ from datetime import datetime
 
 def mapper():
 
-    # input comes from STDIN (standard input)
+    # Input comes from STDIN (standard input)
     for line in sys.stdin:
+
+        # Split on all whitespace and on chars: . , ! ? : ; " ( ) < > [ ] # $ = - /
+
+        # For all words in list
+            
+            # Print "word\t1"

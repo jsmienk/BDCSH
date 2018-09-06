@@ -1,6 +1,6 @@
 # Big Data Computing & Storage with Hadoop
 
-CentOS Clone bugfix: `sudo yum update -y nss curl libcurl`
+CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
 
 ## Lesson 7
 

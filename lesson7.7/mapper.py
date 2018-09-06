@@ -11,7 +11,7 @@ def mapper():
 
         # Replace chars: . , ! ? : ; " ( ) < > [ ] # $ = - / with whitespace
         for ch in ['.',',','!','?',':',';','"','(',')','<','>','[',']','#','$','=','-','/']:
-            if ch in string:
+            if ch in line:
                 line = line.replace(ch, ' ')
 
         # Split on all the whitespace
@@ -19,4 +19,6 @@ def mapper():
 
         # Print every word in the correct format
         for word in line:
-            print('{0}\t{1}'.format(word, 1))
+            print('{0}\t{1}'.format(word.lower(), 1))
+
+mapper()

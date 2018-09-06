@@ -11,7 +11,7 @@ def mapper():
 
         # Replace chars: . , ! ? : ; " ( ) < > [ ] # $ = - / with whitespace
         for ch in ['.',',','!','?',':',';','"','(',')','<','>','[',']','#','$','=','-','/']:
-            if ch in string:
+            if ch in line:
                 line = line.replace(ch, ' ')
 
         # Split on all the whitespace

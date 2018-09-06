@@ -9,8 +9,14 @@ def mapper():
     # Input comes from STDIN (standard input)
     for line in sys.stdin:
 
-        # Split on all whitespace and on chars: . , ! ? : ; " ( ) < > [ ] # $ = - /
+        # Replace chars: . , ! ? : ; " ( ) < > [ ] # $ = - / with whitespace
+        for ch in ['.',',','!','?',':',';','"','(',')','<','>','[',']','#','$','=','-','/']:
+            if ch in string:
+                line = line.replace(ch, ' ')
 
-        # For all words in list
-            
-            # Print "word\t1"
+        # Split on all the whitespace
+        line = line.split()
+
+        # Print every word in the correct format
+        for word in line:
+            print "{0}\t{1}".format(word, 1)

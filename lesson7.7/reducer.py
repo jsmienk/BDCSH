@@ -23,7 +23,7 @@ def reducer():
         if prevWord and prevWord != currentWord:
 
             # Print the previous word and its count
-            print "{0}\t{1}".format(prevWord, currentWordCount)
+            print("{0}\t{1}".format(prevWord, currentWordCount))
 
             # Set current word count to 0
             currentWordCount = 0
@@ -35,4 +35,4 @@ def reducer():
         currentWordCount += data[1]
 
     # Print the current word and its count
-    print "{0}\t{1}".format(currentWord, currentWordCount)
+    print("{0}\t{1}".format(currentWord, currentWordCount))

@@ -2,6 +2,19 @@
 
 CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
 
+## Hadoop Distributed File System (HDFS)
+
+### Exploring
+
+`hadoop fs -ls (path)` to show the current files in the path.
+`hadoop fs -get <dirname> <outputfile>` to get files from HDFS.
+`hadoop fs -put <filename>` to move files to HDFS.
+`hadoop fs -rmdir <dirname>` to remove old output directories.
+
+### Running jobs
+
+`hs mapper.py reducer.py <inputfile> <outputdir>`
+
 ## Lesson 7
 
 ### 7. Quiz Inverted Index

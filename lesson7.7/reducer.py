@@ -8,7 +8,7 @@ def reducer():
     prevWord = None
     currentWord = None
     currentWordCount = 0
-    currentWordNodeIdSet = {}
+    currentWordNodeIdSet = set()
     sortedNodeIdList = []
 
     # Input comes from STDIN
@@ -30,7 +30,7 @@ def reducer():
 
             # Set current word count to 0
             currentWordCount = 0
-            currentWordNodeIdSet = {}
+            currentWordNodeIdSet = set()
 
             # New current word
             prevWord = currentWord

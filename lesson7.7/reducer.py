@@ -36,3 +36,5 @@ def reducer():
 
     # Print the current word and its count
     print("{0}\t{1}".format(currentWord, currentWordCount))
+
+reducer()

@@ -40,3 +40,9 @@ CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
 >```bash
 >tar zxvf forum_data.tar.gz
 >```
+
+#### Output
+
+fantastic       346 [...]
+
+fantastically   4   ['', '', '', '']

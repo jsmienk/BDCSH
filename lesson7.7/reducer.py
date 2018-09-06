@@ -20,7 +20,8 @@ def reducer():
             continue
 
         currentWord = data[0]
-        nodeId = data[2]
+        wordCount = int(data[1])
+        nodeId = int(data[2])
 
         # If current word does not equal previous word
         if prevWord and prevWord != currentWord:
@@ -36,7 +37,7 @@ def reducer():
             prevWord = currentWord
 
         # Increase word count and node id to set
-        currentWordCount += int(data[1])
+        currentWordCount += int(wordCount)
         currentWordNodeIdSet.add(nodeId)
 
         # Set the current word as the previous word for next iteration

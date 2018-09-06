@@ -1,5 +1,7 @@
 # Big Data Computing & Storage with Hadoop
 
+CentOS Clone bugfix: sudo yum update -y nss curl libcurl
+
 ## Lesson 7
 
 ### 7. Quiz Inverted Index

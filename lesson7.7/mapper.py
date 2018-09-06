@@ -23,6 +23,6 @@ def mapper():
 
         # Print every word in the correct format
         for word in body:
-            print('{0}\t{1}\t{2}'.format(body.lower(), 1, node_id))
+            print('{0}\t{1}\t{2}'.format(word.lower(), 1, node_id))
 
 mapper()

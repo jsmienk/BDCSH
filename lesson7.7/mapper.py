@@ -19,6 +19,6 @@ def mapper():
 
         # Print every word in the correct format
         for word in line:
-            print('{0}\t{1}'.format(word, 1))
+            print('{0}\t{1}'.format(word.lower(), 1))
 
 mapper()

@@ -34,6 +34,9 @@ def reducer():
         # Increase word count
         currentWordCount += int(data[1])
 
+        # Set the current word as the previous word for next iteration
+        prevWord = currentWord
+
     # Print the current word and its count
     print("{0}\t{1}".format(currentWord, currentWordCount))
 

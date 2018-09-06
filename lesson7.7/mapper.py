@@ -9,16 +9,20 @@ def mapper():
     # Input comes from STDIN (standard input)
     for line in sys.stdin:
 
+        data = line.split('\t')
+        node_id = data[0]
+        body = data[4]
+
         # Replace chars: . , ! ? : ; " ( ) < > [ ] # $ = - / with whitespace
         for ch in ['.',',','!','?',':',';','"','(',')','<','>','[',']','#','$','=','-','/']:
-            if ch in line:
-                line = line.replace(ch, ' ')
+            if ch in body:
+                body = body.replace(ch, ' ')
 
         # Split on all the whitespace
-        line = line.split()
+        body = body.split()
 
         # Print every word in the correct format
-        for word in line:
-            print('{0}\t{1}'.format(word.lower(), 1))
+        for word in body:
+            print('{0}\t{1}\t{2}'.format(body.lower(), 1, node_id))
 
 mapper()

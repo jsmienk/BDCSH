@@ -18,7 +18,9 @@ CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
 
 ### Running jobs
 
-`hs mapper.py reducer.py <inputfile> <outputdir>`
+`head -50 <inputfile> > <outputfile>` to create a test file of 50 lines.
+
+`hs mapper.py reducer.py <inputfile> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
 
 ## Lesson 7
 

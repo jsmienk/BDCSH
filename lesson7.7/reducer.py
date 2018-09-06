@@ -28,14 +28,14 @@ def reducer():
             # Print the previous word and its count
             print("{0}\t{1}\t{2}".format(prevWord, currentWordCount, sorted(currentWordNodeIdSet)))
 
-            # Set current word count to 0
+            # Set current word count to 0 and reset node id set
             currentWordCount = 0
             currentWordNodeIdSet = set()
 
             # New current word
             prevWord = currentWord
 
-        # Increase word count
+        # Increase word count and node id to set
         currentWordCount += int(data[1])
         currentWordNodeIdSet.add(nodeId)
 

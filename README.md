@@ -1,5 +1,6 @@
 # Big Data Computing & Storage with Hadoop
 
+CentOS 6 VM update git fix [here](https://stackoverflow.com/questions/21820715/how-to-install-latest-version-of-git-on-centos-7-x-6-x).
 CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
 
 ## Hadoop Distributed File System (HDFS)
@@ -7,8 +8,11 @@ CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
 ### Exploring
 
 `hadoop fs -ls (path)` to show the current files in the path.
+
 `hadoop fs -get <dirname> <outputfile>` to get files from HDFS.
+
 `hadoop fs -put <filename>` to move files to HDFS.
+
 `hadoop fs -rmdir <dirname>` to remove old output directories.
 
 ### Running jobs

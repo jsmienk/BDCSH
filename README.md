@@ -24,6 +24,13 @@ CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
 
 ### 7. Quiz Inverted Index
 
+>Write a MapReduce program that creates an index of all words that can found in the body of a forum post and node id they can be found in.
+>
+>Do not parse the HTML. Split the text on special charachters: . , ! ? : ; " ' ( ) < > { } [ ] # $ = - /.
+>
+>- How many times was the word "fantastic" used in forums?
+>- List of comma separated nodes the word "fantastically" can be found in.
+>
 > Make sure to create a case-insensitive index (e.g. "FANTASTIC" and "fantastic" should both count towards the same word).
 >
 > You can download the additional dataset [here](http://content.udacity-data.com/course/hadoop/forum_data.tar.gz). To unarchive it, download it to your VM, put in the data directory and run:

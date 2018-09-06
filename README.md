@@ -1,6 +1,7 @@
 # Big Data Computing & Storage with Hadoop
 
 CentOS 6 VM update git fix [here](https://stackoverflow.com/questions/21820715/how-to-install-latest-version-of-git-on-centos-7-x-6-x).
+
 CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
 
 ## Hadoop Distributed File System (HDFS)

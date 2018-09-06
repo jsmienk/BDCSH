@@ -2,7 +2,6 @@
 """mapper.py"""
 
 import sys
-from datetime import datetime
 
 def mapper():
 

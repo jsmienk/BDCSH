@@ -9,6 +9,10 @@ def mapper():
     for line in sys.stdin:
 
         data = line.split('\t')
+
+        if len(data) < 5:
+            continue
+
         node_id = data[0]
         body = data[4]
 

@@ -164,9 +164,9 @@ in that hour of the day)
 
 ##### Result
 
-fantastic       210 [...]
+fantastic       345 [...]
 
-fantastically   4   [17583, 1007765, 1025821, 9006895]
+fantastically   4   [17583, 1007765, 1025821, 7004477, 9006895]
 
 #### 9. Finding Mean
 

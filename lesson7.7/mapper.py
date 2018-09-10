@@ -17,18 +17,21 @@ def mapper():
         if not node_id.isdigit():
             continue
 
+        title = data[2]
         body = data[4]
+
+        content = title + ' ' = body
 
         # Replace chars: . , ! ? : ; " ( ) < > [ ] # $ = - / with whitespace
         for ch in ['.',',','!','?',':',';','"','(',')','<','>','[',']','#','$','=','-','/']:
-            if ch in body:
-                body = body.replace(ch, ' ')
+            if ch in content:
+                content = content.replace(ch, ' ')
 
         # Split on all the whitespace
-        body = body.split()
+        content = content.split()
 
         # Print every word in the correct format
-        for word in body:
+        for word in content:
             print('{0}\t{1}\t{2}'.format(word.lower(), 1, node_id))
 
 mapper()

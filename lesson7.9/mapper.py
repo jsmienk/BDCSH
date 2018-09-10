@@ -17,8 +17,6 @@ def mapper():
 
         # sales
         sales = row[4]
-        if not isinstance(sales, float):
-            continue
 
         # find weekday
         weekday = datetime.strptime(date, "%Y-%m-%d").weekday()

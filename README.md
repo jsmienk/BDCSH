@@ -138,7 +138,7 @@ in that hour of the day)
 
 ### Lesson 7
 
-#### 7. Quiz Inverted Index
+#### 7. Inverted Index
 
 >Write a MapReduce program that creates an index of all words that can found in the body of a forum post and node id they can be found in.
 >
@@ -147,9 +147,9 @@ in that hour of the day)
 >- How many times was the word "fantastic" used in forums?
 >- List of comma separated nodes the word "fantastically" can be found in.
 >
-> Make sure to create a case-insensitive index (e.g. "FANTASTIC" and "fantastic" should both count towards the same word).
+>Make sure to create a case-insensitive index (e.g. "FANTASTIC" and "fantastic" should both count towards the same word).
 >
-> You can download the additional dataset [here](http://content.udacity-data.com/course/hadoop/forum_data.tar.gz). To unarchive it, download it to your VM, put in the data directory and run:
+>You can download the additional dataset [here](http://content.udacity-data.com/course/hadoop/forum_data.tar.gz). To unarchive it, download it to your VM, put in the data directory and run:
 >
 >```bash
 >tar zxvf forum_data.tar.gz
@@ -160,3 +160,21 @@ in that hour of the day)
 fantastic       346 [...]
 
 fantastically   4   ['', '', '', '']
+
+#### 9. Finding Mean
+
+>Write a MapReduce program that processes the `purchases.txt` file and outputs mean (averages) of sales for each workday.
+>
+>You can find the weekday by the date by using builtin Python functionality:
+>
+>```python
+>from datetime import datetime
+>
+>weekday = datetime.strptime(date, "%Y-%m-%d").weekday()
+>```
+>
+>You can download the additional dataset [here](http://content.udacity-data.com/courses/ud617/purchases.txt.gz).
+
+##### Output
+
+.

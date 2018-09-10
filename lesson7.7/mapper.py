@@ -13,7 +13,7 @@ def mapper():
         if len(data) < 5:
             continue
 
-        node_id = data[0]
+        node_id = data[0].strip('"')
         body = data[4]
 
         # Replace chars: . , ! ? : ; " ( ) < > [ ] # $ = - / with whitespace

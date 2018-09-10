@@ -14,10 +14,10 @@ def mapper():
 
         # date
         date = row[0]
-        
+
         # sales
         sales = row[4]
-        if not isinstance(sales, float)
+        if not isinstance(sales, float):
             continue
 
         # find weekday

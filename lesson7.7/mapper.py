@@ -14,6 +14,9 @@ def mapper():
             continue
 
         node_id = data[0].strip('"')
+        if not node_id.isdigit():
+            continue
+
         body = data[4]
 
         # Replace chars: . , ! ? : ; " ( ) < > [ ] # $ = - / with whitespace

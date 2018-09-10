@@ -18,7 +18,7 @@ def reducer():
         # weekday
         currWeekday = data[0]
         # sales
-        sales = data[1]
+        sales = float(data[1])
 
         # If current weekday does not equal previous weekday
         if prevWeekday and prevWeekday != currWeekday:

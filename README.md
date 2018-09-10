@@ -38,7 +38,11 @@ reducer()
 
 `head -50 <inputfile> > <outputfile>` to create a test file of 50 lines.
 
+`cat <testfile> | ./mapper.py | sort` to test the mapper alone.
+
 `cat <testfile> | ./mapper.py | sort | ./reducer.py` to test the Hadoop workflow.
+
+Make sure to give `mapper.py` and `reducer.py` to correct file permissions by running `chmod +x <filename>`.
 
 ## Hadoop Distributed File System (HDFS)
 
@@ -91,7 +95,7 @@ in that hour of the day)
 >
 >Each file contains a work by Shakespeare in the following format:
 >
->```
+>```text
 >0  HAMLET
 >1
 >2
@@ -106,6 +110,7 @@ in that hour of the day)
 >```
 >
 >Each line contains:
+>
 >- A line number
 >- Separation character: tab character
 >- Value: a line of text

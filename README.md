@@ -178,7 +178,7 @@ fantastically   4   ['', '', '', '']
 >weekday = datetime.strptime(date, "%Y-%m-%d").weekday()
 >```
 >
->You can download the additional dataset [here](http://content.udacity-data.com/courses/ud617/purchases.txt.gz).
+>You can download the additional dataset [here](http://content.udacity-data.com/courses/ud617/purchases.txt.gz). Change the file name to purchases.gz.gz to succefully unzip on CentOS 7.
 
 ##### Output
 

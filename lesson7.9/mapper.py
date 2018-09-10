@@ -8,7 +8,7 @@ from datetime import datetime
 def mapper():
     for line in sys.stdin:
 
-        row = line.strip().split('\t')
+        row = line.split('\t')
         if len(row) < 5:
             continue
 

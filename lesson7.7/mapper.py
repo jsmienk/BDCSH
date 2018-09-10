@@ -20,7 +20,7 @@ def mapper():
         title = data[2]
         body = data[4]
 
-        content = title + ' ' = body
+        content = title + ' ' + body
 
         # Replace chars: . , ! ? : ; " ( ) < > [ ] # $ = - / with whitespace
         for ch in ['.',',','!','?',':',';','"','(',')','<','>','[',']','#','$','=','-','/']:

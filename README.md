@@ -4,6 +4,42 @@ CentOS 6 VM update git fix [here](https://stackoverflow.com/questions/21820715/h
 
 CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
 
+## Writing MapReduce in Python
+
+### Mapper
+
+```python
+#!/usr/bin/python
+"""mapper.py"""
+
+import sys
+
+def mapper():
+    # CODE HERE
+
+mapper()
+```
+
+### Reducer
+
+```python
+#!/usr/bin/python
+"""reducer.py"""
+
+import sys
+
+def reducer():
+    # CODE HERE
+
+reducer()
+```
+
+### Testing MapReduce in CentOS 7
+
+`head -50 <inputfile> > <outputfile>` to create a test file of 50 lines.
+
+`cat <testfile> | ./mapper.py | sort | ./reducer.py` to test the Hadoop workflow.
+
 ## Hadoop Distributed File System (HDFS)
 
 ### Exploring
@@ -17,8 +53,6 @@ CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
 `hadoop fs -rmdir <dirname>` to remove old output directories.
 
 ### Running jobs
-
-`head -50 <inputfile> > <outputfile>` to create a test file of 50 lines.
 
 `hs mapper.py reducer.py <inputfile> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
 

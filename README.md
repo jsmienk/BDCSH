@@ -164,9 +164,9 @@ in that hour of the day)
 
 ##### Result
 
-fantastic       346 [...]
+fantastic       210 [...]
 
-fantastically   4   ['', '', '', '']
+fantastically   4   [17583, 1007765, 1025821, 9006895]
 
 #### 9. Finding Mean
 
@@ -187,13 +187,13 @@ fantastically   4   ['', '', '', '']
 Mean sales for every day of the week. Weekdays are represented as integers (Monday equals 0).
 
 ```text
-0	250.009331149
-1	249.738227929
-2	249.851167195
-3	249.872024327
-4	250.223089314
-5	250.084703253
-6	249.946443251
+0 250.009331149
+1 249.738227929
+2 249.851167195
+3 249.872024327
+4 250.223089314
+5 250.084703253
+6 249.946443251
 ```
 
 #### 10. Combiners

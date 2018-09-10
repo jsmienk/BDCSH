@@ -58,6 +58,8 @@ Make sure to give `mapper.py` and `reducer.py` to correct file permissions by ru
 
 ### Running jobs
 
+`hadoop jar usr/lib/hadoop-mapreduce/hadoop-streaming.jar -mapper mapper.py -reducer reducer.py -input <filename> -output <dirname>` to run a full Hadoop job on an input file that is in HDFS.
+
 `hs mapper.py reducer.py <inputfile> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
 
 ## Assignments
@@ -160,7 +162,7 @@ in that hour of the day)
 >tar zxvf forum_data.tar.gz
 >```
 
-##### Output
+##### Result
 
 fantastic       346 [...]
 
@@ -180,6 +182,32 @@ fantastically   4   ['', '', '', '']
 >
 >You can download the additional dataset [here](http://content.udacity-data.com/courses/ud617/purchases.txt.gz). Change the file name to purchases.gz.gz to succefully unzip on CentOS 7.
 
-##### Output
+##### Result
 
-.
+Mean sales for every day of the week. Weekdays are represented as integers (Monday equals 0).
+
+```text
+
+```
+
+#### 10. Using Combiners
+
+>To use combiner, you will have to add a new shortcut command to your VM. In the terminal window type
+>
+>`gedit ~/.bashrc`
+>
+>In the editor that opens, find a function definition `run_mapreduce`. Copy the contents and create a new function (within the same file), let's say `run_mapreduce_with_combiner`. Add the following `-combiner $2` right after `-reducer $2`.
+>
+>And at the end of the file, add a line for the alias:
+>
+>`alias hsc=run_mapreduce_with_combiner`
+>
+>(or whatever you called that function). You can also change the alias itself, just make sure you are not trying to use any already existing Linux command names.
+>
+>Now save the file and exit the gedit program. Run the following in the terminal:
+>
+>`source ~/.bashrc`
+>
+>This will reload the configuration file you just edited, and your new alias should be ready to use.
+>
+>The new alias will take the second parameter (which is the reducer script) and also use it for combiner. If you want, you can actually make another alias, that allows you to use a different script for combiner. You would need to also upload it, same as you did for mapper and reducer scripts.

@@ -29,7 +29,7 @@ def reducer():
         if prev_track and prev_track != curr_track:
 
             # Print the previous track and its count per month
-            for month in curr_track_plays.keys():
+            for month in sorted(curr_track_plays.keys()):
                 print("{0}\t{1}\t{2}".format(prev_track, month, curr_track_plays[month]))
 
             # Reset dict

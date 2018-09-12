@@ -1,81 +1,15 @@
 # Big Data Computing & Storage with Hadoop
 
-CentOS 6 VM update git fix [here](https://stackoverflow.com/questions/21820715/how-to-install-latest-version-of-git-on-centos-7-x-6-x).
-
-CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
-
-## Writing MapReduce in Python
-
-### Mapper
-
-```python
-#!/usr/bin/python
-"""mapper.py"""
-
-import sys
-
-def mapper():
-        # CODE HERE
-
-mapper()
-```
-
-### Reducer
-
-```python
-#!/usr/bin/python
-"""reducer.py"""
-
-import sys
-
-def reducer():
-        # CODE HERE
-
-reducer()
-```
-
-### Testing MapReduce in CentOS 7
-
-`head -50 <inputfile> > <outputfile>` to create a test file of 50 lines.
-
-`cat <testfile> | ./mapper.py | sort` to test the mapper alone.
-
-`cat <testfile> | ./mapper.py | sort | ./reducer.py` to test the Hadoop workflow.
-
-Make sure to give `mapper.py` and `reducer.py` to correct file permissions by running `chmod +x <filename>`.
-
-## Hadoop Distributed File System (HDFS)
-
-### Exploring
-
-`hadoop fs -ls (path)` to show the current files in the path.
-
-`hadoop fs -get <dirname> (outputfile)` to get files from HDFS.
-
-`hadoop fs -put <filename> (path)` to move files to HDFS.
-
-`hadoop fs -mv <oldfile> <newfile>` to rename files in HDFS.
-
-`hadoop fs -rmdir <dirname>` to remove old output directories.
-
-### Running jobs
-
-`hadoop jar usr/lib/hadoop-mapreduce/hadoop-streaming.jar -mapper mapper.py -reducer reducer.py -input <filename> -output <dirname>` to run a full Hadoop job on an input file that is in HDFS.
-
-`hs mapper.py reducer.py <inputfile> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
-
 ## Assignments
 
-The course containes three assignments:
+>After you have completed lessons 1 through 7 of the Udacity Course, mentioned in the introduction the following assignments have to be done:
 
 1. Written in Python (2 weeks).
-2. Written in Java.
-3. Written in Java.
+2. Written in Java (0.5 week).
+3. Written in Java (0.5 week).
 
-### 1.1
+### 1.1 Music Streaming
 
->After you have completed lessons 1 through 7 of the Udacity Course, mentioned in the introduction the following assignments have to be done:
->
 >The `songplayhistory.zip` which contains 3 files in which the listening history of users of a Spotify-like channel are included:
 >
 >- `people.csv`
@@ -86,7 +20,7 @@ The course containes three assignments:
 >
 >You should hand in the source code of the mappers and the reducers and a (small) report in which you explain your solution and display the results of your solution for the [large dataset](https://leren.saxion.nl/bbcswebdav/pid-2157184-dt-content-rid-50887925_4/xid-50887925_4).
 
-#### 1.1.1
+#### 1.1.1 Play Count per Song per Month
 
 >For each song how often was listened to that song in a certain month of a particular year,
 i.e. March 2015. Expected output: (SongId, number of times played in March 2015), ordered by SongID.
@@ -128,7 +62,7 @@ TREX0CN128F92F8F89    2018 07    2
 TREX0CN128F92F8F89    2018 08    4
 ```
 
-#### 1.1.2
+#### 1.1.2 Songs Listened to per User per Hour of the Day
 
 >For each user the hour of the day (s)he listened most often to songs. Expected output: (FirstName, LastName, hourOfday, numberOfTimesListened to a song in that hour of the day).
 
@@ -185,7 +119,7 @@ Alice Lyfe    22    791
 Alice Lyfe    23    809
 ```
 
-#### 1.1.3
+#### 1.1.3 Top 5 Songs Played at Hour of the Day
 
 >The 5 songs played most often in a specific hour of the day i.e. between 7AM and 8AM. Expected output: 5 lines containing (Songtitle, ArtistName, NumberOfTimesPlayed).
 
@@ -194,7 +128,7 @@ Running a Hadoop job on the large data set resulted in the following output:
 ```text
 ```
 
-#### 1.1.4
+#### 1.1.4 Favourite Artist per User
 
 >For each user, the artist (s)he listen to most often. Expected output: (FirstName, LastName, Artist, NrofTimes listened to that artist) (Hint: you need a cascade of mappers and reducers. Explain why!).
 
@@ -203,7 +137,7 @@ Running a Hadoop job on the large data set resulted in the following output:
 ```text
 ```
 
-### 1.2
+### 1.2 Shakespeare
 
 >For this assignment are given are works by Shakespeare, recorded in the `InvertedIndexInput.tgz` file. If you unpack this file you will have a directory with all the works of Shakespeare.
 >
@@ -244,7 +178,7 @@ Running a Hadoop job on the large data set resulted in the following output:
 
 #### 1.2 Result
 
-### 1.3
+### 1.3 Web Log
 
 >In this assignment we take the accesslog data file from the Udacity course of assignment 1.1 as a starting point, in which it is registered which IP addresses have access on a website:
 >
@@ -334,3 +268,67 @@ Mean sales for every day of the week. Weekdays are represented as integers (Mond
 >This will reload the configuration file you just edited, and your new alias should be ready to use.
 >
 >The new alias will take the second parameter (which is the reducer script) and also use it for combiner. If you want, you can actually make another alias, that allows you to use a different script for combiner. You would need to also upload it, same as you did for mapper and reducer scripts.
+
+## Technical Help & Commands
+
+CentOS 6 VM update git fix [here](https://stackoverflow.com/questions/21820715/how-to-install-latest-version-of-git-on-centos-7-x-6-x).
+
+CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
+
+### Mapper
+
+```python
+#!/usr/bin/python
+"""mapper.py"""
+
+import sys
+
+def mapper():
+        # CODE HERE
+
+mapper()
+```
+
+### Reducer
+
+```python
+#!/usr/bin/python
+"""reducer.py"""
+
+import sys
+
+def reducer():
+        # CODE HERE
+
+reducer()
+```
+
+### Testing MapReduce in CentOS 7
+
+`head -50 <inputfile> > <outputfile>` to create a test file of 50 lines.
+
+`cat <testfile> | ./mapper.py | sort` to test the mapper alone.
+
+`cat <testfile> | ./mapper.py | sort | ./reducer.py` to test the Hadoop workflow.
+
+Make sure to give `mapper.py` and `reducer.py` to correct file permissions by running `chmod +x <filename>`.
+
+## Hadoop Distributed File System (HDFS)
+
+### Exploring
+
+`hadoop fs -ls (path)` to show the current files in the path.
+
+`hadoop fs -get <dirname> (outputfile)` to get files from HDFS.
+
+`hadoop fs -put <filename> (path)` to move files to HDFS.
+
+`hadoop fs -mv <oldfile> <newfile>` to rename files in HDFS.
+
+`hadoop fs -rmdir <dirname>` to remove old output directories.
+
+### Running jobs
+
+`hadoop jar usr/lib/hadoop-mapreduce/hadoop-streaming.jar -mapper mapper.py -reducer reducer.py -input <filename> -output <dirname>` to run a full Hadoop job on an input file that is in HDFS.
+
+`hs mapper.py reducer.py <inputfile> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.

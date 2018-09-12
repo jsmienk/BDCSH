@@ -46,11 +46,11 @@ def reducer():
             curr_user_last_name = None
             curr_user_playhistory.clear()
 
-        if not curr_user_playhistory.has_key(hour_of_day):
-            curr_user_playhistory[hour_of_day] = 0
-
-        # Increase listen count
         if hour_of_day != '-':
+            if not curr_user_playhistory.has_key(hour_of_day):
+                curr_user_playhistory[hour_of_day] = 0
+
+            # Increase listen count
             curr_user_playhistory[hour_of_day] = curr_user_playhistory[hour_of_day] + int(listened_count)
 
         # Set the current user_id as the previous user_id for next iteration

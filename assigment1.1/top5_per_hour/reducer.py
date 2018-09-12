@@ -55,7 +55,7 @@ def reducer():
     # Print the current user's playhistory
     all_tracks.append([curr_track_title, curr_track_artist, curr_track_listened_count])
 
-    for track in sorted(all_tracks, lambda x = x[2], reverse = True)[:10]:
+    for track in sorted(all_tracks, key = lambda x : x[2], reverse = True)[:10]:
         print(track)
 
 reducer()

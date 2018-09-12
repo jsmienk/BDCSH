@@ -39,8 +39,7 @@ def reducer():
         if prev_user and prev_user != curr_user:
 
             # Print the previous user's playhistory
-            for hour in curr_user_playhistory.keys():
-                print("{0}, {1}, {2}, {3}".format(curr_user_first_name, curr_user_last_name, hour, curr_user_playhistory[hour]))
+            print_result(curr_user_first_name, curr_user_last_name, curr_user_playhistory)
 
             # Reset variables
             curr_user_first_name = None
@@ -55,7 +54,10 @@ def reducer():
         prev_user = curr_user
 
     # Print the current user's playhistory
-    for hour in curr_user_playhistory.keys():
-        print("{0}, {1}, {2}, {3}".format(curr_user_first_name, curr_user_last_name, hour, curr_user_playhistory[hour]))
+    print_result(curr_user_first_name, curr_user_last_name, curr_user_playhistory)
+
+def print_result(first_name, last_name, dict):
+    for hour in sorted(dict.keys()):
+        print("{0}\t{1}\t{2}\t{3}".format(first_name, last_name, hour, dict[hour]))
 
 reducer()

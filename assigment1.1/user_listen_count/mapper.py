@@ -17,10 +17,6 @@ def mapper():
         hour_of_day = '-'
         listened_count = 0
 
-        # Two inputs: people.csv & playhistory.csv
-        if len(data) < 3:
-            continue
-
         # Read input of the playhistory.csv file
         if len(data) == 3:
             user_id = data[1]
@@ -33,8 +29,7 @@ def mapper():
             # Extract the hour of the day from the datetime
             hour_of_day = datetime.strptime(date_string, '%Y-%m-%d %H:%M:%S').hour()
             listened_count = 1
-
-        if len(data) == 7:
+        elif len(data) == 7:
             user_id = data[0]
 
             # Skip header line
@@ -43,6 +38,8 @@ def mapper():
 
             first_name = data[1]
             last_name = data[2]
+        else:
+            continue
         
         print('{0},{1},{2},{3},{4}'.format(user_id, first_name, last_name, hour_of_day, listened_count))
 

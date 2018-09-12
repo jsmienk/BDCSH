@@ -219,8 +219,8 @@ Running a Hadoop job on the large data set resulted in the following output:
 >7
 >8    HAMLET son to the late, and nephew to the present king. 9
 >10
->11 POLONIUS lord chamberlain. (LORD POLONIUS:)
->12 ...
+>11   POLONIUS lord chamberlain. (LORD POLONIUS:)
+>12   ...
 >```
 >
 >Each line contains:
@@ -280,9 +280,10 @@ Running a Hadoop job on the large data set resulted in the following output:
 
 ##### 7. Result
 
-fantastic             345 [...]
-
-fantastically     4     [17583, 1007765, 1025821, 7004477, 9006895]
+```text
+fantastic      345  [...]
+fantastically  4    [17583, 1007765, 1025821, 7004477, 9006895]
+```
 
 #### 9. Finding Mean
 
@@ -303,13 +304,13 @@ fantastically     4     [17583, 1007765, 1025821, 7004477, 9006895]
 Mean sales for every day of the week. Weekdays are represented as integers (Monday equals 0).
 
 ```text
-0 250.009331149
-1 249.738227929
-2 249.851167195
-3 249.872024327
-4 250.223089314
-5 250.084703253
-6 249.946443251
+0    250.009331149
+1    249.738227929
+2    249.851167195
+3    249.872024327
+4    250.223089314
+5    250.084703253
+6    249.946443251
 ```
 
 #### 10. Combiners

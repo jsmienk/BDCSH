@@ -91,6 +91,45 @@ in that hour of the day)
 >
 >You should hand in the source code of the mappers and the reducers and a (small) report in which you explain your solution and display the results of your solution for the [large dataset](https://leren.saxion.nl/bbcswebdav/pid-2157184-dt-content-rid-50887925_4/xid-50887925_4).
 
+#### 1.1 Result
+
+Running a Hadoop job on the large data set resulting in the following output:
+
+```text
+TREX0CN128F92F8F89  2016 01 7
+TREX0CN128F92F8F89  2016 02 6
+TREX0CN128F92F8F89  2016 03 5
+TREX0CN128F92F8F89  2016 04 3
+TREX0CN128F92F8F89  2016 05 3
+TREX0CN128F92F8F89  2016 06 2
+TREX0CN128F92F8F89  2016 07 4
+TREX0CN128F92F8F89  2016 08 9
+TREX0CN128F92F8F89  2016 09 6
+TREX0CN128F92F8F89  2016 10 5
+TREX0CN128F92F8F89  2016 11 3
+TREX0CN128F92F8F89  2016 12 4
+TREX0CN128F92F8F89  2017 01 2
+TREX0CN128F92F8F89  2017 02 7
+TREX0CN128F92F8F89  2017 03 5
+TREX0CN128F92F8F89  2017 04 4
+TREX0CN128F92F8F89  2017 05 5
+TREX0CN128F92F8F89  2017 06 5
+TREX0CN128F92F8F89  2017 07 10
+TREX0CN128F92F8F89  2017 08 8
+TREX0CN128F92F8F89  2017 09 2
+TREX0CN128F92F8F89  2017 10 6
+TREX0CN128F92F8F89  2017 11 5
+TREX0CN128F92F8F89  2017 12 3
+TREX0CN128F92F8F89  2018 01 4
+TREX0CN128F92F8F89  2018 02 4
+TREX0CN128F92F8F89  2018 03 11
+TREX0CN128F92F8F89  2018 04 5
+TREX0CN128F92F8F89  2018 05 7
+TREX0CN128F92F8F89  2018 06 3
+TREX0CN128F92F8F89  2018 07 2
+TREX0CN128F92F8F89  2018 08 4
+```
+
 ### 1.2
 
 >For this assignment are given are works by Shakespeare, recorded in the `InvertedIndexInput.tgz` file. If you unpack this file you will have a directory with all the works of Shakespeare.
@@ -130,6 +169,8 @@ in that hour of the day)
 >Hint: To get the name of the input file that is processed at a certain moment, the following statement can be used:
 `String fileName = ((FileSplit) context.getInputSplit()).getPath().getName();`
 
+#### 1.2 Result
+
 ### 1.3
 
 >In this assignment we take the accesslog data file from the Udacity course of assignment 1.1 as a starting point, in which it is registered which IP addresses have access on a website:
@@ -140,6 +181,8 @@ in that hour of the day)
 >2. We want to have an overview per month of the year that states per IP address, how often that particular month the website was visited from that IP address. Think of a solution that can help you achieve this.
 >
 >Hint: Think of a solution where you have 12 reducers and make sure that every reducer handles all hits of one specific month. To do this you must define a partitioner.
+
+#### 1.3 Result
 
 ## Udacity Course
 
@@ -162,7 +205,7 @@ in that hour of the day)
 >tar zxvf forum_data.tar.gz
 >```
 
-##### Result
+##### 7. Result
 
 fantastic       345 [...]
 
@@ -182,7 +225,7 @@ fantastically   4   [17583, 1007765, 1025821, 7004477, 9006895]
 >
 >You can download the additional dataset [here](http://content.udacity-data.com/courses/ud617/purchases.txt.gz). Change the file name to purchases.gz.gz to succefully unzip on CentOS 7.
 
-##### Result
+##### 9. Result
 
 Mean sales for every day of the week. Weekdays are represented as integers (Monday equals 0).
 

@@ -9,7 +9,7 @@ def mapper():
     # Input comes from STDIN (standard input)
     for line in sys.stdin:
 
-        data = line.split(',')
+        data = line.strip().split(',')
 
         if len(data) < 3:
             continue
@@ -20,8 +20,7 @@ def mapper():
             continue
             
         # Reformat date to lose useless time
-        print(date_string)
-        date = datetime.strptime(date_string, '%Y-%m-%d %H:%M:%S').strftime('%Y %m')
+        date = datetime.strptime(date_string.split(' ')[0], '%Y-%m-%d').strftime('%Y %m')
 
         print('{0},{1},{2}'.format(track_id, date, 1))
 

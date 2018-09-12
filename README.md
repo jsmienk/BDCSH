@@ -15,7 +15,7 @@ CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
 import sys
 
 def mapper():
-    # CODE HERE
+        # CODE HERE
 
 mapper()
 ```
@@ -29,7 +29,7 @@ mapper()
 import sys
 
 def reducer():
-    # CODE HERE
+        # CODE HERE
 
 reducer()
 ```
@@ -89,7 +89,46 @@ in that hour of the day)
 >3. The 5 songs played most often in a specific hour of the day i.e. between 7AM and 8AM. Expected output: 5 lines containing (Songtitle, ArtistName, NumberOfTimesPlayed).
 >4. For each user, the artist (s)he listen to most often. Expected output: (FirstName, LastName, Artist, NrofTimes listened to that artist) (Hint: you need a cascade of mappers and reducers. Explain why!).
 >
->You should hand in the source code of the mappers and the reducers and a (small) report in which you explain your solution and display the results of your solution for the large dataset.
+>You should hand in the source code of the mappers and the reducers and a (small) report in which you explain your solution and display the results of your solution for the [large dataset](https://leren.saxion.nl/bbcswebdav/pid-2157184-dt-content-rid-50887925_4/xid-50887925_4).
+
+#### 1.1 Result
+
+Running a Hadoop job on the large data set resulting in the following output:
+
+```text
+TREX0CN128F92F8F89    2016 01    7
+TREX0CN128F92F8F89    2016 02    6
+TREX0CN128F92F8F89    2016 03    5
+TREX0CN128F92F8F89    2016 04    3
+TREX0CN128F92F8F89    2016 05    3
+TREX0CN128F92F8F89    2016 06    2
+TREX0CN128F92F8F89    2016 07    4
+TREX0CN128F92F8F89    2016 08    9
+TREX0CN128F92F8F89    2016 09    6
+TREX0CN128F92F8F89    2016 10    5
+TREX0CN128F92F8F89    2016 11    3
+TREX0CN128F92F8F89    2016 12    4
+TREX0CN128F92F8F89    2017 01    2
+TREX0CN128F92F8F89    2017 02    7
+TREX0CN128F92F8F89    2017 03    5
+TREX0CN128F92F8F89    2017 04    4
+TREX0CN128F92F8F89    2017 05    5
+TREX0CN128F92F8F89    2017 06    5
+TREX0CN128F92F8F89    2017 07    10
+TREX0CN128F92F8F89    2017 08    8
+TREX0CN128F92F8F89    2017 09    2
+TREX0CN128F92F8F89    2017 10    6
+TREX0CN128F92F8F89    2017 11    5
+TREX0CN128F92F8F89    2017 12    3
+TREX0CN128F92F8F89    2018 01    4
+TREX0CN128F92F8F89    2018 02    4
+TREX0CN128F92F8F89    2018 03    11
+TREX0CN128F92F8F89    2018 04    5
+TREX0CN128F92F8F89    2018 05    7
+TREX0CN128F92F8F89    2018 06    3
+TREX0CN128F92F8F89    2018 07    2
+TREX0CN128F92F8F89    2018 08    4
+```
 
 ### 1.2
 
@@ -98,14 +137,14 @@ in that hour of the day)
 >Each file contains a work by Shakespeare in the following format:
 >
 >```text
->0  HAMLET
+>0    HAMLET
 >1
 >2
->3  DRAMATIS PERSONAE 4
+>3    DRAMATIS PERSONAE 4
 >5
->6  CL AUDIUS king of Denmark. (KING CL AUDIUS:)
+>6    CL AUDIUS king of Denmark. (KING CL AUDIUS:)
 >7
->8  HAMLET son to the late, and nephew to the present king. 9
+>8    HAMLET son to the late, and nephew to the present king. 9
 >10
 >11 POLONIUS lord chamberlain. (LORD POLONIUS:)
 >12 ...
@@ -123,12 +162,14 @@ in that hour of the day)
 >
 >For example, for the word 'honeysuckle' the output looks like this:
 >
->`honeysuckle    2kinghenryiv@1038, midsummernightsdream@2175, ...`
+>`honeysuckle        2kinghenryiv@1038, midsummernightsdream@2175, ...`
 >
 >This indicates that the word honeysuckle occurs in the work '2kinghentyiv' on line 1038 and in the work 'midsummernightsdream' on line 2175
 >
 >Hint: To get the name of the input file that is processed at a certain moment, the following statement can be used:
 `String fileName = ((FileSplit) context.getInputSplit()).getPath().getName();`
+
+#### 1.2 Result
 
 ### 1.3
 
@@ -140,6 +181,8 @@ in that hour of the day)
 >2. We want to have an overview per month of the year that states per IP address, how often that particular month the website was visited from that IP address. Think of a solution that can help you achieve this.
 >
 >Hint: Think of a solution where you have 12 reducers and make sure that every reducer handles all hits of one specific month. To do this you must define a partitioner.
+
+#### 1.3 Result
 
 ## Udacity Course
 
@@ -162,11 +205,11 @@ in that hour of the day)
 >tar zxvf forum_data.tar.gz
 >```
 
-##### Result
+##### 7. Result
 
-fantastic       345 [...]
+fantastic             345 [...]
 
-fantastically   4   [17583, 1007765, 1025821, 7004477, 9006895]
+fantastically     4     [17583, 1007765, 1025821, 7004477, 9006895]
 
 #### 9. Finding Mean
 
@@ -182,7 +225,7 @@ fantastically   4   [17583, 1007765, 1025821, 7004477, 9006895]
 >
 >You can download the additional dataset [here](http://content.udacity-data.com/courses/ud617/purchases.txt.gz). Change the file name to purchases.gz.gz to succefully unzip on CentOS 7.
 
-##### Result
+##### 9. Result
 
 Mean sales for every day of the week. Weekdays are represented as integers (Monday equals 0).
 

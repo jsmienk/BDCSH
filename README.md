@@ -25,6 +25,85 @@
 >For each song how often was listened to that song in a certain month of a particular year,
 i.e. March 2015. Expected output: (SongId, number of times played in March 2015), ordered by SongID.
 
+##### 1.1.1 Mapper
+
+Our mapper checks if the amount of columns is sufficient and skips the header of the `.csv`. We use the track id as the `key` to pass on to the reducer, because we want to know how often each song (track id) is listened to. It then gets the year and month from the timestamp and uses that as the first value. We provide `1` as the second value, because that is how often this song was listened to on that date.
+
+```python
+def mapper():
+    for line in sys.stdin:
+        data = line.strip().split(',')
+        if len(data) < 3:
+            continue
+
+        track_id, user_id, date_string = data
+        # Skip header line
+        if track_id == 'track_id':
+            continue
+
+        # Reformat date to lose useless time
+        date = datetime.strptime(date_string.strip(), '%Y-%m-%d').strftime('%Y %m')
+
+        print('{0},{1},{2}'.format(track_id, date, 1))
+```
+
+##### 1.1.1 Reducer
+
+The reducer includes two functions. The reducer itself and a helper for printing the output. We keep track of three variables outside the for-loop: `prev_track`, `curr_track` and `curr_track_plays`. The `prev_track` is the track id of previous track we have been visiting. The `curr_track` is current track we are looking at in the for-loop. `curr_track_plays` is a dictionary containing key-value pairs being `date, total play count`.
+
+After splitting the input line and checking its column count we check if the third parameter (play count) is an integer. We check if we arrived at a new track (not the very first). If this is true, we print the results of that previous track we finished visiting and clear the dictionary. If this track is the first track we are visiting or the same as the previous track, we check if the dictionary key for that date is initialized and increase its value with the play count.
+
+When the for-loop ends, we print the final track's result. This has to be done here, because there is no next track to trigger the printing of the previous track's result inside the for-loop.
+
+Printing the result is done with a helper function. It loopes through all sorted keys of the `curr_track_plays` dictionary and prints the track id, date and total play count for every entry. We sort the keys so not only the track ids are sorted in the output but also the dates per track id.
+
+```python
+def reducer():
+    prev_track = None
+    curr_track = None
+    curr_track_plays = {}
+
+    for line in sys.stdin:
+        data = line.strip().split(',')
+        # Check argument count
+        if len(data) != 3:
+            continue
+
+        # Check argument type
+        if not data[2].isdigit():
+            continue
+
+        curr_track = data[0]
+        date = data[1]
+        count = int(data[2])
+
+        # If current word does not equal previous word
+        if prev_track and prev_track != curr_track:
+
+            # Print results
+            print_result(prev_track, curr_track_plays)
+
+            # Reset dict
+            curr_track_plays.clear()
+
+        # Increase count per month
+        if not curr_track_plays.has_key(date):
+            curr_track_plays[date] = 0
+
+        curr_track_plays[date] = curr_track_plays[date] + count
+
+        # Set the current track as the previous track for next iteration
+        prev_track = curr_track
+
+    # Print the last track and its count
+    print_result(prev_track, curr_track_plays)
+
+# Print the previous track and its count per month
+def print_result(track_id, dict):
+    for month in sorted(dict.keys()):
+        print("{0}\t{1}\t{2}".format(track_id, month, dict[month]))
+```
+
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
@@ -126,6 +205,7 @@ Alice Lyfe    23    809
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
+
 ```
 
 #### 1.1.4 Favourite Artist per User
@@ -135,6 +215,7 @@ Running a Hadoop job on the large data set resulted in the following output:
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
+
 ```
 
 ### 1.2 Shakespeare

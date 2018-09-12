@@ -16,7 +16,7 @@ def mapper():
 
         track_id, user_id, date_string = data
         # Skip header line
-        if track_id == 'track_id' or user_id == 'user' or date_string == 'datetime':
+        if track_id == 'track_id':
             continue
             
         # Reformat date to lose useless time

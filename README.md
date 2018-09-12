@@ -147,7 +147,19 @@ TREX0CN128F92F8F89    2018 08    4
 
 ##### 1.1.2 Mapper
 
-The mapper's task is to combine data from two different sources. One being `playhistory.csv` and the other being `people.csv`. We need to combine the full name of the user with the amount of plays per hour of the day.
+The mapper's task is to combine data from two different sources. One being `playhistory.csv` and the other being `people.csv`. We need to combine the full name of the user with the amount of plays per hour of the day. The mapper does not know if it gets input from `playhistory.csv` or `people.csv`, but we can determine this by looking at the amount of columns. If the columns do not match either file, we skip that line. It is important that we have atleast one common value to be able to combine the data. In this case this common value is `user_id`. This column is present in both source files.
+
+We get the useful data from the lines and always print it in the same format so our reducer can expect what his input will be. Depending on the source of the current line that is being processed some values may be zero or not applicable ('-'). The only value that must always be present is the key. The key is always the common value used to combine the data from the different sources. In our case `user_id`.
+
+```python
+# Output line with data from people.csv
+22,Jeroen,Smienk,-,0
+
+# Output line with data from playhistory.csv
+22,-,-,7,1
+
+# In both cases the id is the same, so we can match the play count with the user's name.
+```
 
 ```python
 def mapper():

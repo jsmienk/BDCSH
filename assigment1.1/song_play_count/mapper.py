@@ -14,13 +14,14 @@ def mapper():
         if len(data) < 3:
             continue
 
-        track_id, user_id, time_stamp = data
+        track_id, user_id, date_string = data
         # Skip header line
-        if track_id == 'track_id':
+        if track_id == 'track_id' or user_id == 'user' or date_string == 'datetime':
             continue
             
         # Reformat date to lose useless time
-        date = datetime.strptime(time_stamp, '%Y-%m-%d %H:%M:%S').strftime('%Y %m')
+        print(date_string)
+        date = datetime.strptime(date_string, '%Y-%m-%d %H:%M:%S').strftime('%Y %m')
 
         print('{0},{1},{2}'.format(track_id, date, 1))
 

@@ -12,7 +12,7 @@ def reducer():
     curr_track_artist = None
     curr_track_listened_count = 0
 
-    all_tracks = 
+    all_tracks = []
 
     # Input comes from STDIN
     for line in sys.stdin:

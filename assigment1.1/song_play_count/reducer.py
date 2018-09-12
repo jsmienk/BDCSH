@@ -29,7 +29,7 @@ def reducer():
         if prev_track and prev_track != curr_track:
 
             # Print results
-            print_result(prev_track, dict)
+            print_result(prev_track, curr_track_plays)
 
             # Reset dict
             curr_track_plays.clear()
@@ -44,7 +44,7 @@ def reducer():
         prev_track = curr_track
 
     # Print the last track and its count
-    print_result(prev_track, dict)
+    print_result(prev_track, curr_track_plays)
 
 # Print the previous track and its count per month
 def print_result(track_id, dict):

@@ -49,7 +49,7 @@ def mapper():
 
 ##### 1.1.1 Reducer
 
-The reducer includes two functions. The reducer itself and a helper for printing the output. We keep track of three variables outside the for-loop: `prev_track`, `curr_track` and `curr_track_plays`. The `prev_track` is the track id of previous track we have been visiting. The `curr_track` is current track we are looking at in the for-loop. `curr_track_plays` is a dictionary containing key-value pairs being `date, total play count`.
+The reducer includes two functions. The reducer itself and a helper for printing the output. We keep track of three variables outside the for-loop: `prev_track`, `curr_track` and `curr_track_plays`. The `prev_track` is the track id of previous track we have been visiting. The `curr_track` is current track we are looking at in the for-loop. `curr_track_plays` is a dictionary containing key-value pairs being date and total play count for each song.
 
 After splitting the input line and checking its column count we check if the third parameter (play count) is an integer. We check if we arrived at a new track (not the very first). If this is true, we print the results of that previous track we finished visiting and clear the dictionary. If this track is the first track we are visiting or the same as the previous track, we check if the dictionary key for that date is initialized and increase its value with the play count.
 
@@ -144,6 +144,54 @@ TREX0CN128F92F8F89    2018 08    4
 #### 1.1.2 Songs Listened to per User per Hour of the Day
 
 >For each user the hour of the day (s)he listened most often to songs. Expected output: (FirstName, LastName, hourOfday, numberOfTimesListened to a song in that hour of the day).
+
+##### 1.1.2 Mapper
+
+The mapper's task is to combine data from two different sources. One being `playhistory.csv` and the other being `people.csv`. We need to combine the full name of the user with the amount of plays per hour of the day.
+
+```python
+def mapper():
+    for line in sys.stdin:
+        data = line.strip().split(',')
+
+        user_id = None
+        first_name = '-'
+        last_name = '-'
+        hour_of_day = '-'
+        listened_count = 0
+
+        # Read input of the playhistory.csv file
+        if len(data) == 3:
+            user_id = data[1]
+            time_stamp = data[2]
+
+            # Skip header line
+            if user_id == 'user':
+                continue
+
+            # Extract the hour of the day from the datetime
+            hour_of_day = datetime.strptime(time_stamp.strip(), '%Y-%m-%d %H:%M:%S').hour
+            listened_count = 1
+        elif len(data) == 7:
+            user_id = data[0]
+
+            # Skip header line
+            if user_id == 'id':
+                continue
+
+            first_name = data[1]
+            last_name = data[2]
+        else:
+            continue
+
+        print('{0},{1},{2},{3},{4}'.format(user_id, first_name, last_name, hour_of_day, listened_count))
+```
+
+##### 1.1.2 Reducer
+
+```python
+
+```
 
 Running a Hadoop job on the large data set resulted in the following output:
 

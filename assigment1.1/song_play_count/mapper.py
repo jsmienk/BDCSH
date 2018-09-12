@@ -20,7 +20,7 @@ def mapper():
             continue
             
         # Reformat date to lose useless time
-        date = datetime.strptime(date_string.split(' ')[0], '%Y-%m-%d').strftime('%Y %m')
+        date = datetime.strptime(date_string.strip(), '%Y-%m-%d').strftime('%Y %m')
 
         print('{0},{1},{2}'.format(track_id, date, 1))
 

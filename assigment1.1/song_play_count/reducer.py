@@ -21,7 +21,7 @@ def reducer():
         if not data[2].isdigit():
             continue
 
-        track_id = data[0]
+        curr_track = data[0]
         date = data[1]
         count = int(data[2])
 

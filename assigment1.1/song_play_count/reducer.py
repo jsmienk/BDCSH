@@ -28,9 +28,8 @@ def reducer():
         # If current word does not equal previous word
         if prev_track and prev_track != curr_track:
 
-            # Print the previous track and its count per month
-            for month in sorted(curr_track_plays.keys()):
-                print("{0}\t{1}\t{2}".format(prev_track, month, curr_track_plays[month]))
+            # Print results
+            print_result(prev_track, dict)
 
             # Reset dict
             curr_track_plays.clear()
@@ -45,7 +44,11 @@ def reducer():
         prev_track = curr_track
 
     # Print the last track and its count
-    for month in curr_track_plays.keys():
-        print("{0}\t{1}\t{2}".format(curr_track, month, curr_track_plays[month]))
+    print_result(prev_track, dict)
+
+# Print the previous track and its count per month
+def print_result(track_id, dict):
+    for month in sorted(dict.keys()):
+        print("{0}\t{1}\t{2}".format(track_id, month, dict[month]))
 
 reducer()

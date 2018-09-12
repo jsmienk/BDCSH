@@ -50,9 +50,11 @@ Make sure to give `mapper.py` and `reducer.py` to correct file permissions by ru
 
 `hadoop fs -ls (path)` to show the current files in the path.
 
-`hadoop fs -get <dirname> <outputfile>` to get files from HDFS.
+`hadoop fs -get <dirname> (outputfile)` to get files from HDFS.
 
-`hadoop fs -put <filename>` to move files to HDFS.
+`hadoop fs -put <filename> (path)` to move files to HDFS.
+
+`hadoop fs -mv <oldfile> <newfile>` to rename files in HDFS.
 
 `hadoop fs -rmdir <dirname>` to remove old output directories.
 

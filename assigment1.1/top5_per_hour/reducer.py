@@ -12,7 +12,7 @@ def reducer():
     curr_track_artist = None
     curr_track_listened_count = 0
 
-    all_tracks = 
+    all_tracks = []
 
     # Input comes from STDIN
     for line in sys.stdin:
@@ -39,7 +39,7 @@ def reducer():
         if prev_track and prev_track != curr_track:
 
             # Print the previous track information
-            all_tracks.append("{0}\t{1}\t{2}".format(curr_track_title, curr_track_artist, curr_track_listened_count))
+            all_tracks.append([curr_track_title, curr_track_artist, curr_track_listened_count])
 
             # Reset variables
             curr_track_title = None
@@ -53,9 +53,9 @@ def reducer():
         prev_track = curr_track
 
     # Print the current user's playhistory
-    all_tracks.append("{0}\t{1}\t{2}".format(curr_track_title, curr_track_artist, curr_track_listened_count))
+    all_tracks.append([curr_track_title, curr_track_artist, curr_track_listened_count])
 
-    for track in sorted(all_tracks, reverse = True)[:10]:
-        print(track)
+    for track in sorted(all_tracks, key = lambda x : x[2], reverse = True)[:5]:
+        print("{0}\t{1}\t{2}".format(track[0], track[1], track[2]))
 
 reducer()

@@ -27,7 +27,7 @@ def mapper():
                 continue
 
             # Extract the hour of the day from the datetime
-            hour_of_day = datetime.strptime(time_stamp, '%Y-%m-%d %H:%M:%S').hour()
+            hour_of_day = datetime.strptime(time_stamp.strip(), '%Y-%m-%d %H:%M:%S').hour
             listened_count = 1
         elif len(data) == 7:
             user_id = data[0]

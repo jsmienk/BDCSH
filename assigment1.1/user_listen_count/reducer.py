@@ -23,7 +23,7 @@ def reducer():
         if len(data) != 5:
             continue
 
-        user_id, first_name, last_name, hour_of_day, listened_count = data
+        curr_user, first_name, last_name, hour_of_day, listened_count = data
 
         # Check argument type
         if not listened_count.isdigit():

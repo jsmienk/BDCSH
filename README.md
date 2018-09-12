@@ -201,6 +201,28 @@ def mapper():
 
 ##### 1.1.2 Reducer
 
+The reducer includes two functions. The reducer itself and a helper for printing the output. We keep track of five variables outside the for-loop: `prev_user`, `curr_user` and `curr_user_playhistory`. The `prev_user` is the user id of previous user we have been visiting. The `curr_user` is current user we are looking at in the for-loop. `curr_user_playhistory` is a dictionary containing key-value pairs being hour of the day and total play count for each user.
+
+This looks a lot like the previous assignment's reducer, but because we have to combine data now as well it looks a little different. When there is a first and last name present in the current line, we save it. After counting all other lines with the same user id. We print an output line and reset the name and play history variables.
+
+Input data (prepared by the mapper) may look like this:
+
+```python
+43,-,-,14,1
+43,-,-,6,1
+43,Marnick,Arend,-,0
+43,-,-,15,1
+43,-,-,16,1
+43,-,-,6,1
+22,Jeroen,Smienk,-,0
+22,-,-,9,1
+22,-,-,7,1
+22,-,-,12,1
+22,-,-,7,1
+```
+
+The lines are sorted on the key (user id) so we can be certain that all play counts and eventually the name will be together. When a new user id is visited (`prev_user != curr_user`) the all play counts and the name can be printed as a single row. Again, the keys in the dictionary are sorted before printing to enhance readability of the output.
+
 ```python
 def reducer():
     prev_user = None
@@ -238,8 +260,7 @@ def reducer():
             curr_user_last_name = None
             curr_user_playhistory.clear()
 
-
-        if hour_of_day.isdigit():  
+        if hour_of_day.isdigit():
             hour_of_day = int(hour_of_day)
 
             # Initialize key
@@ -248,7 +269,6 @@ def reducer():
 
             # Increase listen count
             curr_user_playhistory[hour_of_day] = curr_user_playhistory[hour_of_day] + int(listened_count)
-
 
         # Set the current user_id as the previous user_id for next iteration
         prev_user = curr_user

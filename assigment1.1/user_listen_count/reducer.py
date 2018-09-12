@@ -26,8 +26,10 @@ def reducer():
         user_id, first_name, last_name, hour_of_day, listened_count = data
 
         # Check argument type
-        if not listened_count.isdigit():
+        if not listened_count.isdigit() or not hour_of_day.isdigit():
             continue
+
+        hour_of_day = int(hour_of_day)
 
         if curr_user_first_name == None and first_name != '-':
             curr_user_first_name = first_name
@@ -46,12 +48,12 @@ def reducer():
             curr_user_last_name = None
             curr_user_playhistory.clear()
 
-        if hour_of_day != '-':
-            if not curr_user_playhistory.has_key(hour_of_day):
-                curr_user_playhistory[hour_of_day] = 0
+        #if hour_of_day != '-':
+        if not curr_user_playhistory.has_key(hour_of_day):
+            curr_user_playhistory[hour_of_day] = 0
 
-            # Increase listen count
-            curr_user_playhistory[hour_of_day] = curr_user_playhistory[hour_of_day] + int(listened_count)
+        # Increase listen count
+        curr_user_playhistory[hour_of_day] = curr_user_playhistory[hour_of_day] + int(listened_count)
 
         # Set the current user_id as the previous user_id for next iteration
         prev_user = curr_user

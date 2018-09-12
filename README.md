@@ -128,6 +128,8 @@ TREX0CN128F92F8F89    2018 08    4
 
 #### 1.1.2
 
+>For each user the hour of the day (s)he listened most often to songs. Expected output: (FirstName, LastName, hourOfday, numberOfTimesListened to a song in that hour of the day).
+
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
@@ -185,12 +187,16 @@ Alice Lyfe    23    809
 
 >The 5 songs played most often in a specific hour of the day i.e. between 7AM and 8AM. Expected output: 5 lines containing (Songtitle, ArtistName, NumberOfTimesPlayed).
 
+Running a Hadoop job on the large data set resulted in the following output:
+
 ```text
 ```
 
 #### 1.1.4
 
 >For each user, the artist (s)he listen to most often. Expected output: (FirstName, LastName, Artist, NrofTimes listened to that artist) (Hint: you need a cascade of mappers and reducers. Explain why!).
+
+Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
 ```

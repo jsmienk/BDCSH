@@ -1,3 +1,502 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1cfea6753a668940e80063bae32dbf049a419a7c0842db5f9bebb1e5f201b077
-size 28125
+track_id,artist,title,lengthSeconds
+TRATSCZ12903CDAF86,Edge of Sanity,The Silent Threat,327
+TRATSDF128F93023EB,Inkubus Sukkubus,Storm,259
+TRATSFS12903D03730,Dave Evans,Circular line,268
+TRATSGT12903CDC943,Julie Andrews,Just You Wait,183
+TRATSJR128EF34E1F3,Ours,Nina se réveille,178
+TRATSKB12903CBCB27,Kyoto Jazz Massive,Endless Flight,265
+TRATSMF128F92ED742,The Herbaliser,The Missing Suitcase,328
+TRATSNJ12903D0A109,Spock's Beard,Broken Promise Land (Bonus Track),153
+TRATSRJ128F934312F,Karl Jenkins,Agnus Dei,185
+TRATTFD128F92F416F,Marcelo D2,Pilotando O Bonde da Excursao,368
+TRATTGV12903CD1A58,Aria,Posledny Zakat,307
+TRATTKA128F92F6AFA,Karsh Kale,Empty Hands,182
+TRATTMO12903CE0459,Adolescents,The Liar,339
+TRATTMV128F426836E,Wanda Jackson,Good Rockin' Tonight,225
+TRATTNC128F9309BB3,The Redwalls,How The Story Goes,314
+TRATTQX128F428DF29,Looptroop,In the Place to Be,218
+TRATTWU128F42B356F,Intro,Intro,227
+TRATTZQ128F42283C5,Excel,Whatcha need,253
+TRATTZU128E0798513,Blind Melon,Soak The Sin (Live) (2005 Digital Remaster),181
+TRATUCH12903CDFD5B,The Whispers,"Shake It, Shake It",176
+TRATUHZ128F932847B,Vince Guaraldi Trio,Softly As In A Morning Sunrise,237
+TRATUJK128F429C591,Old Town School Of Folk Music,Old McDonald,117
+TRATUKH128F426305B,Piemont,Montmartre,203
+TRATULJ128F426BBB2,Vienio & Pele,Chce Zyc,215
+TRATUON128F92EC9D9,Billy Ocean,Everyday Sunshine,259
+TRATUOQ128F9313C57,Vince Guaraldi Trio,My Little Drum,217
+TRATVHE128F934ABD2,Flotsam and Jetsam,Flotzilla,214
+TRATVQJ128F9309581,Hellfish,Deck fuel,249
+TRATVQK128F425450D,Glenn Medeiros,Knocking at Your Door,212
+TRATWOM128EF35A552,Jorge Ben Jor,W Brasil -Club Dance Version,199
+TRATXBY128F931174B,The Midway State,A Million Fireflies,211
+TRATXCW128F92E0576,J. Tillman,Take Care,290
+TRATXIY12903CD8318,Hurricane Chris featuring Beenie Man,No Worries,330
+TRATXKU128F14A3619,The Stingers ATX,What A Wonderfull Dub,334
+TRATXMR128F92E108B,Stephen Malkmus,Baby C'mon,225
+TRATXPM128F92F15A1,The Bobbettes,Mr. Lee,227
+TRATXQY128F1489B0C,Tiga,3 Weeks (Jesper Dahlback Mix),188
+TRATXSV12903CC1F0A,Pete Berwick,While I Die (Pete Berwick),308
+TRATYHL128F1469E29,Alliance Ethnik,Époque scolaire (interlude),243
+TRATYLI128F9324AF3,Daniele Silvestri,Salirò,248
+TRATYQE128F4293A7D,Dave Douglas,Woman at Point Zero,255
+TRATZLP128F421C574,Shawn Christopher,Don't Lose The Magic [The Cube Guys Dub],200
+TRATZZO128F930CEDE,Vicious,Root Of Extinsion,208
+TRAUAHD128F425C85D,Grzegorz Turnau,Naprawde Nie Dzieje Sie Nic (Live),272
+TRAUAIN128F14863BA,Pierre-Laurent Aimard,Etudes Symphoniques [Symphonic Studies] Op.13 : XIII Appended Variation 5,334
+TRAUALK128F92C5100,Daisy Chainsaw,Greatest God's Divine,182
+TRAUANB128F4263571,MC Eiht,All for the Money,242
+TRAUARW12903CE70B0,Tommy Emmanuel,(The Man With The) Green Thumb,314
+TRAUBAO128F92FC23D,T-Rock,Little Or Nuthin',238
+TRAUBDT128F9311E92,Elisa,The Big Dipper,283
+TRAUBNC128F933EB78,Covenant,Ritual Noise (Edit),253
+TRAUBPL128F93285BA,ASP,"Der Geheimnisvolle Fremde (Ja, Ja, Drei Mal Hurra!)",155
+TRAUBPN128F9312AAA,23 Skidoo,Coup (In The Palace),193
+TRAUBWG128F4287B01,Soledad Brothers,Up Jumped The Devil,226
+TRAUBZO128F148C2C0,Los Papines,A Santiago,228
+TRAUCDL128F42774C3,Ordinary Peoples,Rockville,246
+TRAUCGD128F92DA6EB,Transglobal Underground,Border Control,228
+TRAUCMQ128F427506B,Turbonegro,No Rule,301
+TRAUCOU128F42289D1,Taio Cruz,Come on Girl (radio edit) (feat. Luciana),223
+TRAUDBO128F92DF470,Daniele Silvestri,Monetine,140
+TRAUDBU128F9313CBB,Reverend Horton Heat,If It Ain't Got Rhythm,266
+TRAUDCS128E078866D,Ruth Brown,As Long As I'm Moving (LP Version),317
+TRAUDFY128F9355693,Current,A Cotton Pickers Dream,196
+TRAUDJF128F428FA58,Discount,Runaway,175
+TRAUDNS128F92F64C7,Johnny DJ,Liebe,184
+TRAUDPF128F14A1166,Andy Prinz,Chaos in Motion (original mix),253
+TRAUDSV128E07863F9,LCD Soundsystem,Too Much Love,154
+TRAUDXB128F9305525,Inkubus Sukkubus,Lucifer Rising,250
+TRAUEGH128F4242EFF,Kyuss,Shine,247
+TRAUEGN128F9307238,Lester Quitzau,Let It Shine,165
+TRAUENB128F9302207,Dan Deacon,Red F,249
+TRAUEQC128F93321F1,Julie Andrews,He Loves And She Loves,292
+TRAUERZ128F933832E,Stealers Wheel,Stuck In The Middle With You,226
+TRAUFEH12903CF4243,Vital Remains,Scorned,264
+TRAUFHP128F933E28F,Asobi Seksu,Nefi + Girly,209
+TRAUFKT128F14812FF,Breaks Co-op,A Place For You,181
+TRAUFMU128F935F235,Jawbox,FF=66,244
+TRAUFNY128F9308217,Plasmic Honey,I'm A Believer (Peter Bailey Mix),230
+TRAUFXV128F4266645,Ralph Stanley,Distant Land To Roam,147
+TRAUFZM128F4290117,Odd Nosdam,Freakout 3,242
+TRAUGAU128F930DF58,Infinito 2017,83rd Ashland,320
+TRAUGMT128F9303449,Solar Stone,Solarcoaster,228
+TRAUGOE128F422AB81,Doug Ploss,Jerusalem Run,218
+TRAUGWA128F14661A9,DC Talk,What If I Stumble (Freakshow Live Album Version),140
+TRAUGXB12903CD0B9A,Dead Or Alive,That's The Way (I Like It),218
+TRAUHDJ128F4260191,Vital Remains,Isolated Magick,290
+TRAUHFH128F14813AC,David Lanz,Madre De La Tierra,239
+TRAUHSY12903CFEA42,Dempsey,Hello Psycho (Go Away),294
+TRAUHWR12903CC82A0,Mechanical Poet,Bubble Bath,180
+TRAUHZX128F92EC39B,The Melodians,Rivers Of Babylon,227
+TRAUIMP128F92DC604,Jennifer Hudson,The Star-Spangled Banner,217
+TRAUIOF128F428F221,Keimzeit,Urwaldnashorn,284
+TRAUIOO12903CB33C0,J-Boogie's Dubtronic Science,Alegria Dub feat. Ted De Oliveira,274
+TRAUIPY128F4273122,The Toasters,El Chopo,134
+TRAUIUP128F4243949,a-ha,Lifelines (demo),204
+TRAUIXQ128F4259751,Dead Or Alive,Hooked On Love,124
+TRAUJCX128F42811F9,Cage The Elephant,Back Stabbin' Betty,266
+TRAUJLB128F9307505,White Skull,Boudicca's Speech,252
+TRAUJPR128F92CA3AF,Luther Allison,Mistake,355
+TRAUJQL128F4228C71,Leo Kottke,The Driving Of The Year Nail,260
+TRAUJVJ128F42440BF,a-ha,Afternoon High - Demo Version,202
+TRAUJXH128F4257E85,Primal Fear,Metal is forever,224
+TRAUJXN12903CD4C0E,Herbert von Karajan; Berlin Philharmonic Orchestra,"Meditation (From The Opera ""Thais"")",230
+TRAUKAH128F1485EAC,Moya Brennan,Tapestry,199
+TRAUKCN128F4271AF5,Rosemary Clooney,Suzy Snowflake,241
+TRAUKEE128F427EE36,Nobody & Mystic Chords Of Memory,The Long Lost Coyote's Song (When You Hear It Too),277
+TRAUKER12903CAF2ED,Maino,Good Shoe,256
+TRAUKKZ128F9341A22,Lulu Santos,Mojo (Instrumental),243
+TRAUKNY128F4296284,Old Town School Of Folk Music,Join In The Games,141
+TRAUKSX128F4234EF1,Clovis,Guardian Angel,225
+TRAUKZZ128F933A09C,Bezerra da Silva,As Favelas Que Não Exaltei,183
+TRAULCS128F4254CAA,Morgan Heritage,Everything Is Still Everything,328
+TRAULEJ128F92E2A47,José Mercé,Columpia Los Corazones (Bambera),212
+TRAULQC128F425F230,Sea of Sin,I Live My Life,340
+TRAULTL128F92FA6F9,Chris Thile,Panhandle Rag,324
+TRAULUB128F4236B05,Joe Lee Wilson,Medley:  Azur Te / Don't The Moon Look Lonesome Shining Through The Trees / Route 66 / Now's The Time / The Blues Ain't Nothin',185
+TRAULVY128F9343D18,Jeanette,Easy Dirty Money,206
+TRAUMBO128F42A6405,Brahim featuring DJ P2K,Party With Me - featuring DJ P2K,170
+TRAUMQN128F931A236,DJ Vadim,Suckas wearing tainted sunglasses,204
+TRAUMWA128F427B071,Discipline,Young & Reckless (Album Version),218
+TRAUMWO128F9323788,John Patitucci,Mullagh,251
+TRAUNEK128F4270B12,Arcade Fire,Neighborhood #3 (Power Out),207
+TRAUNFO128F92EC88E,The Umbrella Sequence,This Time We're Positive,216
+TRAUNGY12903CC412B,Titán,Space Chemo,129
+TRAUNSC128F930C8D0,Funkdoobiest,Superhoes,273
+TRAUNSW12903CA815E,Tarot,Pilot of All Dreams,259
+TRAUNUB128F93373AA,Brent Dowe,Passion Love,215
+TRAUNWP128F146E6D8,Orson,Bright Idea,205
+TRAUOCV128F428464E,B R OAD WAY,Caution Wet Floor,234
+TRAUODT12903CA6E19,Shirley Brown,If I Were Your Woman,306
+TRAUOFO128F92F71D3,Steps,Never Say Never Again,254
+TRAUOMY12903CE8685,The Loved Ones,Chicken,292
+TRAUOOS128F92ED2CA,Suicidal Romance,Prince of the Darkness,145
+TRAUPHW12903CE599C,Thomas Leer,Freidrich Strasse,264
+TRAUPIY128F425EF4A,Butane,Long Time,122
+TRAUPJB128F42625B8,Steve Tyrell,Someone To Watch Over Me,150
+TRAUPJP128F42A4AB0,Alex Baroni,Come Sei E Quello Che Non Sei,301
+TRAUPNX128F428F286,Leo Kottke,Death By Reputation,185
+TRAUQBO128F92FF305,Jimi Tenor,My Mind,297
+TRAUQEV128F9319F49,Blockhead,Good Block Bad Block,220
+TRAUQID128F427864F,Bomb,I Loved You Than I Died,344
+TRAUQJM128F4277BB9,Blenderhead,Fort Lewis Gun Club Youth Day,271
+TRAUQYG128F92F0806,Major Matt Mason USA,It's All You,300
+TRAURIV128F9337BE5,Articolo 31,Domani,226
+TRAURNN128F92EF1C8,Blackmore's Night,Rainbow Blues,173
+TRAURQO128F426932F,Ornette Coleman,All of My Life,261
+TRAURXZ128F427E8FD,Tommy McClennan,My Baby's Doggin' Me,244
+TRAUSGG128F932519D,Guy J,Mikro,242
+TRAUSMT128F9302A7E,Audio Soul Project,Everything Is Alright (Audio Soul Dark Touch),397
+TRAUSOL128F93389C4,Eurogliders,Maybe Only I Dream,322
+TRAUSRW128F4262F05,Daniele Silvestri,1.000 Euro Al Mese,193
+TRAUSVK128F9323795,John Patitucci,Bach Prelude In G Major (From The Cello Suite),141
+TRAUSVP128F149AF3D,Enzo Avitabile,Un Amico (2004 Digital Remaster),239
+TRAUSWP128F4260CA5,Tiger Lou,The loyal,369
+TRAUTFS128F428CE3A,Exposé,You Don't Know What You Got,335
+TRAUTGZ128F92F6E88,IIIrd Tyme Out,Medals For Mothers,266
+TRAUTHQ128F1469076,The Railway Children,Over And Over (Full Remix),266
+TRAUTIX128F42985F7,Tom Robinson Band,Days of Rage,239
+TRAUTJX128F92F6B44,Lale Andersen,Sail Away Boy (2008 Digital Remaster),195
+TRAUTSW128F427E27A,East West,Breathe,284
+TRAUUDH12903CF9010,Tommy Bolin,Lotus,148
+TRAUUFH128F4226B3D,The Weathermen,Custom Brain,302
+TRAUUNU128F9307EBA,General Degree,Last Night,156
+TRAUUTN12903CA8CA6,Machito,Conversation,209
+TRAUUUW128F930923A,Adversus,Stirb in mir,239
+TRAUUWB12903CD391A,The Wailers,Shanghied,179
+TRAUUXR12903CC1EDD,Golden Triangle,Jungle Jim,121
+TRAUVBT128F933F94F,El Guincho,Kalise (Tanlines Remix),261
+TRAUVDF12903CBCA12,Dagda,Prologue,307
+TRAUVFO128EF34E1EF,Ours,Il Était Temps,241
+TRAUVGR128F9334B5C,Franco De Vita,Intro,174
+TRAUVLY128F92DA990,Archie Edwards,Sittin' On Top Of The World,263
+TRAUVMA128F92F0FFE,BloodKin,Last Night Out,182
+TRAUVOJ12903CA3C77,The Gourds,Part II - Best of Me,299
+TRAUVOX128F427785A,Adalberto Álvarez,Mientes,226
+TRAUVRN128E07838DF,Ronan Keating,I Hope You Dance,154
+TRAUVTR12903CB43D9,Team Arliss featuring Sheek Louch,Bang Bang,233
+TRAUVUW128F92E20E8,The Go-Go's,Stuck In My Car,247
+TRAUVVK128F4224BDE,Takka Takka,They Built You Up Too Fast,199
+TRAUWGB128F424C8FE,Eric Dolphy,Laura,192
+TRAUWGZ128F9320617,The Whitest Boy Alive,Gravity,307
+TRAUWMJ128F92F9329,Headscan,Lolife (Resolver),214
+TRAUWPC12903CF0183,Extol,Human Frailtie's Grave,298
+TRAUWTB128E0791D69,Bryan Adams,What's It Gonna Be,217
+TRAUWUV128F93369E2,Barry Biggs,Wide Awake In A Dream,264
+TRAUWUX128F92FE41C,Alison Krauss,When You Say Nothing At All,203
+TRAUXDX128F934210A,Lemongrass,On The Way,249
+TRAUXJB128F92C7E9B,65daysofstatic,The Fall of Math,159
+TRAUXUA128F9303F66,Suicidal Romance,Lose Your Fears (radio edit),258
+TRAUXUF128F426C0C8,Mariachi Sol de Mexico,Carino Nuevo,207
+TRAUXUZ12903CE813F,Teenage Kicks,I Heart Lora Logic,224
+TRAUXZY12903CE4255,Turning Point,The Few and the Proud,256
+TRAUYAT128F42554AA,The Skillet Lickers,Pass Around the Bottle and We'll All Take a Drink,371
+TRAUYGJ128E0798505,Blind Melon,No Rain (2002 Digital Remaster),157
+TRAUYHK12903CDD9F1,Compay Segundo,Cuembe Tangana,196
+TRAUYHZ128F9335DCB,Willy Chirino (a duo con Celia Cruz),Cuba Que Lindos Son Tus Paisajes,271
+TRAUYJF128F4267CFF,Gong,Sold To The Highest Buddha (2004 Digital Remaster),224
+TRAUYTQ128F930680F,Spanish Harlem Orchestra,Danzón for My Father,208
+TRAUZCE128F4267A9C,David Bromberg,The Holdup,289
+TRAUZDH128F42B86F4,Shawn Christopher,Another Sleepless Night,238
+TRAUZFC12903D03259,Tastexperience,Forgiven,379
+TRAUZJP128F427040B,Adam F,Music in my Mind (Album Version),166
+TRAUZST128F92E81BE,Fiction 8,Break the Line,198
+TRAVACS128E0789D58,The Redwalls,Falling Down (Explicit),151
+TRAVAHG128F428D023,Pink Razors,Dischord Datchord,192
+TRAVAJV128F42AA3CE,Members of Mayday,Forward Ever Backward Never,279
+TRAVANC128F92EB21F,Sporto Kantès,Surprise,168
+TRAVANG12903CC6E6E,Ney Matogrosso,Fosforo Queimado,193
+TRAVAPT12903CCFD4E,Arma Blanca,El Musicologo,213
+TRAVATJ128E078D74D,Madeleine Peyroux,La Vie En Rose  (LP Version),237
+TRAVAXP128F92C5589,Sarah Brightman,Do You Wanna Be Loved?,140
+TRAVAZN128F42719C9,Cledus T. Judd,What the *$@#  Did You Say,287
+TRAVBFO128F427B701,Chet Baker,Chet (2004 Digital Remaster),250
+TRAVBJU128F931786F,The Clancy Brothers and Tommy Makem,Children's Medley,283
+TRAVBMS128F1458D8C,Steve Hackett,Give It Away,243
+TRAVBQA128F933A494,Leeland,Lift Your Eyes Up,244
+TRAVBWV128F92D2531,Eat Static,Dzhopa Dream,252
+TRAVBYW128F426D501,Terence Trent D'arby,Are You Happy?,255
+TRAVCDD128F425D98E,The Dayton Family,The Journal,184
+TRAVCDS128F4234FEB,Roll Deep,Bad Luck,233
+TRAVCEW128F4268619,Louisiana Red,Prison Blues #1,211
+TRAVCJB12903CC8B5D,Nifelheim,The Final Slaughter,259
+TRAVCKY128F4236EBF,Horsepower,Dreams On The Wheels (2006 Digital Remaster),255
+TRAVCNI128E0794817,JJ72,Coming Home,216
+TRAVCNT128F92F1091,Superdrag,Garmonbozia (LP Version),260
+TRAVCUK128EF341404,No More,Schwarzen Mann Gesehn,234
+TRAVDFC128F42636AA,Self Scientific,Bonus Track 2,291
+TRAVDOK128F424EA5E,Kate Nash,Foundations,263
+TRAVDUR128F931A097,Ernestine Anderson,God Bless The Child,184
+TRAVDUU128F424D590,Teräsbetoni,Voiman vartijat,278
+TRAVDWI12903CA913D,Xavier Cugat,Alma Llanera,216
+TRAVDZK12903CCF61B,Royal Crown Revue,Barflies At The Beach (Album Version),257
+TRAVEJN128F149E0F6,Sarah,Make You Laugh,115
+TRAVEKC128F92D5C73,Los Inquietos,Si La Ves,336
+TRAVERI128F42457CB,Army of the Pharaohs,Blue Steel,201
+TRAVEUJ128F9332263,Pete and the Pirates,Sonny,253
+TRAVEZB128F425B954,Electric Frankenstein,Not This Time,282
+TRAVFEP128F93200FC,Shrimp Boat,Van Buren,189
+TRAVFPW128F9346CA5,617,Drunk (The Phat Mix),227
+TRAVFUU12903CCDE9D,Dudley Perkins,Money,302
+TRAVFVI12903CB7B4C,Jesse Saunders featuring Twala Dawn,Excited,260
+TRAVGIB128F9349B3F,Jump5,Why Do I Do (Key-E-Premiere Performance Plus w/o Background Vocals),216
+TRAVGJU128F4266E8D,James Blood Ulmer,Love Dance Rag,192
+TRAVGKH128F4239937,Marcelo,Pa' Lo Congo,166
+TRAVGNV128F9334B4B,Goteki,Diatribe,301
+TRAVHDM128F4288954,Purple City,Strapped,172
+TRAVHGK128F14ADDE0,Donald Lawrence & The Tri-City Singers,In The Presence Of A King,289
+TRAVHGK128F9315318,Keny Arkana,Prière,315
+TRAVHJA12903CE18F1,Frank Gambale,6.8 Shaker,203
+TRAVHKQ128F92CD6B3,Biosphere,Lounge,156
+TRAVHPF128F429AA9A,Eddie C. Campbell,Cha Cha in Blues,249
+TRAVHUC128F429B62B,Merle Travis,Sixteen Tons,225
+TRAVHYF12903CEFB88,Men Of Standard,Always There,233
+TRAVIBR128F1473C2E,Os Travessos,A Música que eu toco,176
+TRAVIJA128F92E720A,King Tubby,Pain Dub,197
+TRAVIMX12903CEB755,Inkubus Sukkubus,Death Comes (The Wedding Night),131
+TRAVISG128F932B3FB,DIR EN GREY,艶かしき安息、躊躇いに微笑み,300
+TRAVIVN128F42873F4,Chrome,Brain On Scan,301
+TRAVIYW128F4277858,Adalberto Álvarez,Te equivocaste,196
+TRAVJCU128F428B0DA,Original Broadway Cast Recording;Ross Reimueller,Finale/Thank Heaven For Little Girls (Reprise),127
+TRAVJIC128F1469AA7,Bryan Savage,Two Cool,298
+TRAVJJI12903CC428A,Craig David,I Heard It Through The Grapevine,407
+TRAVJLG128F930B2C3,The Flower Kings,Flora Majora,233
+TRAVJMP128F9306FE0,Kojak,Tell Me,226
+TRAVJQU12903CA3CD4,Julie Andrews,He Loves and She Loves (from Funny Face),217
+TRAVJSK128F9313313,Aubrey,Angel (ANR Club Mix),325
+TRAVJUH12903CC06B6,Argent,Liar,176
+TRAVJVQ12903CE09BC,Raheem Devaughn,Dr. Cornell West (Intro),242
+TRAVJVS128F4251455,Wayne Smith,Like A Dragon,274
+TRAVJYT12903D11356,June Carter Cash,Eight More Miles To Louisville,131
+TRAVKAK128F426E6C7,Sandy Nelson,In Beat,248
+TRAVKIF128F1451AF2,The Hold Steady,Chicago Seemed Tired Last Night,276
+TRAVKIR12903CBE25D,Jackie-O Motherfucker,The Grave (VPRO Session),298
+TRAVKJW128F421B564,Otis Rush,I Wonder Why (Live),210
+TRAVKKE128F429DEFE,Kasso,Brazilian Dancer,205
+TRAVKOQ128F9351B59,Jay Reatard,It Aint Gonna Save Me,232
+TRAVKWA128F4271E63,Téléphone,Ca C'est Vraiment Toi,258
+TRAVLLA128F42948C3,The Nitty Gritty Dirt Band,Mother Of Love (2002 Digital Remaster),122
+TRAVLOL128F428206C,The Grassmasters,Play With Fire,369
+TRAVMHD128F4279699,Tina Charles,Disco Love,229
+TRAVMHQ128F92DE5A4,The Backyardigans,When I'm Booin',234
+TRAVMTI128F4231CFF,Preacher,Traffic Jam,168
+TRAVMVL128F4271899,Cledus T. Judd,Momma's Boy,290
+TRAVNIZ12903CDB1D5,Edge of Sanity,Beyond the Unknown,245
+TRAVNKL128F933D1FD,Division Day,Devil Light,190
+TRAVNLR128F93433DD,Mallorca Lee,Second Guess,261
+TRAVNMB12903CE606A,Kris wadsworth,Jazz Jack,300
+TRAVNQX128F4268D40,The Jesus Lizard,And Then The Rain,189
+TRAVNRI128F931B140,September,September All Over,199
+TRAVOIX128F425792A,Inkubus Sukkubus,Three Women & The Sea,200
+TRAVOJJ128F426DE21,George Clinton & the P-funk AllStars,Sick 'em,195
+TRAVOLC128F930B2DC,Samael,Illumination,176
+TRAVOLK128F147CD94,The Grates,Lies,224
+TRAVOOT128F9333D01,Hannah Montana,Let's Do This,232
+TRAVORG128F9302C75,Anthony Hamilton,Cool,310
+TRAVOWY128F9336628,Eliza Lacerda,"Sim, Foi Você",288
+TRAVOYX128F42AB738,Public Relations Exercise,The Centurion,207
+TRAVPAT12903CEDCAC,Frankie Bones,The Saga Continues,197
+TRAVPGS128F9329A5D,The Riverboat Gamblers,Catch Your Eye,197
+TRAVPHZ128F9300DB1,Cursive,The Dirt of the Vineyard,324
+TRAVPNW128F93381DE,Lucky Luciano,Man N My City,210
+TRAVPOX128F14A0A3F,Blank & Jones,Flying To The Moon (Paffendorf Dub),247
+TRAVPRK128F42797F6,Terence Trent D'arby,Undeniably,322
+TRAVPTB128F4248442,Remembering Never,Plotting a Revolution in a Minor,256
+TRAVPVL128F92FA6C2,Lil' KeKe,What It Do (Feat. Big Pokey & Big Hawk),265
+TRAVPVT12903CF4704,Dustin O'Halloran,What Is Unknown,141
+TRAVQDQ128F92FBF42,The Riverboat Gamblers,I Get Down,336
+TRAVQKR128F935A10E,Jonathan King,Let it all hang out,222
+TRAVQLL12903CF225C,Borknagar,Relate (dialogue),247
+TRAVQMB128F9315644,Harrison Kennedy,Everybody Gets the Blues,312
+TRAVQRL128F93037FF,Ruth Brown,Brown Sugar,235
+TRAVRBD12903CF1DFB,Extol,Confession Of Inadequacy,286
+TRAVRCV12903CDFBB0,A Small Good Thing,The Horn,283
+TRAVRDW128F932657D,Fat Freddy's Drop,The Raft,403
+TRAVRET128F422DA1B,The Four Aces,Feelings,251
+TRAVRMA128F9323782,Love/Hate,Don't Be Afraid,187
+TRAVRNH128F42B85E6,Roch Voisine,Sauve-moi,253
+TRAVSEK128F428AB05,Shirley Brown,Move Me - Move Me,259
+TRAVSJD12903CB3097,Hey Negrita,Chained,169
+TRAVSJZ128F147BE50,Agent Orange,Somebody To Love (Album Version),264
+TRAVSNR12903CBBC81,Fauna Flash,Tel Aviv,179
+TRAVSPR12903CBC884,General Elektriks,Catch The Bus,224
+TRAVSRO12903CBCA6F,Dagda,The Turning Years,240
+TRAVSSN128F931C5F6,Grateful Dead,"Dupree's Diamond Blues [Live at Knickerbocker Arena, Albany, NY, March 1990]",246
+TRAVTBD12903D078A5,Fabulous Disaster,Star Car,81
+TRAVTDJ128F9318DDB,Chapeau Claque,Reykjavik,288
+TRAVTGB12903CE5231,daphne,Change,172
+TRAVTLK128F93389E4,Eurogliders,Listen,177
+TRAVTTJ128F4266D7C,James Blood Ulmer,"Too Lazy To Work, Too Nervous To Steal",291
+TRAVUIQ128F4231357,Nena,Lass mich (radio version),183
+TRAVUJS128F427A50F,Mike Oldfield,The Tempest,246
+TRAVUMJ128F932117E,Support Lesbiens,Sacred Cup,226
+TRAVUQU128F933D3FE,Stan Getz,Gone With the Wind,269
+TRAVURN12903CD9FCC,Hank Marvin,Tailspin,302
+TRAVUTW128F92D821F,Wolfsheim,The Sparrows and the Nightingales,211
+TRAVVBT12903CDCEAE,Inked In Blood,Call To Arms,188
+TRAVVFG128F14697E9,Steve Hillage,Lunar Musick Suite,345
+TRAVVLS128F14A79D6,Ali Hassan Kuban,Gammal,208
+TRAVVRJ12903CE4166,Debbie Deane,Sunday Morning Dawn,114
+TRAVVSA128F92C9A41,Cimarons,Willin - Original,157
+TRAVVTG128F428E8CA,Fist,Fe fi fo fum,268
+TRAVVYO12903CAFAD1,The Machines,Over And Out,247
+TRAVWCV128F14AA604,Fuckpony,Mafalda,235
+TRAVWEK12903D0C756,Niki Haris,Total Love,274
+TRAVWGY128F9337BAF,Willy Chirino,El Cantor Del Pueblo,195
+TRAVWIE128F149BD15,Mahlathini and The Mahotella Queens,Re Ya Dumedisa,274
+TRAVWRR128F933B142,Pigface,War Ich Nicht,260
+TRAVXCQ128F92DDE94,Feridun Düzağaç,Kurumus ölüyorken,228
+TRAVXDV128F934D9AB,The Young Dubliners,Rosie,213
+TRAVXFA128F933B7A3,BloodKin,Night School,260
+TRAVXJF12903CF0973,The Clovers,Nip Sip,270
+TRAVXOW128F92FB749,Miles Davis,Ah-Leu-Cha,346
+TRAVXWY128F42A2689,Zarah Leander,Ich steh' im Regen (aus dem Film 'Zu neuen Ufern'),217
+TRAVXZY128F426E5AD,Da Brat,Sittin' On Top Of The World,230
+TRAVYFE12903CB52E5,Doctor Rockit,Café De Flore,290
+TRAVYPD128F424DB08,The Dreamside,Open your eyes (feat. Rogue) (single version),195
+TRAVYTY128F4238850,General Degree,Granny,151
+TRAVZGW12903CF2514,Arthur Verocai,Tudo De Bom,255
+TRAVZIF128F4295AC2,The Sentinals,Surfin',154
+TRAVZKQ128F4291393,Benümb,Division Within Division,149
+TRAVZTE128F421C581,Shawn Christopher,Don't Lose The Magic [David Morales Dub],164
+TRAVZWM128E079282D,Jurassic 5,Acetate Prophets,301
+TRAWAFA128F931B67C,24-7 Spyz,Earth And Sky,173
+TRAWAGQ128F932FB1C,Heads Will Roll,Truth In Jest,287
+TRAWAJW128F42154AD,Los Suaves,Baby Please don't Go,192
+TRAWAUC128F9312676,Mind da Gap,Atitude Construtiva,225
+TRAWAUX128F4236BAC,Dubee,"Dubee, Mall & Sleep  (LP Version)",197
+TRAWAUZ128F9322AB2,Alvik,beat :: skip (nut'n'berry rmx by prince of tennis),191
+TRAWBEL128F427FCBA,Fatty Koo,Fatty Koo,305
+TRAWBJQ128F931AC8D,Moses Pelham,Mein Glück,324
+TRAWBKL128F932E32A,Viola,My Troubled One,308
+TRAWBMA12903CD5422,Tocadisco,Toca 128.0 FM,301
+TRAWBNI128F4244271,Veggie Tales (Veggie Tunes),I'm Blue (LP Version),322
+TRAWBNU128F9306D69,Kojak,The Truth,216
+TRAWBUA128F92F9966,The Monotones,Zombi,293
+TRAWBXX12903D099D5,Vlad Topalov,Podnimus Visoko,233
+TRAWCBC128F92ECDE9,Kid Cudi,Day 'N' Nite,214
+TRAWCCQ12903CD9497,Krishna Das,The Goddess Suite - Mother Song,252
+TRAWCCZ128F14A66AB,LCD Soundsystem,Yeah (Pretentious Mix),158
+TRAWCHJ128F9359625,Buddy Knox,Party Doll,221
+TRAWCLE128F92F7BBD,Karsh Kale,Beautiful (Beat Pharmacy Remix),127
+TRAWCLM12903CCABD1,Marc Anthony,Pastourel Delaï L'Aiga - Un jour je m'y promène,271
+TRAWCLY128F424835F,Larry Groce,Hickory Dickory Dock/Jack And Jill/Jack Be Nimble (Medley),254
+TRAWDAX128F931C5EF,Junior Murvin,Police & Thieves,255
+TRAWDEG12903C9A9DB,Aca Lukas,Kuda idu ljudi kao ja,283
+TRAWDET128F934FB4E,Pridebowl,Throw In The Towel,295
+TRAWDFL128F426B6C1,Brigitte Fontaine,Chat,203
+TRAWDKJ128F423A5F3,La Excepción,Gorrion Bernardino (Con Kultama),287
+TRAWDMN128F934911B,The Big Bopper,Old Maid,226
+TRAWDRH12903CFA586,Boo Williams,teckno drome,274
+TRAWDTB12903CB283D,Ha Ha Tonka,Thoreau in the Woods (Album),347
+TRAWDUC12903CC51A0,The Commercial Hippies,Loose Control,361
+TRAWEFO128F92D816D,Styles of Beyond,Bleach (Instrumental),302
+TRAWFEM128F92D95BA,Nnenna Freelon,The Tears Of A Clown,174
+TRAWFFR128F9320370,Bobby Sherman,Jingle Bell Rock,246
+TRAWFLJ128F4255415,Gerald Albright,About Last Night - LP Version,245
+TRAWFRU128F145954F,Betty Carter,Some Other Time,319
+TRAWFSN128F9348E3E,Rocío Dúrcal,La Diferencia,241
+TRAWGFU128F92DEF4D,Charlie Parker,The Song Is You,187
+TRAWGJX128F429A3F0,Equipe 84,La Montagna Sacra,177
+TRAWGKQ128F92F8F54,Thyrfing,Celebration of Our Victory,237
+TRAWGNH128F42320BB,The End,A Fell Wind,263
+TRAWGOW128F149FF8F,Sunbeam,The Beginning,204
+TRAWGRW128F4285171,Tiffany,Together Again,231
+TRAWGTK128F4268774,Jean-Louis Murat,Le Temps qu'il Ferait,243
+TRAWHGD128F9309DF3,The Holloways,Listen,224
+TRAWHOC128F933C5A8,Anne Ducros,Faded Roses,334
+TRAWHOF128E0788F95,Mis-Teeq,Roll On,241
+TRAWHPI128F92D1553,W&W,Countach,145
+TRAWHRH128F426BF30,The Clancy Brothers and Tommy Makem,The Parting Glass,148
+TRAWHTB128F934B874,Forever In Terror,In The Face Of The Faceless,238
+TRAWHVY12903CB098E,David Holmes,Holy Pictures,286
+TRAWICE12903CEF144,System F,Needlejuice,280
+TRAWIDG128F92EF1EA,Andreas Tilliander,She Don't Cry (feat. New Moscow),178
+TRAWIJQ128F145C2C7,Francesco Guccini,Il Vecchio E Il Bambino (Anfiteatro Live),219
+TRAWITH128F92FB132,Absolute,Dolphins Cry,274
+TRAWJGA128F4269064,Tom Robinson Band,Power In The Darkness,310
+TRAWJKM12903CCB49D,Armageddon Dildos,Conversion,203
+TRAWJQR128F42A7404,The Weavers,Goodnight Irene,193
+TRAWKBW12903CC48FE,The Stills,"Still In Love Song (Extended 12"" Remix)",215
+TRAWKCN128F428EC1E,The Blow Monkeys,Choice?,201
+TRAWKDK12903CFDA30,Maserati,Show me the Season,236
+TRAWKFX128F9317510,Carlo Siliotto,Filodiperle,172
+TRAWKPE128F42660AA,Mahalia Jackson,Elijah Rock,190
+TRAWLAH128F42A9258,Lalo Schifrin,Chasing The Assassin,267
+TRAWLBX128F4257811,Nubla,Nube negrita,304
+TRAWLEX128F429DCA3,Prince Po,Hello,235
+TRAWLFR12903CDD0DA,Carcass,Exhume To Consume,267
+TRAWLKO128F92DCE96,Franco De Vita,Los hijos de la oscuridad,208
+TRAWLLK128F932467C,Martyr AD,Statement Of Being Followed By Followers,235
+TRAWLOB128F92CF27B,Madeleine Peyroux,Smile,315
+TRAWLRV128F92D310E,Georgie Fame,Bidin' My Time,344
+TRAWLST128F426F991,Ralph Stanley,Intro,249
+TRAWLVG128F426836F,Wanda Jackson,Blue Moon Of Kentucky,211
+TRAWMAR128F147A654,Livin' Joy,Don't Stop Movin',232
+TRAWMBY128F428CB76,Pig Destroyer,Ghost of a Bullet,298
+TRAWMLY128F92CFBBE,Boy George,Turn To Dust,160
+TRAWMMY128F427D7E1,Alvin And The Chipmunks,Oh Gondaliero,266
+TRAWMQC128F4288D56,George Duke,I C'n Hear That,193
+TRAWMUK128F92F5C3F,The Nimmo Brothers,Flat Broke,232
+TRAWMYO128F92FAFAB,Retching Red,Blue Kid Trapped in a Red State,230
+TRAWNAF128F425CBC9,Sporto Kantès,Sick Song,180
+TRAWNKE128F428A2EA,Home Grown,UBotherme,291
+TRAWNRK128F92EA2C2,Slayer,Criminally Insane,279
+TRAWOCQ128F9306906,Bennie Moten's Kansas City Orchestra,Terrific Stomp,303
+TRAWOFR12903CC8876,The Ruins of Beverast,Kain's Countenance Fell,184
+TRAWOIA12903C9ACB1,Niño Josele,Pañuelo de Lunares,152
+TRAWOIH128F932D547,Al Hibbler,After The Lights Go Down Low,190
+TRAWOII128F4237C12,Billy Cobham,Space Lady (LP Version),210
+TRAWOJQ128F934B653,The-Dream / Kanye West,Walkin' on the Moon,239
+TRAWOUY128F930A959,Sieges Even,Blue Wide Open,207
+TRAWPVQ128F42676E9,Jane Olivor,Song For My Father,281
+TRAWPXD128F422B642,Across the Border,Patriotic Pack,346
+TRAWQEU128F4279159,Gambafreaks Feat. Nicole,Never Say Never,229
+TRAWQFC128F42BC796,Third Day,Anything,267
+TRAWQFU128F429882B,Turbo Fruits,Ramblin Rose,252
+TRAWQIL128F424D8C4,Elmore James,Goodbye Baby,258
+TRAWQJN128F4256CEE,Love/Hate,Walk On,137
+TRAWQLZ12903CA2E47,Everton Blender,Bring the Kutchie,270
+TRAWQNE128F92F3AE0,Karsh Kale,Milan,246
+TRAWQYH128F93222C6,Arab on Radar,Piggin' In The Pumpkin Patch,285
+TRAWRGZ128F930B12F,Seventeen Evergreen,Constellation,276
+TRAWRIC128E078ED37,Limp Bizkit,Take A Look Around,267
+TRAWRJP128F42A22B4,David Mead,No One Left To Blame,253
+TRAWRMB12903CF28C7,Markus Guentner,Histrionics,279
+TRAWRNO128F4253951,Automatic 7,Lucky One,302
+TRAWSKO128F422E8E9,Johnny Tillotson,Empty Feeling,194
+TRAWSSB128F92F81DB,Alesha Dixon,Breathe Slow,304
+TRAWSVD128F92E96B9,Garden of Delight,Downwards To A Sea,301
+TRAWSVP12903CC132D,55 Escape,Spoken,221
+TRAWSYJ12903CB2E3B,Basic Vocab,Sit On Down,228
+TRAWTDG128F93320BD,Echo & The Bunnymen,The Killing Moon,130
+TRAWTHB128F1491C02,Sonic Youth,Queen Anne Chair,212
+TRAWTHK12903CB0260,Alexander Robotnick,Electrika India,155
+TRAWTRZ12903CDE478,Random,Hybrid,199
+TRAWUGP128F42BA894,Dan Sartain,Place to Call My Home,238
+TRAWUYW128F428E26B,This Mortal Coil,Inch Blue,256
+TRAWVBR128F930A60B,Queen,Las Palabras De Amor (The Words Of Love) (2009 Digital Remaster),218
+TRAWVVM12903CC9B77,Mortification,The Destroyer Beholds,276
+TRAWWPG12903CA769A,Lemongrass,Voyager,333
+TRAWWSL128F93112A9,Flatfoot 56,Standing for Nothing,268
+TRAWWXI12903CEBCCF,Raw Power,Reptile House,356
+TRAWXAV128F93298E8,Art Tatum,Last Goodbye Blues,172
+TRAWXFZ128F146C080,Soulsister,All I've Got,174
+TRAWXLI128F1463CDB,Robert Plant,Last Time I Saw Her,313
+TRAWXLK128F42A44C9,Alex Baroni,Dimmi Che Ci Sei,206
+TRAWXQQ128E07856F0,Emmylou Harris,Hickory Wind (Remastered LP Version),205
+TRAWXRW128F92F2686,Morrissey,The First Of The Gang To Die,310
+TRAWXSC12903D027C2,Warne Marsh,Easy Living,302
+TRAWXXJ128F9346F83,Abandin All Hope,The novelty slut song,237
+TRAWYLS128F9331A51,Red Flag 77,Paranoia,246
+TRAWYQE128F147BB28,Jim Noir,Eanie Meany [Fatboy Slim Remix - radio edit],205
+TRAWYVC12903CD9439,F.R. David,Sing In My Life,261
+TRAWYXI128F429996C,I-20 featuring Juvenile,Point 'Em Out,237
+TRAWZHV128F14ADC8B,Spoken,1992,304
+TRAWZMV128F4266823,Stabbing Westward,Drugstore,161
+TRAWZYK128F92F88DA,The Count Five,The Morning After,230
+TRAXAAK128F92F9AEF,Headscan,Lolife (Remixed By Famine),202
+TRAXACX128E0792481,Bryan Adams,The Best Of Me,342
+TRAXACY128F424C6D1,Big John Patton,Soul Man,338
+TRAXADZ128F92D323F,Forgive Durden,Genesis [Alternate Ending],192

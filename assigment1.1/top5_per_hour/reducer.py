@@ -5,14 +5,12 @@ import sys
 
 def reducer():
 
-    # Expected output: (FirstName, LastName, hourOfday, numberOfTimesListened to a song in that hour of the day)
+    prev_track = None
+    curr_track = None
 
-    prev_user = None
-    curr_user = None
-    curr_user_playhistory = {}
-
-    curr_user_first_name = None
-    curr_user_last_name = None
+    curr_track_title = None
+    curr_track_artist = None
+    curr_track_listened_count = 0
 
     # Input comes from STDIN
     for line in sys.stdin:
@@ -20,52 +18,42 @@ def reducer():
         data = line.strip().split(',')
 
         # Check argument count        
-        if len(data) != 5:
+        if len(data) != 4:
             continue
 
-        curr_user, first_name, last_name, hour_of_day, listened_count = data
+        curr_track, title, artist, listened_count = data
 
         # Check argument type
         if not listened_count.isdigit():
             continue
 
-        if curr_user_first_name == None and first_name != '-':
-            curr_user_first_name = first_name
+        if curr_track_title == None and title != '-':
+            curr_track_title = title
 
-        if curr_user_last_name == None and last_name != '-':
-            curr_user_last_name = last_name
+        if curr_track_artist == None and artist != '-':
+            curr_track_artist = artist
 
-        # If current user_id does not equal previous user_id
-        if prev_user and prev_user != curr_user:
+        # If current track_id does not equal previous track_id
+        if prev_track and prev_track != curr_track:
 
-            # Print the previous user's playhistory
-            print_result(curr_user_first_name, curr_user_last_name, curr_user_playhistory)
+            # Print the previous track information
+            print_result(curr_track_title, curr_track_artist, curr_track_listened_count)
 
             # Reset variables
-            curr_user_first_name = None
-            curr_user_last_name = None
-            curr_user_playhistory.clear()
+            curr_track_title = None
+            curr_track_artist = None
+            curr_track_listened_count = 0
+            
+        # Increase listen count
+        curr_track_listened_count += int(listened_count)
 
-
-        if hour_of_day.isdigit():  
-            hour_of_day = int(hour_of_day)
-
-            # Initialize key
-            if not curr_user_playhistory.has_key(hour_of_day):
-                curr_user_playhistory[hour_of_day] = 0
-
-            # Increase listen count
-            curr_user_playhistory[hour_of_day] = curr_user_playhistory[hour_of_day] + int(listened_count)
-
-
-        # Set the current user_id as the previous user_id for next iteration
-        prev_user = curr_user
+        # Set the current track_id as the previous track_id for next iteration
+        prev_track = curr_track
 
     # Print the current user's playhistory
-    print_result(curr_user_first_name, curr_user_last_name, curr_user_playhistory)
+    print_result(curr_track_title, curr_track_artist, curr_track_listened_count)
 
-def print_result(first_name, last_name, dict):
-    for hour in sorted(dict.keys()):
-        print("{0}\t{1}\t{2}\t{3}".format(first_name, last_name, hour, dict[hour]))
+def print_result(title, artist, count):
+    print("{0}\t{1}\t{2}".format(title, artist, count))
 
 reducer()

@@ -6,41 +6,46 @@ from datetime import datetime
 
 def mapper():
 
+    HOUR_OF_DAY_CONST = 12
+
     # Input comes from STDIN (standard input)
     for line in sys.stdin:
 
         data = line.split(',')
 
-        user_id = None
-        first_name = '-'
-        last_name = '-'
-        hour_of_day = '-'
+        track_id = None
+        title = '-'
+        artist = '-'
         listened_count = 0
 
         # Read input of the playhistory.csv file
         if len(data) == 3:
-            user_id = data[1]
+            track_id = data[0]
             time_stamp = data[2]
 
             # Skip header line
-            if user_id == 'user':
+            if track_id == 'track_id':
                 continue
 
             # Extract the hour of the day from the datetime
             hour_of_day = datetime.strptime(time_stamp.strip(), '%Y-%m-%d %H:%M:%S').hour
-            listened_count = 1
-        elif len(data) == 7:
-            user_id = data[0]
 
-            # Skip header line
-            if user_id == 'id':
+            if not hour_of_day == HOUR_OF_DAY_CONST:
                 continue
 
-            first_name = data[1]
-            last_name = data[2]
+            listened_count = 1
+        elif len(data) == 4:
+            track_id = data[0]
+
+            # Skip header line
+            if track_id == 'track_id':
+                continue
+
+            title = data[2]
+            artist = data[1]
         else:
             continue
         
-        print('{0},{1},{2},{3},{4}'.format(user_id, first_name, last_name, hour_of_day, listened_count))
+        print('{0},{1},{2},{3}'.format(track_id, title, artist, listened_count))
 
 mapper()

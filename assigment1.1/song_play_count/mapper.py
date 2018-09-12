@@ -19,7 +19,8 @@ def mapper():
         if track_id == 'track_id':
             continue
             
-        date = datetime.strptime(time_stamp, "%Y-%m")
+        # Reformat date to lose useless time
+        date = datetime.strptime(time_stamp, '%Y-%m-%d %HH:%MM:%ss').strftime('%Y %m')
 
         print('{0},{1},{2}'.format(track_id, date, 1))
 

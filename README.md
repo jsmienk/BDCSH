@@ -80,20 +80,16 @@ The course containes three assignments:
 >- `tracks.csv`
 >- `playhistory.csv`
 >
->Write mappers and reducers to solve the following problems:
->
->1. For each song how often was listened to that song in a certain month of a particular year,
-i.e. March 2015. Expected output: (SongId, number of times played in March 2015), ordered by SongID.
->2. For each user the hour of the day (s)he listened most often to songs. Expected output: (FirstName, LastName, hourOfday, numberOfTimesListened to a song.
-in that hour of the day)
->3. The 5 songs played most often in a specific hour of the day i.e. between 7AM and 8AM. Expected output: 5 lines containing (Songtitle, ArtistName, NumberOfTimesPlayed).
->4. For each user, the artist (s)he listen to most often. Expected output: (FirstName, LastName, Artist, NrofTimes listened to that artist) (Hint: you need a cascade of mappers and reducers. Explain why!).
+>Write mappers and reducers to solve the following four problems (1.1.1, 1.1.2, 1.1.3 and 1.1.4):
 >
 >You should hand in the source code of the mappers and the reducers and a (small) report in which you explain your solution and display the results of your solution for the [large dataset](https://leren.saxion.nl/bbcswebdav/pid-2157184-dt-content-rid-50887925_4/xid-50887925_4).
 
-#### 1.1 Result
+#### 1.1.1
 
-Running a Hadoop job on the large data set resulting in the following output:
+>For each song how often was listened to that song in a certain month of a particular year,
+i.e. March 2015. Expected output: (SongId, number of times played in March 2015), ordered by SongID.
+
+Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
 TREX0CN128F92F8F89    2016 01    7
@@ -128,6 +124,75 @@ TREX0CN128F92F8F89    2018 05    7
 TREX0CN128F92F8F89    2018 06    3
 TREX0CN128F92F8F89    2018 07    2
 TREX0CN128F92F8F89    2018 08    4
+```
+
+#### 1.1.2
+
+Running a Hadoop job on the large data set resulted in the following output:
+
+```text
+Blinny Coleford    0     832
+Blinny Coleford    1     760
+Blinny Coleford    2     807
+Blinny Coleford    3     840
+Blinny Coleford    4     820
+Blinny Coleford    5     833
+Blinny Coleford    6     793
+Blinny Coleford    7     803
+Blinny Coleford    8     831
+Blinny Coleford    9     803
+Blinny Coleford    10    858
+Blinny Coleford    11    791
+Blinny Coleford    12    784
+Blinny Coleford    13    809
+Blinny Coleford    14    775
+Blinny Coleford    15    822
+Blinny Coleford    16    865
+Blinny Coleford    17    863
+Blinny Coleford    18    868
+Blinny Coleford    19    860
+Blinny Coleford    20    768
+Blinny Coleford    21    828
+Blinny Coleford    22    791
+Blinny Coleford    23    798
+Alice Lyfe    0     771
+Alice Lyfe    1     832
+Alice Lyfe    2     829
+Alice Lyfe    3     809
+Alice Lyfe    4     790
+Alice Lyfe    5     849
+Alice Lyfe    6     812
+Alice Lyfe    7     851
+Alice Lyfe    8     827
+Alice Lyfe    9     834
+Alice Lyfe    10    833
+Alice Lyfe    11    801
+Alice Lyfe    12    810
+Alice Lyfe    13    786
+Alice Lyfe    14    858
+Alice Lyfe    15    823
+Alice Lyfe    16    842
+Alice Lyfe    17    797
+Alice Lyfe    18    864
+Alice Lyfe    19    770
+Alice Lyfe    20    822
+Alice Lyfe    21    813
+Alice Lyfe    22    791
+Alice Lyfe    23    809
+```
+
+#### 1.1.3
+
+>The 5 songs played most often in a specific hour of the day i.e. between 7AM and 8AM. Expected output: 5 lines containing (Songtitle, ArtistName, NumberOfTimesPlayed).
+
+```text
+```
+
+#### 1.1.4
+
+>For each user, the artist (s)he listen to most often. Expected output: (FirstName, LastName, Artist, NrofTimes listened to that artist) (Hint: you need a cascade of mappers and reducers. Explain why!).
+
+```text
 ```
 
 ### 1.2

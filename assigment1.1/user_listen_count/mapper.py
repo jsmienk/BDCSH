@@ -23,7 +23,7 @@ def mapper():
             time_stamp = data[2]
 
             # Skip header line
-            if track_id == 'track_id':
+            if user_id == 'user':
                 continue
 
             # Extract the hour of the day from the datetime

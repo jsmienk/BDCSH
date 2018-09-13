@@ -45,7 +45,7 @@ def reducer():
         if prev_track and prev_track != curr_track:
 
             # Print the previous user's playhistory
-            print_result(track_id, artist, curr_user_id, curr_user_first_name, curr_user_last_name, curr_track_count)
+            print_result(prev_track, artist, curr_user_id, curr_user_first_name, curr_user_last_name, curr_track_count)
 
             # Reset variables
             curr_track_count = 0

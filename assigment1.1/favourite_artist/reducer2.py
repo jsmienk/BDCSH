@@ -39,8 +39,7 @@ def reducer():
         if prev_track and prev_track != curr_track:
 
             # Print the previous track's listeners
-            for listener in curr_track_listeners:
-                print_result(prev_track, curr_artist, listener[0], listener[1], listener[2], listener[3])
+            print_result(prev_track, curr_artist, curr_track_listeners)
 
             # Reset variables
             curr_artist = None
@@ -50,11 +49,11 @@ def reducer():
         prev_track = curr_track
 
     # Print the current track's listeners
-    for listener in curr_track_listeners:
-        print_result(prev_track, curr_artist, listener[0], listener[1], listener[2], listener[3])
+    print_result(prev_track, curr_artist, curr_track_listeners)
 
 # Print track_id, artist, user_id, first_name, last_name, listen_count
-def print_result(track_id, artist, user_id, first_name, last_name, listen_count):
-    print("{0}\t{1}\t{2}\t{3}\t{4}\t{5}".format(track_id, artist, user_id, first_name, last_name, listen_count))  
+def print_result(track_id, artist, listeners):
+    for listener in listeners:
+        print("{0}\t{1}\t{2}\t{3}\t{4}\t{5}".format(track_id, artist, listener[0], listener[1], listener[2], listener[3]))
 
 reducer()

@@ -371,6 +371,7 @@ Running a Hadoop job on the large data set resulted in the following output:
 First round results:
 
 ```python
+# Fake results
 43,Marnick,Arend,TRATSCZ12903CDAF86,1
 43,Marnick,Arend,TRAUHWR12903CC82A0,1
 43,Marnick,Arend,TRATSFS12903D03730,2
@@ -387,13 +388,29 @@ First round results:
 Second round mapper output:
 
 ```python
+# Fake results
 TRATSJR128EF34E1F3,AC/DC,-,-,-,0
 TRATSJR128EF34E1F3,-,43,Marnick,Arend,3
 TRATSJR128EF34E1F3,-,22,Jeroen,Smienk,4
-...
 TRATXQY128F1489B0C,-,22,Jeroen,Smienk,1
 TRATXQY128F1489B0C,Krezip,-,-,-,0
 TRATXQY128F1489B0C,-,43,Marnick,Arend,2
+```
+
+Second round results:
+
+```python
+# Fake results
+TRATSJR128EF34E1F3,AC/DC,43,Marnick,Arend,3
+TRATSJR128EF34E1F3,AC/DC,22,Jeroen,Smienk,4
+TRATXQY128F1489B0C,Krezip,22,Jeroen,Smienk,1
+TRATXQY128F1489B0C,Krezip,43,Marnick,Arend,2
+```
+
+Third round results:
+
+```python
+# Real results
 ```
 
 ### 1.2 Shakespeare

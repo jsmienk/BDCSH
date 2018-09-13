@@ -354,6 +354,18 @@ Necesito Respirar                  Medina Azahara      27
 
 >For each user, the artist (s)he listen to most often. Expected output: (FirstName, LastName, Artist, NrofTimes listened to that artist) (Hint: you need a cascade of mappers and reducers. Explain why!).
 
+combine people and playhistory to get everything the user listened to.
+mapper prints user_id, (first_name, last_name), (track_id)
+reducer prints user_id, first_name, last_name, track_id, listen_count
+
+combine result round 1 with tracks to find the artists for every song the user listened to.
+mapper prints track_id, (artist), (user_id, first_name, last_name, listen_count)
+reducer prints track_id, artist, user_id, first_name, last_name, listen_count
+
+reorder to calc user stats
+mapper prints user_id, first_name, last_name, track_id, artist, listen_count
+reducer prints first_name, last_name, top_artist, listen_count
+
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```text

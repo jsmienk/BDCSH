@@ -1,6 +1,8 @@
 #!/usr/bin/python
 """reducer.py"""
 
+# Reducer prints first_name, last_name, top_artist, listen_count
+
 import sys
 
 def reducer():

@@ -29,7 +29,7 @@ def mapper():
             user_id = data[0]
             first_name = data[1]
             last_name = data[2]
-            listen_count = listen_count
+            listen_count = data[4]
         else:
             continue
         

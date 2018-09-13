@@ -147,7 +147,19 @@ TREX0CN128F92F8F89    2018 08    4
 
 ##### 1.1.2 Mapper
 
-The mapper's task is to combine data from two different sources. One being `playhistory.csv` and the other being `people.csv`. We need to combine the full name of the user with the amount of plays per hour of the day.
+The mapper's task is to combine data from two different sources. One being `playhistory.csv` and the other being `people.csv`. We need to combine the full name of the user with the amount of plays per hour of the day. The mapper does not know if it gets input from `playhistory.csv` or `people.csv`, but we can determine this by looking at the amount of columns. If the columns do not match either file, we skip that line. It is important that we have atleast one common value to be able to combine the data. In this case this common value is `user_id`. This column is present in both source files.
+
+We get the useful data from the lines and always print it in the same format so our reducer can expect what his input will be. Depending on the source of the current line that is being processed some values may be zero or not applicable ('-'). The only value that must always be present is the key. The key is always the common value used to combine the data from the different sources. In our case `user_id`.
+
+```python
+# Output line with data from people.csv
+22,Jeroen,Smienk,-,0
+
+# Output line with data from playhistory.csv
+22,-,-,7,1
+
+# In both cases the id is the same, so we can match the play count with the user's name.
+```
 
 ```python
 def mapper():
@@ -189,8 +201,84 @@ def mapper():
 
 ##### 1.1.2 Reducer
 
-```python
+The reducer includes two functions. The reducer itself and a helper for printing the output. We keep track of five variables outside the for-loop: `prev_user`, `curr_user` and `curr_user_playhistory`. The `prev_user` is the user id of previous user we have been visiting. The `curr_user` is current user we are looking at in the for-loop. `curr_user_playhistory` is a dictionary containing key-value pairs being hour of the day and total play count for each user.
 
+This looks a lot like the previous assignment's reducer, but because we have to combine data now as well it looks a little different. When there is a first and last name present in the current line, we save it. After counting all other lines with the same user id. We print an output line and reset the name and play history variables.
+
+Input data (prepared by the mapper) may look like this:
+
+```python
+43,-,-,14,1
+43,-,-,6,1
+43,Marnick,Arend,-,0
+43,-,-,15,1
+43,-,-,16,1
+43,-,-,6,1
+22,Jeroen,Smienk,-,0
+22,-,-,9,1
+22,-,-,7,1
+22,-,-,12,1
+22,-,-,7,1
+```
+
+The lines are sorted on the key (user id) so we can be certain that all play counts and eventually the name will be together. When a new user id is visited (`prev_user != curr_user`) the all play counts and the name can be printed as a single row. Again, the keys in the dictionary are sorted before printing to enhance readability of the output.
+
+```python
+def reducer():
+    prev_user = None
+    curr_user = None
+    curr_user_playhistory = {}
+
+    curr_user_first_name = None
+    curr_user_last_name = None
+
+    for line in sys.stdin:
+        data = line.strip().split(',')
+        if len(data) != 5:
+            continue
+
+        curr_user, first_name, last_name, hour_of_day, listened_count = data
+
+        # Check argument type
+        if not listened_count.isdigit():
+            continue
+
+        if curr_user_first_name == None and first_name != '-':
+            curr_user_first_name = first_name
+
+        if curr_user_last_name == None and last_name != '-':
+            curr_user_last_name = last_name
+
+        # If current user_id does not equal previous user_id
+        if prev_user and prev_user != curr_user:
+
+            # Print the previous user's playhistory
+            print_result(curr_user_first_name, curr_user_last_name, curr_user_playhistory)
+
+            # Reset variables
+            curr_user_first_name = None
+            curr_user_last_name = None
+            curr_user_playhistory.clear()
+
+        if hour_of_day.isdigit():
+            hour_of_day = int(hour_of_day)
+
+            # Initialize key
+            if not curr_user_playhistory.has_key(hour_of_day):
+                curr_user_playhistory[hour_of_day] = 0
+
+            # Increase listen count
+            curr_user_playhistory[hour_of_day] = curr_user_playhistory[hour_of_day] + int(listened_count)
+
+        # Set the current user_id as the previous user_id for next iteration
+        prev_user = curr_user
+
+    # Print the current user's playhistory
+    print_result(curr_user_first_name, curr_user_last_name, curr_user_playhistory)
+
+def print_result(first_name, last_name, dict):
+    for hour in sorted(dict.keys()):
+        print("{0}\t{1}\t{2}\t{3}".format(first_name, last_name, hour, dict[hour]))
 ```
 
 Running a Hadoop job on the large data set resulted in the following output:

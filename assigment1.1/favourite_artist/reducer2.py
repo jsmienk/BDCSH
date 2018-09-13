@@ -53,6 +53,6 @@ def reducer():
 # Print track_id, artist, user_id, first_name, last_name, listen_count
 def print_result(track_id, artist, listeners):
     for listener in listeners:
-        print("{0}\t{1}\t{2}\t{3}\t{4}\t{5}".format(track_id, artist, listener[0], listener[1], listener[2], listener[3]))
+        print("{0},{1},{2},{3},{4},{5}".format(track_id, artist, listener[0], listener[1], listener[2], listener[3]))
 
 reducer()

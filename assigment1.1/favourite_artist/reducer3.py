@@ -39,7 +39,7 @@ def reducer():
         if not curr_user_artists.has_key(artist):
             curr_user_artists[artist] = 0
 
-        curr_user_artists[artist] = curr_user_artists[artist] + count
+        curr_user_artists[artist] = curr_user_artists[artist] + listen_count
 
         # Set the current user as the previous user for next iteration
         prev_user = curr_user

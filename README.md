@@ -368,8 +368,32 @@ reducer prints first_name, last_name, top_artist, listen_count
 
 Running a Hadoop job on the large data set resulted in the following output:
 
-```text
+First round results:
 
+```python
+43,Marnick,Arend,TRATSCZ12903CDAF86,1
+43,Marnick,Arend,TRAUHWR12903CC82A0,1
+43,Marnick,Arend,TRATSFS12903D03730,2
+43,Marnick,Arend,TRAUARW12903CE70B0,1
+43,Marnick,Arend,TRATSJR128EF34E1F3,3
+22,Jeroen,Smienk,TRATSKB12903CBCB27,1
+22,Jeroen,Smienk,TRATSMF128F92ED742,3
+22,Jeroen,Smienk,TRAUNSW12903CA815E,2
+22,Jeroen,Smienk,TRATWOM128EF35A552,1
+22,Jeroen,Smienk,TRAUYTQ128F930680F,4
+22,Jeroen,Smienk,TRATXQY128F1489B0C,1
+```
+
+Second round mapper output:
+
+```python
+TRATSJR128EF34E1F3,AC/DC,-,-,-,0
+TRATSJR128EF34E1F3,-,43,Marnick,Arend,3
+TRATSJR128EF34E1F3,-,22,Jeroen,Smienk,4
+...
+TRATXQY128F1489B0C,-,22,Jeroen,Smienk,1
+TRATXQY128F1489B0C,Krezip,-,-,-,0
+TRATXQY128F1489B0C,-,43,Marnick,Arend,2
 ```
 
 ### 1.2 Shakespeare

@@ -10,7 +10,6 @@ def reducer():
 
     prev_track = None
     curr_track = None
-    curr_track_count = 0
     curr_artist = None
     curr_user_id = None
     curr_user_first_name = None

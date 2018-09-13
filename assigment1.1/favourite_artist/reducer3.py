@@ -11,6 +11,8 @@ def reducer():
 
     prev_user = None
     curr_user = None
+    first_name = None
+    last_name = None
     curr_user_artists = {}
 
     for line in sys.stdin:
@@ -30,7 +32,7 @@ def reducer():
         if prev_user and prev_user != curr_user:
 
             # Print results
-            print_result(prev_user, curr_user_artists)
+            print_result(first_name, last_name, curr_user_artists)
 
             # Reset dict
             curr_user_artists.clear()
@@ -45,7 +47,7 @@ def reducer():
         prev_user = curr_user
 
     # Print the last user and its favourite artist
-    print_result(prev_user, curr_user_artists)
+    print_result(first_name, last_name, curr_user_artists)
 
 # Print the previous user and its favourite artist
 def print_result(first_name, last_name, dict):

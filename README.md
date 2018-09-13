@@ -338,10 +338,16 @@ Alice Lyfe    23    809
 
 >The 5 songs played most often in a specific hour of the day i.e. between 7AM and 8AM. Expected output: 5 lines containing (Songtitle, ArtistName, NumberOfTimesPlayed).
 
+We choose to find songs between 12:00 and 13:00.
+
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
-
+Come Out Your Frame (Interlude)    Styles of Beyond    29
+To                                 Zao                 28
+Sweetest Love                      Dean Frazer         27
+Ballast                            Jawbox              27
+Necesito Respirar                  Medina Azahara      27
 ```
 
 #### 1.1.4 Favourite Artist per User

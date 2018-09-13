@@ -4,27 +4,26 @@
 import sys
 
 # combine result round 1 with tracks to find the artists for every song the user listened to.
-# reducer prints track_id, artist, user_id, first_name, last_name, listen_count
+# Reducer prints track_id, artist, user_id, first_name, last_name, listen_count
 
 def reducer():
 
     prev_track = None
     curr_track = None
     curr_track_count = 0
-
     curr_artist = None
     curr_user_id = None
     curr_user_first_name = None
     curr_user_last_name = None
 
-    # Input comes from STDIN: track_id, (artist), (user_id, first_name, last_name, listen_count)
+    # Input comes from STDIN: track_id, artist, user_id, first_name, last_name, listen_count
     for line in sys.stdin:
         data = line.strip().split(',')
 
         if len(data) != 6:
             continue
 
-        track_id, artist, user_id, first_name, last_name, listen_count = data
+        curr_track, artist, user_id, first_name, last_name, listen_count = data
 
         # Check argument type
         if not listen_count.isdigit():

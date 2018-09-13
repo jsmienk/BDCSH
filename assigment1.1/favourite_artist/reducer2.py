@@ -57,7 +57,7 @@ def reducer():
             curr_user_last_name = None
 
         # Increase the count
-        curr_track_count += listen_count
+        curr_track_count += int(listen_count)
 
         # Set the current track_id as the previous track_id for next iteration
         prev_track = curr_track

@@ -400,11 +400,12 @@ TRATXQY128F1489B0C,-,43,Marnick,Arend,2
 Second round results:
 
 ```python
-# Fake results
-TRATSJR128EF34E1F3,AC/DC,43,Marnick,Arend,3
-TRATSJR128EF34E1F3,AC/DC,22,Jeroen,Smienk,4
-TRATXQY128F1489B0C,Krezip,22,Jeroen,Smienk,1
-TRATXQY128F1489B0C,Krezip,43,Marnick,Arend,2
+...
+TREXOCN128F92F8F89    Callenish Circle    900    Phyllys Stott       1
+TREXOCN128F92F8F89    Callenish Circle    923    Kelci Peirone       2
+TREXOCN128F92F8F89    Callenish Circle    965    Bradney Christin    1
+TREXOCN128F92F8F89    Callenish Circle    969    Kelcey Caunt        1
+...
 ```
 
 Third round results:

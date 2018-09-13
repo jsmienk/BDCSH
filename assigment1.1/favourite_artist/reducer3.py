@@ -1,56 +1,56 @@
 #!/usr/bin/python
 """reducer.py"""
 
+# Input is user_id, first_name, last_name, artist, listen_count
 # Reducer prints first_name, last_name, top_artist, listen_count
 
 import sys
+import operator
 
 def reducer():
 
-    prev_track = None
-    curr_track = None
-    curr_track_plays = {}
+    prev_user = None
+    curr_user = None
+    curr_user_artists = {}
 
-    # Input comes from STDIN
     for line in sys.stdin:
-
-        # Check argument count
         data = line.strip().split(',')
-        if len(data) != 3:
+        if len(data) != 5:
             continue
+
+        curr_user, first_name, last_name, artist, listen_count = data
 
         # Check argument type
-        if not data[2].isdigit():
+        if not curr_user.isdigit() or not listen_count.isdigit():
             continue
 
-        curr_track = data[0]
-        date = data[1]
-        count = int(data[2])
+        listen_count = int(listen_count)
 
-        # If current word does not equal previous word
-        if prev_track and prev_track != curr_track:
+        # If current user does not equal previous user
+        if prev_user and prev_user != curr_user:
 
             # Print results
-            print_result(prev_track, curr_track_plays)
+            print_result(prev_user, curr_user_artists)
 
             # Reset dict
-            curr_track_plays.clear()
+            curr_user_artists.clear()
 
-        # Increase count per month
-        if not curr_track_plays.has_key(date):
-            curr_track_plays[date] = 0
+        # Increase count per artist
+        if not curr_user_artists.has_key(artist):
+            curr_user_artists[artist] = 0
 
-        curr_track_plays[date] = curr_track_plays[date] + count
+        curr_user_artists[artist] = curr_user_artists[artist] + count
 
-        # Set the current track as the previous track for next iteration
-        prev_track = curr_track
+        # Set the current user as the previous user for next iteration
+        prev_user = curr_user
 
-    # Print the last track and its count
-    print_result(prev_track, curr_track_plays)
+    # Print the last user and its favourite artist
+    print_result(prev_user, curr_user_artists)
 
-# Print the previous track and its count per month
-def print_result(track_id, dict):
-    for month in sorted(dict.keys()):
-        print("{0}\t{1}\t{2}".format(track_id, month, dict[month]))
+# Print the previous user and its favourite artist
+def print_result(first_name, last_name, dict):
+    artists = sorted(dict.items(), key=operator.itemgetter(1), reverse=True)
+    favourite = artists[:1]
+    print("{0}\t{1}\t{2}\t{3}".format(first_name, last_name, favourite, dict[favourite]))
 
 reducer()

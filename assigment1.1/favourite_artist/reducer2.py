@@ -11,7 +11,6 @@ def reducer():
     prev_track = None
     curr_track = None
     curr_artist = None
-
     curr_track_listeners = []
 
     # Input comes from STDIN: track_id, artist, user_id, first_name, last_name, listen_count

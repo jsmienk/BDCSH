@@ -52,7 +52,7 @@ def reducer():
 # Print the previous user and its favourite artist
 def print_result(first_name, last_name, dict):
     artists = sorted(dict.items(), key=operator.itemgetter(1), reverse=True)
-    favourite = artists[:1]
+    favourite = artists[0]
     print("{0}\t{1}\t{2}\t{3}".format(first_name, last_name, favourite, dict[favourite]))
 
 reducer()

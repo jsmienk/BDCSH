@@ -338,20 +338,80 @@ Alice Lyfe    23    809
 
 >The 5 songs played most often in a specific hour of the day i.e. between 7AM and 8AM. Expected output: 5 lines containing (Songtitle, ArtistName, NumberOfTimesPlayed).
 
+We choose to find songs between 12:00 and 13:00.
+
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
-
+Come Out Your Frame (Interlude)    Styles of Beyond    29
+To                                 Zao                 28
+Sweetest Love                      Dean Frazer         27
+Ballast                            Jawbox              27
+Necesito Respirar                  Medina Azahara      27
 ```
 
 #### 1.1.4 Favourite Artist per User
 
 >For each user, the artist (s)he listen to most often. Expected output: (FirstName, LastName, Artist, NrofTimes listened to that artist) (Hint: you need a cascade of mappers and reducers. Explain why!).
 
+combine people and playhistory to get everything the user listened to.
+mapper prints user_id, (first_name, last_name), (track_id)
+reducer prints user_id, first_name, last_name, track_id, listen_count
+
+combine result round 1 with tracks to find the artists for every song the user listened to.
+mapper prints track_id, (artist), (user_id, first_name, last_name, listen_count)
+reducer prints track_id, artist, user_id, first_name, last_name, listen_count
+
+reorder to calc user stats
+mapper prints user_id, first_name, last_name, track_id, artist, listen_count
+reducer prints first_name, last_name, top_artist, listen_count
+
 Running a Hadoop job on the large data set resulted in the following output:
 
-```text
+First round results:
 
+```python
+# Fake results
+43,Marnick,Arend,TRATSCZ12903CDAF86,1
+43,Marnick,Arend,TRAUHWR12903CC82A0,1
+43,Marnick,Arend,TRATSFS12903D03730,2
+43,Marnick,Arend,TRAUARW12903CE70B0,1
+43,Marnick,Arend,TRATSJR128EF34E1F3,3
+22,Jeroen,Smienk,TRATSKB12903CBCB27,1
+22,Jeroen,Smienk,TRATSMF128F92ED742,3
+22,Jeroen,Smienk,TRAUNSW12903CA815E,2
+22,Jeroen,Smienk,TRATWOM128EF35A552,1
+22,Jeroen,Smienk,TRAUYTQ128F930680F,4
+22,Jeroen,Smienk,TRATXQY128F1489B0C,1
+```
+
+Second round mapper output:
+
+```python
+# Fake results
+TRATSJR128EF34E1F3,AC/DC,-,-,-,0
+TRATSJR128EF34E1F3,-,43,Marnick,Arend,3
+TRATSJR128EF34E1F3,-,22,Jeroen,Smienk,4
+TRATXQY128F1489B0C,-,22,Jeroen,Smienk,1
+TRATXQY128F1489B0C,Krezip,-,-,-,0
+TRATXQY128F1489B0C,-,43,Marnick,Arend,2
+```
+
+Second round results:
+
+```python
+...
+TREXOCN128F92F8F89    Callenish Circle    900    Phyllys Stott       1
+TREXOCN128F92F8F89    Callenish Circle    923    Kelci Peirone       2
+TREXOCN128F92F8F89    Callenish Circle    965    Bradney Christin    1
+TREXOCN128F92F8F89    Callenish Circle    969    Kelcey Caunt        1
+...
+```
+
+Third round results:
+
+```python
+# Real results
 ```
 
 ### 1.2 Shakespeare

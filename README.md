@@ -488,9 +488,12 @@ Mean sales for every day of the week. Weekdays are represented as integers (Mond
 
 ## Technical Help & Commands
 
-CentOS 6 VM update git fix [here](https://stackoverflow.com/questions/21820715/how-to-install-latest-version-of-git-on-centos-7-x-6-x).
+CentOS 6 VM git fix:
 
-CentOS 6 VM git fix: `sudo yum update -y nss curl libcurl`
+```text
+sudo yum update -y nss curl libcurl
+sudo yum install git
+```
 
 ### Mapper
 

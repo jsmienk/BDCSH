@@ -55,7 +55,7 @@ def reducer():
     print_result(curr_user_first_name, curr_user_last_name, curr_user_playhistory)
 
 def print_result(first_name, last_name, list):
-    for hour, count in list.items():
+    for hour, count in enumerate(list):
         print("{0}\t{1}\t{2}\t{3}".format(first_name, last_name, hour, count))
 
 reducer()

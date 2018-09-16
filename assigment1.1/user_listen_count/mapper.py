@@ -21,7 +21,7 @@ def mapper():
             time_stamp = data[2]
 
             # Skip header line
-            if user_id == 'user':
+            if not user_id.isdigit():
                 continue
 
             # Extract the hour of the day from the datetime
@@ -31,7 +31,7 @@ def mapper():
             user_id = data[0]
 
             # Skip header line
-            if user_id == 'id':
+            if not user_id.isdigit():
                 continue
 
             first_name = data[1]

@@ -11,7 +11,7 @@ def mapper():
     # Input comes from STDIN (standard input)
     for line in sys.stdin:
 
-        data = line.split(',')
+        data = line.strip().split(',')
 
         # Skip header line
         if data[0] == 'track_id':
@@ -34,10 +34,10 @@ def mapper():
                 continue
 
             listened_count = 1
-        elif len(data) == 4:
+        elif len(data) > 3:
             track_id = data[0]
-            artist = data[1]
-            title = data[2]
+            artist = ','.join(data[1:-2])
+            title = data[len(data) - 2]
         else:
             continue
         

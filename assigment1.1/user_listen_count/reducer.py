@@ -26,12 +26,6 @@ def reducer():
         if not listened_count.isdigit():
             continue
 
-        if curr_user_first_name == None and first_name != '-':
-            curr_user_first_name = first_name
-
-        if curr_user_last_name == None and last_name != '-':
-            curr_user_last_name = last_name
-
         # If current user_id does not equal previous user_id
         if prev_user and prev_user != curr_user:
 
@@ -42,6 +36,12 @@ def reducer():
             curr_user_first_name = None
             curr_user_last_name = None
             curr_user_playhistory = [0] * 24
+
+        if curr_user_first_name == None and first_name != '-':
+            curr_user_first_name = first_name
+
+        if curr_user_last_name == None and last_name != '-':
+            curr_user_last_name = last_name
 
         if hour_of_day.isdigit():  
             hour_of_day = int(hour_of_day)

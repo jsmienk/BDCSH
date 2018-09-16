@@ -13,6 +13,10 @@ def mapper():
 
         data = line.split(',')
 
+        # Skip header line
+        if data[0] == 'track_id':
+            continue
+
         track_id = None
         title = '-'
         artist = '-'
@@ -23,26 +27,17 @@ def mapper():
             track_id = data[0]
             time_stamp = data[2]
 
-            # Skip header line
-            if track_id == 'track_id':
-                continue
-
             # Extract the hour of the day from the datetime
             hour_of_day = datetime.strptime(time_stamp.strip(), '%Y-%m-%d %H:%M:%S').hour
 
-            if not hour_of_day == HOUR_OF_DAY_CONST:
+            if hour_of_day != HOUR_OF_DAY_CONST:
                 continue
 
             listened_count = 1
         elif len(data) == 4:
             track_id = data[0]
-
-            # Skip header line
-            if track_id == 'track_id':
-                continue
-
-            title = data[2]
             artist = data[1]
+            title = data[2]
         else:
             continue
         

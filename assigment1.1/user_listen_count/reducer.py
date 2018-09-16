@@ -9,14 +9,11 @@ def reducer():
 
     prev_user = None
     curr_user = None
-    curr_user_playhistory = {}
-
+    curr_user_playhistory = [0] * 24
     curr_user_first_name = None
     curr_user_last_name = None
 
-    # Input comes from STDIN
     for line in sys.stdin:
-
         data = line.strip().split(',')
 
         # Check argument count        
@@ -44,19 +41,12 @@ def reducer():
             # Reset variables
             curr_user_first_name = None
             curr_user_last_name = None
-            curr_user_playhistory.clear()
-
+            curr_user_playhistory = [0] * 24
 
         if hour_of_day.isdigit():  
             hour_of_day = int(hour_of_day)
-
-            # Initialize key
-            if not curr_user_playhistory.has_key(hour_of_day):
-                curr_user_playhistory[hour_of_day] = 0
-
             # Increase listen count
             curr_user_playhistory[hour_of_day] = curr_user_playhistory[hour_of_day] + int(listened_count)
-
 
         # Set the current user_id as the previous user_id for next iteration
         prev_user = curr_user
@@ -64,8 +54,8 @@ def reducer():
     # Print the current user's playhistory
     print_result(curr_user_first_name, curr_user_last_name, curr_user_playhistory)
 
-def print_result(first_name, last_name, dict):
-    for hour in sorted(dict.keys()):
-        print("{0}\t{1}\t{2}\t{3}".format(first_name, last_name, hour, dict[hour]))
+def print_result(first_name, last_name, list):
+    for hour, count in enumerate(list):
+        print("{0}\t{1}\t{2}\t{3}".format(first_name, last_name, hour, count))
 
 reducer()

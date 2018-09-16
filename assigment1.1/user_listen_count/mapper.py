@@ -6,9 +6,7 @@ from datetime import datetime
 
 def mapper():
 
-    # Input comes from STDIN (standard input)
     for line in sys.stdin:
-
         data = line.strip().split(',')
 
         user_id = None

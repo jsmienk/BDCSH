@@ -7,16 +7,13 @@ def reducer():
 
     prev_track = None
     curr_track = None
-
     curr_track_title = None
     curr_track_artist = None
     curr_track_listened_count = 0
 
     all_tracks = []
 
-    # Input comes from STDIN
     for line in sys.stdin:
-
         data = line.strip().split(',')
 
         # Check argument count        

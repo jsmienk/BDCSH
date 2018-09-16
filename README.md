@@ -213,7 +213,7 @@ Input data (prepared by the mapper) may look like this:
 22,-,-,7,1
 ```
 
-The lines are sorted on the key (user id) so we can be certain that all play counts and eventually the name will be together. When a new user id is visited (`prev_user != curr_user`) the all play counts and the name can be printed as a single row. Again, the keys in the dictionary are sorted before printing to enhance readability of the output.
+The lines are sorted on the key (user id) so we can be certain that all play counts and eventually the name will be together. When a new user id is visited (`prev_user != curr_user`) the all play counts and the name can be printed as a single row. No need to sort the list on hour here like we did in the last assignment, because we used the indices of the array as the hours of the day.
 
 ```python
 def reducer():

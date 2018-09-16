@@ -172,28 +172,20 @@ def mapper():
         hour_of_day = '-'
         listened_count = 0
 
-        # Read input of the playhistory.csv file
-        if len(data) == 3:
+        if len(data) == 3: # playhistory.csv
             user_id = data[1]
             time_stamp = data[2]
-
-            # Skip header line
-            if user_id == 'user':
-                continue
-
-            # Extract the hour of the day from the datetime
             hour_of_day = datetime.strptime(time_stamp.strip(), '%Y-%m-%d %H:%M:%S').hour
             listened_count = 1
-        elif len(data) == 7:
+        elif len(data) == 7: # people.csv
             user_id = data[0]
-
-            # Skip header line
-            if user_id == 'id':
-                continue
-
             first_name = data[1]
             last_name = data[2]
-        else:
+        else: # invalid source
+            continue
+
+        # Skip header line / invalid sources
+        if not user_id.isdigit():
             continue
 
         print('{0},{1},{2},{3},{4}'.format(user_id, first_name, last_name, hour_of_day, listened_count))
@@ -201,7 +193,7 @@ def mapper():
 
 ##### 1.1.2 Reducer
 
-The reducer includes two functions. The reducer itself and a helper for printing the output. We keep track of five variables outside the for-loop: `prev_user`, `curr_user` and `curr_user_playhistory`. The `prev_user` is the user id of previous user we have been visiting. The `curr_user` is current user we are looking at in the for-loop. `curr_user_playhistory` is a dictionary containing key-value pairs being hour of the day and total play count for each user.
+The reducer includes two functions. The reducer itself and a helper for printing the output. We keep track of five variables outside the for-loop: `prev_user`, `curr_user` and `curr_user_playhistory`. The `prev_user` is the user id of previous user we have been visiting. The `curr_user` is current user we are looking at in the for-loop. `curr_user_playhistory` is a list with the index being hour of the day and its value the total play count for each user.
 
 This looks a lot like the previous assignment's reducer, but because we have to combine data now as well it looks a little different. When there is a first and last name present in the current line, we save it. After counting all other lines with the same user id. We print an output line and reset the name and play history variables.
 
@@ -227,13 +219,14 @@ The lines are sorted on the key (user id) so we can be certain that all play cou
 def reducer():
     prev_user = None
     curr_user = None
-    curr_user_playhistory = {}
-
+    curr_user_playhistory = [0] * 24
     curr_user_first_name = None
     curr_user_last_name = None
 
     for line in sys.stdin:
         data = line.strip().split(',')
+
+        # Check argument count
         if len(data) != 5:
             continue
 
@@ -242,12 +235,6 @@ def reducer():
         # Check argument type
         if not listened_count.isdigit():
             continue
-
-        if curr_user_first_name == None and first_name != '-':
-            curr_user_first_name = first_name
-
-        if curr_user_last_name == None and last_name != '-':
-            curr_user_last_name = last_name
 
         # If current user_id does not equal previous user_id
         if prev_user and prev_user != curr_user:
@@ -258,17 +245,18 @@ def reducer():
             # Reset variables
             curr_user_first_name = None
             curr_user_last_name = None
-            curr_user_playhistory.clear()
+            curr_user_playhistory = [0] * 24
 
-        if hour_of_day.isdigit():
+        if curr_user_first_name == None and first_name != '-':
+            curr_user_first_name = first_name
+
+        if curr_user_last_name == None and last_name != '-':
+            curr_user_last_name = last_name
+
+        if hour_of_day.isdigit():  
             hour_of_day = int(hour_of_day)
-
-            # Initialize key
-            if not curr_user_playhistory.has_key(hour_of_day):
-                curr_user_playhistory[hour_of_day] = 0
-
             # Increase listen count
-            curr_user_playhistory[hour_of_day] = curr_user_playhistory[hour_of_day] + int(listened_count)
+            curr_user_playhistory[hour_of_day] += int(listened_count)
 
         # Set the current user_id as the previous user_id for next iteration
         prev_user = curr_user
@@ -276,62 +264,62 @@ def reducer():
     # Print the current user's playhistory
     print_result(curr_user_first_name, curr_user_last_name, curr_user_playhistory)
 
-def print_result(first_name, last_name, dict):
-    for hour in sorted(dict.keys()):
-        print("{0}\t{1}\t{2}\t{3}".format(first_name, last_name, hour, dict[hour]))
+def print_result(first_name, last_name, list):
+    for hour, count in enumerate(list):
+        print("{0}\t{1}\t{2}\t{3}".format(first_name, last_name, hour, count))
 ```
 
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
-Blinny Coleford    0     832
-Blinny Coleford    1     760
-Blinny Coleford    2     807
-Blinny Coleford    3     840
-Blinny Coleford    4     820
-Blinny Coleford    5     833
-Blinny Coleford    6     793
-Blinny Coleford    7     803
-Blinny Coleford    8     831
-Blinny Coleford    9     803
-Blinny Coleford    10    858
-Blinny Coleford    11    791
-Blinny Coleford    12    784
-Blinny Coleford    13    809
-Blinny Coleford    14    775
-Blinny Coleford    15    822
-Blinny Coleford    16    865
-Blinny Coleford    17    863
-Blinny Coleford    18    868
-Blinny Coleford    19    860
-Blinny Coleford    20    768
-Blinny Coleford    21    828
-Blinny Coleford    22    791
-Blinny Coleford    23    798
-Alice Lyfe    0     771
-Alice Lyfe    1     832
-Alice Lyfe    2     829
-Alice Lyfe    3     809
-Alice Lyfe    4     790
-Alice Lyfe    5     849
-Alice Lyfe    6     812
-Alice Lyfe    7     851
-Alice Lyfe    8     827
-Alice Lyfe    9     834
-Alice Lyfe    10    833
-Alice Lyfe    11    801
-Alice Lyfe    12    810
-Alice Lyfe    13    786
-Alice Lyfe    14    858
-Alice Lyfe    15    823
-Alice Lyfe    16    842
-Alice Lyfe    17    797
-Alice Lyfe    18    864
-Alice Lyfe    19    770
-Alice Lyfe    20    822
-Alice Lyfe    21    813
-Alice Lyfe    22    791
-Alice Lyfe    23    809
+Kimberley Fredy    0     29
+Kimberley Fredy    1     24
+Kimberley Fredy    2     26
+Kimberley Fredy    3     22
+Kimberley Fredy    4     33
+Kimberley Fredy    5     18
+Kimberley Fredy    6     28
+Kimberley Fredy    7     28
+Kimberley Fredy    8     33
+Kimberley Fredy    9     24
+Kimberley Fredy    10    27
+Kimberley Fredy    11    27
+Kimberley Fredy    12    30
+Kimberley Fredy    13    27
+Kimberley Fredy    14    34
+Kimberley Fredy    15    29
+Kimberley Fredy    16    38
+Kimberley Fredy    17    27
+Kimberley Fredy    18    29
+Kimberley Fredy    19    23
+Kimberley Fredy    20    28
+Kimberley Fredy    21    21
+Kimberley Fredy    22    25
+Kimberley Fredy    23    22
+Rhys Pearne        0     27
+Rhys Pearne        1     24
+Rhys Pearne        2     38
+Rhys Pearne        3     30
+Rhys Pearne        4     31
+Rhys Pearne        5     32
+Rhys Pearne        6     18
+Rhys Pearne        7     25
+Rhys Pearne        8     25
+Rhys Pearne        9     23
+Rhys Pearne        10    24
+Rhys Pearne        11    27
+Rhys Pearne        12    23
+Rhys Pearne        13    24
+Rhys Pearne        14    22
+Rhys Pearne        15    34
+Rhys Pearne        16    22
+Rhys Pearne        17    34
+Rhys Pearne        18    13
+Rhys Pearne        19    27
+Rhys Pearne        20    23
+Rhys Pearne        21    27
+Rhys Pearne        22    19
+Rhys Pearne        23    35
 ```
 
 #### 1.1.3 Top 5 Songs Played at Hour of the Day

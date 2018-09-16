@@ -46,7 +46,7 @@ def reducer():
         if hour_of_day.isdigit():  
             hour_of_day = int(hour_of_day)
             # Increase listen count
-            curr_user_playhistory[hour_of_day] = curr_user_playhistory[hour_of_day] + int(listened_count)
+            curr_user_playhistory[hour_of_day] += int(listened_count)
 
         # Set the current user_id as the previous user_id for next iteration
         prev_user = curr_user

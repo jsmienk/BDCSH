@@ -54,7 +54,7 @@ def reducer():
 
 # Print the previous user and its favourite artist
 def print_result(first_name, last_name, dict):
-    artists = sorted(data.items(), key=lambda x:x[1], reverse=True)
+    artists = sorted(dict.items(), key=lambda x:x[1], reverse=True)
     favouriteTuple = artists[0]
     print("{0} {1}\t{2}\t{3}".format(first_name, last_name, favouriteTuple[0], favouriteTuple[1]))
 

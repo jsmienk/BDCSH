@@ -396,6 +396,17 @@ TREXOCN128F92F8F89    Callenish Circle    969    Kelcey Caunt        1
 ...
 ```
 
+Third round mapper output:
+
+```python
+...
+TREXOCN128F92F8F89    Callenish Circle    900    Phyllys Stott       1
+TREXOCN128F92F8F89    Callenish Circle    923    Kelci Peirone       2
+TREXOCN128F92F8F89    Callenish Circle    965    Bradney Christin    1
+TREXOCN128F92F8F89    Callenish Circle    969    Kelcey Caunt        1
+...
+```
+
 Third round results:
 
 ```python

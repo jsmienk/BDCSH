@@ -34,6 +34,9 @@ def mapper():
             first_name = data[1]
             last_name = data[2]
             listen_count = data[4]
+
+            if not user_id.isdigit():
+                continue
         else:
             continue
 

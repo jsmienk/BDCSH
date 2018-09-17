@@ -8,7 +8,7 @@ import sys
 
 def mapper():
     for line in sys.stdin:
-        data = line.strip().split('\t')
+        data = line.strip().split(',')
 
         if len(data) != 6:
             continue

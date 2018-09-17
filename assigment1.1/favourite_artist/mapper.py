@@ -20,7 +20,7 @@ def mapper():
             user_id = data[1]
 
             # Skip header line
-            if user_id == 'user':
+            if user_id == 'user' or not user_id.isdigit():
                 continue
         elif len(data) == 7:
             user_id = data[0]
@@ -28,7 +28,7 @@ def mapper():
             last_name = data[2]
 
             # Skip header line
-            if user_id == 'id':
+            if user_id == 'id' or not user_id.isdigit():
                 continue
         else:
             continue

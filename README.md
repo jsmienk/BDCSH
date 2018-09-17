@@ -106,7 +106,9 @@ def print_result(track_id, dict):
 
 Running a Hadoop job on the large data set resulted in the following output:
 
-```text
+```python
+...
+# Track id            Date       Listen count
 TREX0CN128F92F8F89    2016 01    7
 TREX0CN128F92F8F89    2016 02    6
 TREX0CN128F92F8F89    2016 03    5
@@ -139,6 +141,7 @@ TREX0CN128F92F8F89    2018 05    7
 TREX0CN128F92F8F89    2018 06    3
 TREX0CN128F92F8F89    2018 07    2
 TREX0CN128F92F8F89    2018 08    4
+...
 ```
 
 #### 1.1.2 Songs Listened to per User per Hour of the Day
@@ -200,17 +203,20 @@ This looks a lot like the previous assignment's reducer, but because we have to 
 Input data (prepared by the mapper) may look like this:
 
 ```python
-43,-,-,14,1
-43,-,-,6,1
-43,Marnick,Arend,-,0
-43,-,-,15,1
-43,-,-,16,1
-43,-,-,6,1
-22,Jeroen,Smienk,-,0
-22,-,-,9,1
-22,-,-,7,1
-22,-,-,12,1
-22,-,-,7,1
+# Hypothetical results
+...
+43,-      ,-     ,14,1
+43,-      ,-     ,6 ,1
+43,Marnick,Arend ,- ,0
+43,-      ,-     ,15,1
+43,-      ,-     ,16,1
+43,-      ,-     ,6 ,1
+22,Jeroen ,Smienk,- ,0
+22,-      ,-     ,9 ,1
+22,-      ,-     ,7 ,1
+22,-      ,-     ,12,1
+22,-      ,-     ,7 ,1
+...
 ```
 
 The lines are sorted on the key (user id) so we can be certain that all play counts and eventually the name will be together. When a new user id is visited (`prev_user != curr_user`) the all play counts and the name can be printed as a single row. No need to sort the list on hour here like we did in the last assignment, because we used the indices of the array as the hours of the day.
@@ -271,7 +277,9 @@ def print_result(first_name, last_name, list):
 
 Running a Hadoop job on the large data set resulted in the following output:
 
-```text
+```python
+...
+# Name             Hour  Listen count
 Kimberley Fredy    0     29
 Kimberley Fredy    1     24
 Kimberley Fredy    2     26
@@ -320,6 +328,7 @@ Rhys Pearne        20    23
 Rhys Pearne        21    27
 Rhys Pearne        22    19
 Rhys Pearne        23    35
+...
 ```
 
 #### 1.1.3 Top 5 Songs Played at Hour of the Day
@@ -359,40 +368,47 @@ Running a Hadoop job on the large data set resulted in the following output:
 First round results:
 
 ```python
-# Fake results
-43,Marnick,Arend,TRATSCZ12903CDAF86,1
-43,Marnick,Arend,TRAUHWR12903CC82A0,1
-43,Marnick,Arend,TRATSFS12903D03730,2
-43,Marnick,Arend,TRAUARW12903CE70B0,1
-43,Marnick,Arend,TRATSJR128EF34E1F3,3
-22,Jeroen,Smienk,TRATSKB12903CBCB27,1
-22,Jeroen,Smienk,TRATSMF128F92ED742,3
-22,Jeroen,Smienk,TRAUNSW12903CA815E,2
-22,Jeroen,Smienk,TRATWOM128EF35A552,1
-22,Jeroen,Smienk,TRAUYTQ128F930680F,4
-22,Jeroen,Smienk,TRATXQY128F1489B0C,1
+...
+# User  Name   Track id           Listen count
+10,Rhys,Pearne,TRDGUYP128F92DCE2C,2
+10,Rhys,Pearne,TRCNUPQ128F933EBBC,1
+10,Rhys,Pearne,TRECGFS128F9300400,1
+10,Rhys,Pearne,TREKCYB128F14A9880,1
+10,Rhys,Pearne,TRBKNXM128F930E3F6,1
+10,Rhys,Pearne,TRCNUSH128F4247622,1
+10,Rhys,Pearne,TRENJBP128E0791D68,1
+10,Rhys,Pearne,TREJUTA128F92E95C2,1
+10,Rhys,Pearne,TRBENMR12903CE9B16,1
+10,Rhys,Pearne,TRCOBDF128F426324F,1
+10,Rhys,Pearne,TRBEKVF128F42306E1,1
+...
 ```
 
 Second round mapper output:
 
 ```python
-# Fake results
-TRATSJR128EF34E1F3,AC/DC,-,-,-,0
-TRATSJR128EF34E1F3,-,43,Marnick,Arend,3
-TRATSJR128EF34E1F3,-,22,Jeroen,Smienk,4
-TRATXQY128F1489B0C,-,22,Jeroen,Smienk,1
-TRATXQY128F1489B0C,Krezip,-,-,-,0
-TRATXQY128F1489B0C,-,43,Marnick,Arend,2
+# Hypothetical
+TRATSJR128EF34E1F3,AC/DC ,- ,-      ,-     ,0
+TRATSJR128EF34E1F3,-     ,43,Marnick,Arend ,3
+TRATSJR128EF34E1F3,-     ,22,Jeroen ,Smienk,4
+TRATXQY128F1489B0C,-     ,22,Jeroen ,Smienk,1
+TRATXQY128F1489B0C,Krezip,- ,-      ,-     ,0
+TRATXQY128F1489B0C,-     ,43,Marnick,Arend ,2
 ```
 
 Second round results:
 
 ```python
 ...
-TREXOCN128F92F8F89    Callenish Circle    900    Phyllys Stott       1
-TREXOCN128F92F8F89    Callenish Circle    923    Kelci Peirone       2
-TREXOCN128F92F8F89    Callenish Circle    965    Bradney Christin    1
-TREXOCN128F92F8F89    Callenish Circle    969    Kelcey Caunt        1
+# Track id         Artist         User Name                Listen count
+TRATSCZ12903CDAF86,Edge of Sanity,1333,Kristo   ,O Cannan ,1
+TRATSCZ12903CDAF86,Edge of Sanity,135 ,Jilleen  ,Tyhurst  ,1
+TRATSCZ12903CDAF86,Edge of Sanity,1355,Rickard  ,Cardenoza,1
+TRATSCZ12903CDAF86,Edge of Sanity,1359,Oralia   ,Gwillym  ,1
+TRATSCZ12903CDAF86,Edge of Sanity,1369,Effie    ,Cariss   ,1
+TRATSCZ12903CDAF86,Edge of Sanity,1374,Claudell ,Shedd    ,1
+TRATSCZ12903CDAF86,Edge of Sanity,1398,Ingelbert,Kalberer ,1
+TRATSCZ12903CDAF86,Edge of Sanity,144 ,Donavon  ,Cudiff   ,1
 ...
 ```
 
@@ -400,17 +416,33 @@ Third round mapper output:
 
 ```python
 ...
-TREXOCN128F92F8F89    Callenish Circle    900    Phyllys Stott       1
-TREXOCN128F92F8F89    Callenish Circle    923    Kelci Peirone       2
-TREXOCN128F92F8F89    Callenish Circle    965    Bradney Christin    1
-TREXOCN128F92F8F89    Callenish Circle    969    Kelcey Caunt        1
+
 ...
 ```
 
-Third round results:
+Third round (final) results:
 
 ```python
-# Real results
+...
+# Name                Artist               Listen count
+Kissie Pymar          Groove Collective    3
+Silvio Manzell        iiO                  4
+Dennet Chicchelli     Rebeca               4
+Stormi Beltzner       Johnny Gill          4
+Madison Houldin       The Four Aces        4
+Arte Siss             Right Said Fred      3
+Clarance Braybrookes  Nnenna Freelon       3
+Timofei Tute          Smokey Robinson & the Miracles    4
+Vasily Vidloc         Scott Joplin         5
+Livvy Symonds         Mickey Gilley        3
+Danell Karpe          Horace Silver        4
+Livvie Thatcher       Anathallo            4
+Blondelle McGurgan    Suzy Bogguss         3
+Nolana Swains         Machine Head         5
+Tris Georgeot         Jorge Ben Jor        3
+Thomasine Whitfeld    Jimmy Ruffin         3
+Bernetta Hutson       Bruce Dickinson      4
+...
 ```
 
 ### 1.2 Shakespeare

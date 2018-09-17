@@ -26,10 +26,6 @@ def reducer():
         if not listen_count.isdigit():
             continue
 
-        # Save the artist of the current track_id
-        if curr_artist == None and artist != '-':
-            curr_artist = artist
-
         # Append a user to the listeners list
         if user_id != '-':
             curr_track_listeners.append([user_id, first_name, last_name, listen_count])
@@ -43,6 +39,10 @@ def reducer():
             # Reset variables
             curr_artist = None
             curr_track_listeners = []
+
+        # Save the artist of the current track_id
+        if curr_artist == None and artist != '-':
+            curr_artist = artist
 
         # Set the current track_id as the previous track_id for next iteration
         prev_track = curr_track

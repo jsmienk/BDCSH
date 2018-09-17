@@ -15,47 +15,48 @@ def reducer():
     prev_user_artists = {}
 
     for line in sys.stdin:
-        data = line.strip().split(',')
-        if len(data) != 5:
-            continue
+        print(line)
+#         data = line.strip().split(',')
+#         if len(data) != 5:
+#             continue
 
-        curr_user, first_name, last_name, artist, listen_count = data
+#         curr_user, first_name, last_name, artist, listen_count = data
 
-        # Check argument type
-        if not curr_user.isdigit() or not listen_count.isdigit():
-            continue
+#         # Check argument type
+#         if not curr_user.isdigit() or not listen_count.isdigit():
+#             continue
 
-        listen_count = int(listen_count)
+#         listen_count = int(listen_count)
 
-        # If current user does not equal previous user
-        if prev_user and prev_user != curr_user:
+#         # If current user does not equal previous user
+#         if prev_user and prev_user != curr_user:
 
-            # Print results
-            print_result(prev_first_name, prev_last_name, prev_user_artists)
+#             # Print results
+#             print_result(prev_first_name, prev_last_name, prev_user_artists)
 
-            # Reset dict
-            prev_user_artists.clear()
+#             # Reset dict
+#             prev_user_artists.clear()
 
-        # New name
-        prev_first_name = first_name
-        prev_last_name = last_name
+#         # New name
+#         prev_first_name = first_name
+#         prev_last_name = last_name
 
-        # Increase count per artist
-        if not prev_user_artists.has_key(artist):
-            prev_user_artists[artist] = 0
+#         # Increase count per artist
+#         if not prev_user_artists.has_key(artist):
+#             prev_user_artists[artist] = 0
 
-        prev_user_artists[artist] += listen_count
+#         prev_user_artists[artist] += listen_count
 
-        # Set the current user as the previous user for next iteration
-        prev_user = curr_user
+#         # Set the current user as the previous user for next iteration
+#         prev_user = curr_user
 
-    # Print the last user and its favourite artist
-    print_result(prev_first_name, prev_last_name, prev_user_artists)
+#     # Print the last user and its favourite artist
+#     print_result(prev_first_name, prev_last_name, prev_user_artists)
 
-# Print the previous user and its favourite artist
-def print_result(first_name, last_name, dict):
-    artists = sorted(dict.items(), key=lambda x:x[1], reverse=True)
-    favouriteTuple = artists[0]
-    print("{0} {1}\t{2}\t{3}".format(first_name, last_name, favouriteTuple[0], favouriteTuple[1]))
+# # Print the previous user and its favourite artist
+# def print_result(first_name, last_name, dict):
+#     artists = sorted(dict.items(), key=lambda x:x[1], reverse=True)
+#     favouriteTuple = artists[0]
+#     print("{0} {1}\t{2}\t{3}".format(first_name, last_name, favouriteTuple[0], favouriteTuple[1]))
 
 reducer()

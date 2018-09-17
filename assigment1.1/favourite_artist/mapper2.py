@@ -38,5 +38,4 @@ def mapper():
 
         print('{0},{1},{2},{3},{4},{5}'.format(track_id, artist, user_id, first_name, last_name, listen_count))
 
-
 mapper()

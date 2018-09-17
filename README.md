@@ -107,8 +107,8 @@ def print_result(track_id, dict):
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
-...
 # Track id            Date       Listen count
+...
 TREX0CN128F92F8F89    2016 01    7
 TREX0CN128F92F8F89    2016 02    6
 TREX0CN128F92F8F89    2016 03    5
@@ -278,8 +278,8 @@ def print_result(first_name, last_name, list):
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```python
-...
 # Name             Hour  Listen count
+...
 Kimberley Fredy    0     29
 Kimberley Fredy    1     24
 Kimberley Fredy    2     26
@@ -369,8 +369,8 @@ Running a Hadoop job on the large data set resulted in the following output:
 First round results:
 
 ```python
-...
 # User  Name   Track id           Listen count
+...
 10,Rhys,Pearne,TRDGUYP128F92DCE2C,2
 10,Rhys,Pearne,TRCNUPQ128F933EBBC,1
 10,Rhys,Pearne,TRECGFS128F9300400,1
@@ -389,19 +389,21 @@ Second round mapper output:
 
 ```python
 # Hypothetical
+...
 TRATSJR128EF34E1F3,AC/DC ,- ,-      ,-     ,0
 TRATSJR128EF34E1F3,-     ,43,Marnick,Arend ,3
 TRATSJR128EF34E1F3,-     ,22,Jeroen ,Smienk,4
 TRATXQY128F1489B0C,-     ,22,Jeroen ,Smienk,1
 TRATXQY128F1489B0C,Krezip,- ,-      ,-     ,0
 TRATXQY128F1489B0C,-     ,43,Marnick,Arend ,2
+...
 ```
 
 Second round results:
 
 ```python
-...
 # Track id         Artist         User Name                Listen count
+...
 TRATSCZ12903CDAF86,Edge of Sanity,1333,Kristo   ,O Cannan ,1
 TRATSCZ12903CDAF86,Edge of Sanity,135 ,Jilleen  ,Tyhurst  ,1
 TRATSCZ12903CDAF86,Edge of Sanity,1355,Rickard  ,Cardenoza,1
@@ -424,8 +426,8 @@ Third round mapper output:
 Third round (final) results:
 
 ```python
-...
 # Name                Artist               Listen count
+...
 Kissie Pymar          Groove Collective    3
 Silvio Manzell        iiO                  4
 Dennet Chicchelli     Rebeca               4

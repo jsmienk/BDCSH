@@ -106,7 +106,7 @@ def print_result(track_id, dict):
 
 Running a Hadoop job on the large data set resulted in the following output:
 
-```python
+```text
 ...
 # Track id            Date       Listen count
 TREX0CN128F92F8F89    2016 01    7
@@ -339,7 +339,8 @@ We choose to find songs between 12:00 and 13:00.
 
 Running a Hadoop job on the large data set resulted in the following output:
 
-```text
+```python
+# Title                            Artist              Listen count
 Come Out Your Frame (Interlude)    Styles of Beyond    29
 To                                 Zao                 28
 Sweetest Love                      Dean Frazer         27

@@ -27,7 +27,7 @@ def mapper():
 
             if not user_id.isdigit():
                 continue
-        elif len(data) > 4: # tracks.csv
+        elif len(data) >= 4: # tracks.csv
             track_id = data[0]
             artist = data[1]
             # title not important

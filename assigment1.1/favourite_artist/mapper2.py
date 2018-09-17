@@ -17,16 +17,14 @@ def mapper():
         last_name = '-'
         listen_count = 0
 
-        if len(data) == 5: # Read input from the first mapper
-            # user_id, first_name, last_name, track_id, listen_count
-            track_id = data[3]
+        # Read input from the first mapper
+        # Second condition is required to distinguish malformed but correct lines from tracks.csv
+        if len(data) == 5 and data[0].isdigit():
             user_id = data[0]
             first_name = data[1]
             last_name = data[2]
+            track_id = data[3]
             listen_count = data[4]
-
-            if not user_id.isdigit():
-                continue
         elif len(data) >= 4: # tracks.csv
             track_id = data[0]
             artist = data[1]

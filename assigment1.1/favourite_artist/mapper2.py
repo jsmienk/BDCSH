@@ -17,17 +17,7 @@ def mapper():
         last_name = '-'
         listen_count = 0
 
-        # Read input of the tracks.csv file
-        if len(data) == 4:
-            track_id = data[0]
-            artist = data[1]
-            # title not important
-
-            # Skip header line
-            if track_id == 'track_id':
-                continue
-
-        elif len(data) == 5: # Read input from the first mapper
+        if len(data) == 5: # Read input from the first mapper
             # user_id, first_name, last_name, track_id, listen_count
             track_id = data[3]
             user_id = data[0]
@@ -36,6 +26,14 @@ def mapper():
             listen_count = data[4]
 
             if not user_id.isdigit():
+                continue
+        elif len(data) > 4: # tracks.csv
+            track_id = data[0]
+            artist = data[1]
+            # title not important
+
+            # Skip header line
+            if track_id == 'track_id':
                 continue
         else:
             continue

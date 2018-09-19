@@ -31,6 +31,8 @@ Our mapper checks if the amount of columns is sufficient and skips the header of
 
 ```python
 def mapper():
+    LISTEN_COUNT = 1
+
     for line in sys.stdin:
         data = line.strip().split(',')
         if len(data) < 3:
@@ -42,9 +44,9 @@ def mapper():
             continue
 
         # Reformat date to lose useless time
-        date = datetime.strptime(date_string.strip(), '%Y-%m-%d').strftime('%Y %m')
+        date = datetime.strptime(date_string.strip(), '%Y-%m-%d %H:%M:%S').strftime('%Y %m')
 
-        print('{0},{1},{2}'.format(track_id, date, 1))
+        print('{0},{1},{2}'.format(track_id, date, LISTEN_COUNT))
 ```
 
 ##### 1.1.1 Reducer
@@ -108,39 +110,62 @@ Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
 # Track id            Date       Listen count
-...
-TREX0CN128F92F8F89    2016 01    7
-TREX0CN128F92F8F89    2016 02    6
-TREX0CN128F92F8F89    2016 03    5
-TREX0CN128F92F8F89    2016 04    3
-TREX0CN128F92F8F89    2016 05    3
-TREX0CN128F92F8F89    2016 06    2
-TREX0CN128F92F8F89    2016 07    4
-TREX0CN128F92F8F89    2016 08    9
-TREX0CN128F92F8F89    2016 09    6
-TREX0CN128F92F8F89    2016 10    5
-TREX0CN128F92F8F89    2016 11    3
-TREX0CN128F92F8F89    2016 12    4
-TREX0CN128F92F8F89    2017 01    2
-TREX0CN128F92F8F89    2017 02    7
-TREX0CN128F92F8F89    2017 03    5
-TREX0CN128F92F8F89    2017 04    4
-TREX0CN128F92F8F89    2017 05    5
-TREX0CN128F92F8F89    2017 06    5
-TREX0CN128F92F8F89    2017 07    10
-TREX0CN128F92F8F89    2017 08    8
-TREX0CN128F92F8F89    2017 09    2
-TREX0CN128F92F8F89    2017 10    6
-TREX0CN128F92F8F89    2017 11    5
-TREX0CN128F92F8F89    2017 12    3
-TREX0CN128F92F8F89    2018 01    4
-TREX0CN128F92F8F89    2018 02    4
-TREX0CN128F92F8F89    2018 03    11
-TREX0CN128F92F8F89    2018 04    5
-TREX0CN128F92F8F89    2018 05    7
-TREX0CN128F92F8F89    2018 06    3
-TREX0CN128F92F8F89    2018 07    2
-TREX0CN128F92F8F89    2018 08    4
+TRATSCZ12903CDAF86    2014 01    5
+TRATSCZ12903CDAF86    2014 02    3
+TRATSCZ12903CDAF86    2014 03    7
+TRATSCZ12903CDAF86    2014 04    2
+TRATSCZ12903CDAF86    2014 05    5
+TRATSCZ12903CDAF86    2014 06    9
+TRATSCZ12903CDAF86    2014 07    3
+TRATSCZ12903CDAF86    2014 08    3
+TRATSCZ12903CDAF86    2014 09    7
+TRATSCZ12903CDAF86    2014 10    2
+TRATSCZ12903CDAF86    2014 11    4
+TRATSCZ12903CDAF86    2014 12    4
+TRATSCZ12903CDAF86    2015 01    13
+TRATSCZ12903CDAF86    2015 02    2
+TRATSCZ12903CDAF86    2015 03    5
+TRATSCZ12903CDAF86    2015 04    5
+TRATSCZ12903CDAF86    2015 05    5
+TRATSCZ12903CDAF86    2015 06    3
+TRATSCZ12903CDAF86    2015 07    8
+TRATSCZ12903CDAF86    2015 08    1
+TRATSCZ12903CDAF86    2015 09    6
+TRATSCZ12903CDAF86    2015 10    3
+TRATSCZ12903CDAF86    2015 11    4
+TRATSCZ12903CDAF86    2015 12    3
+TRATSCZ12903CDAF86    2016 01    6
+TRATSCZ12903CDAF86    2016 02    8
+TRATSCZ12903CDAF86    2016 03    3
+TRATSCZ12903CDAF86    2016 04    4
+TRATSCZ12903CDAF86    2016 05    5
+TRATSCZ12903CDAF86    2016 06    3
+TRATSCZ12903CDAF86    2016 07    5
+TRATSCZ12903CDAF86    2016 08    2
+TRATSCZ12903CDAF86    2016 09    4
+TRATSCZ12903CDAF86    2016 10    8
+TRATSCZ12903CDAF86    2016 11    7
+TRATSCZ12903CDAF86    2016 12    10
+TRATSCZ12903CDAF86    2017 01    8
+TRATSCZ12903CDAF86    2017 02    5
+TRATSCZ12903CDAF86    2017 03    7
+TRATSCZ12903CDAF86    2017 04    5
+TRATSCZ12903CDAF86    2017 05    7
+TRATSCZ12903CDAF86    2017 06    8
+TRATSCZ12903CDAF86    2017 07    6
+TRATSCZ12903CDAF86    2017 08    5
+TRATSCZ12903CDAF86    2017 09    2
+TRATSCZ12903CDAF86    2017 10    7
+TRATSCZ12903CDAF86    2017 11    3
+TRATSCZ12903CDAF86    2017 12    7
+TRATSCZ12903CDAF86    2018 01    7
+TRATSCZ12903CDAF86    2018 02    7
+TRATSCZ12903CDAF86    2018 03    5
+TRATSCZ12903CDAF86    2018 04    6
+TRATSCZ12903CDAF86    2018 05    9
+TRATSCZ12903CDAF86    2018 06    6
+TRATSCZ12903CDAF86    2018 07    5
+TRATSCZ12903CDAF86    2018 08    8
 ...
 ```
 
@@ -340,111 +365,74 @@ We choose to find songs between 12:00 and 13:00.
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```python
-# Title                            Artist              Listen count
-Come Out Your Frame (Interlude)    Styles of Beyond    29
-To                                 Zao                 28
-Sweetest Love                      Dean Frazer         27
-Ballast                            Jawbox              27
-Necesito Respirar                  Medina Azahara      27
+# Title                   Artist                                Listen count
+Think About (The Beach)   Clubraiders                           32
+Blue Moon                 I Giganti                             28
+Battle of the Species     Antibalas Afrobeat Orchestra          26
+I Know                    Dr. Ring-Ding & The Senior Allstars   26
+Me culpas de todo         Medina Azahara                        26
 ```
 
 #### 1.1.4 Favourite Artist per User
 
 >For each user, the artist (s)he listen to most often. Expected output: (FirstName, LastName, Artist, NrofTimes listened to that artist) (Hint: you need a cascade of mappers and reducers. Explain why!).
 
-combine people and playhistory to get everything the user listened to.
-mapper prints user_id, (first_name, last_name), (track_id)
-reducer prints user_id, first_name, last_name, track_id, listen_count
+Combining play history and artists.
 
-combine result round 1 with tracks to find the artists for every song the user listened to.
-mapper prints track_id, (artist), (user_id, first_name, last_name, listen_count)
-reducer prints track_id, artist, user_id, first_name, last_name, listen_count
+Combining play history and names.
 
-reorder to calc user stats
-mapper prints user_id, first_name, last_name, track_id, artist, listen_count
-reducer prints first_name, last_name, top_artist, listen_count
+Reducing names and artists to the most favourite artist per user.
 
 Running a Hadoop job on the large data set resulted in the following output:
 
 First round results:
 
 ```python
-# User  Name   Track id           Listen count
-...
-10,Rhys,Pearne,TRDGUYP128F92DCE2C,2
-10,Rhys,Pearne,TRCNUPQ128F933EBBC,1
-10,Rhys,Pearne,TRECGFS128F9300400,1
-10,Rhys,Pearne,TREKCYB128F14A9880,1
-10,Rhys,Pearne,TRBKNXM128F930E3F6,1
-10,Rhys,Pearne,TRCNUSH128F4247622,1
-10,Rhys,Pearne,TRENJBP128E0791D68,1
-10,Rhys,Pearne,TREJUTA128F92E95C2,1
-10,Rhys,Pearne,TRBENMR12903CE9B16,1
-10,Rhys,Pearne,TRCOBDF128F426324F,1
-10,Rhys,Pearne,TRBEKVF128F42306E1,1
-...
-```
-
-Second round mapper output:
-
-```python
-# Hypothetical
-...
-TRATSJR128EF34E1F3,AC/DC ,- ,-      ,-     ,0
-TRATSJR128EF34E1F3,-     ,43,Marnick,Arend ,3
-TRATSJR128EF34E1F3,-     ,22,Jeroen ,Smienk,4
-TRATXQY128F1489B0C,-     ,22,Jeroen ,Smienk,1
-TRATXQY128F1489B0C,Krezip,- ,-      ,-     ,0
-TRATXQY128F1489B0C,-     ,43,Marnick,Arend ,2
+# Track id         Artist         User id   Listen count
+TRATSCZ12903CDAF86,Edge of Sanity,1107,1
+TRATSCZ12903CDAF86,Edge of Sanity,1124,1
+TRATSCZ12903CDAF86,Edge of Sanity,1148,1
+TRATSCZ12903CDAF86,Edge of Sanity,1167,1
+TRATSCZ12903CDAF86,Edge of Sanity,1169,1
+TRATSCZ12903CDAF86,Edge of Sanity,1300,1
+TRATSCZ12903CDAF86,Edge of Sanity,1305,1
+TRATSCZ12903CDAF86,Edge of Sanity,1371,1
+TRATSCZ12903CDAF86,Edge of Sanity,1402,1
+TRATSCZ12903CDAF86,Edge of Sanity,1408,1
+TRATSCZ12903CDAF86,Edge of Sanity,1410,1
+TRATSCZ12903CDAF86,Edge of Sanity,1443,1
+TRATSCZ12903CDAF86,Edge of Sanity,1450,1
+TRATSCZ12903CDAF86,Edge of Sanity,1454,1
+TRATSCZ12903CDAF86,Edge of Sanity,1462,1
+TRATSCZ12903CDAF86,Edge of Sanity,1531,1
+TRATSCZ12903CDAF86,Edge of Sanity,1538,1
 ...
 ```
 
 Second round results:
 
 ```python
-# Track id         Artist         User Name                Listen count
-...
-TRATSCZ12903CDAF86,Edge of Sanity,1333,Kristo   ,O Cannan ,1
-TRATSCZ12903CDAF86,Edge of Sanity,135 ,Jilleen  ,Tyhurst  ,1
-TRATSCZ12903CDAF86,Edge of Sanity,1355,Rickard  ,Cardenoza,1
-TRATSCZ12903CDAF86,Edge of Sanity,1359,Oralia   ,Gwillym  ,1
-TRATSCZ12903CDAF86,Edge of Sanity,1369,Effie    ,Cariss   ,1
-TRATSCZ12903CDAF86,Edge of Sanity,1374,Claudell ,Shedd    ,1
-TRATSCZ12903CDAF86,Edge of Sanity,1398,Ingelbert,Kalberer ,1
-TRATSCZ12903CDAF86,Edge of Sanity,144 ,Donavon  ,Cudiff   ,1
-...
-```
-
-Third round mapper output:
-
-```python
-...
-
-...
-```
-
-Third round (final) results:
-
-```python
-# Name                Artist               Listen count
-...
-Kissie Pymar          Groove Collective    3
-Silvio Manzell        iiO                  4
-Dennet Chicchelli     Rebeca               4
-Stormi Beltzner       Johnny Gill          4
-Madison Houldin       The Four Aces        4
-Arte Siss             Right Said Fred      3
-Clarance Braybrookes  Nnenna Freelon       3
-Timofei Tute          Smokey Robinson & the Miracles    4
-Vasily Vidloc         Scott Joplin         5
-Livvy Symonds         Mickey Gilley        3
-Danell Karpe          Horace Silver        4
-Livvie Thatcher       Anathallo            4
-Blondelle McGurgan    Suzy Bogguss         3
-Nolana Swains         Machine Head         5
-Tris Georgeot         Jorge Ben Jor        3
-Thomasine Whitfeld    Jimmy Ruffin         3
-Bernetta Hutson       Bruce Dickinson      4
+# Name                    Artist                    Listen count
+Kimberley Fredy           Jimmy Somerville          3
+Rhys Pearne               Sepultura                 3
+Kimberly Bartlomieczak    Alan Parsons              3
+Bald Shrubshall           Pet Shop Boys             4
+Othilia Denness           Charles Mingus            4
+Mandi Yanin               The Andrews Sisters       6
+Tan Cullip                Mantovani                 4
+Claudianus Woolger        Burl Ives                 4
+Sandra Doddridge          Pet Shop Boys             4
+Hakim Chainey             Queen                     3
+Simone Barehead           Edith Márquez             3
+Xaviera Jacquest          The Golden Gate Quartet   3
+May Filipczak             Absolute                  3
+Margarethe Waleworke      Rush                      3
+Fabian Seagar             Career Suicide            4
+Dene Jacobsohn            Howlin Wolf               4
+Maddie Lavies             Luna                      3
+Evie Bogart               Howlin Wolf               4
+Neila McCorkell           Jim Lauderdale            4
+Titos Hordell             Ironik                    4
 ...
 ```
 

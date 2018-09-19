@@ -6,6 +6,8 @@ from datetime import datetime
 
 def mapper():
 
+    LISTEN_COUNT = 1
+
     # Input comes from STDIN (standard input)
     for line in sys.stdin:
 
@@ -22,6 +24,6 @@ def mapper():
         # Reformat date to lose useless time
         date = datetime.strptime(date_string.strip(), '%Y-%m-%d %H:%M:%S').strftime('%Y %m')
 
-        print('{0},{1},{2}'.format(track_id, date, 1))
+        print('{0},{1},{2}'.format(track_id, date, LISTEN_COUNT))
 
 mapper()

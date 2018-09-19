@@ -383,6 +383,178 @@ Combining play history and names.
 
 Reducing names and artists to the most favourite artist per user.
 
+##### 1.1.4 Mapper 1
+
+```python
+def mapper():
+    for line in sys.stdin:
+        data = line.strip().split(',')
+        # Skip header line
+        if data[0] == 'track_id':
+            continue
+
+        track_id = None
+        artist = '-'
+        user_id = '-'
+        listen_count = 0
+
+        if len(data) == 3: # playhistory.csv
+            track_id = data[0]
+            user_id = data[1]
+            listen_count = 1
+
+            if not user_id.isdigit():
+                continue
+        elif len(data) >= 4: # tracks.csv
+            track_id = data[0]
+            artist = data[1]
+            # title not important
+        else:
+            continue
+
+        print('{0},{1},{2},{3}'.format(track_id, artist, user_id, listen_count))
+```
+
+##### 1.1.4 Reducer 1
+
+```python
+def reducer():
+    prev_track = None
+    curr_track = None
+    prev_artist = None
+    prev_track_listeners = []
+
+    for line in sys.stdin:
+        data = line.strip().split(',')
+
+        if len(data) != 4:
+            continue
+
+        curr_track, curr_artist, user_id, listen_count = data
+
+        # Check argument type
+        if not listen_count.isdigit():
+            continue
+
+        # If current track_id does not equal previous track_id
+        if prev_track and prev_track != curr_track:
+
+            # Print the previous track's listeners
+            print_result(prev_track, prev_artist, prev_track_listeners)
+
+            # Reset variables
+            prev_artist = None
+            prev_track_listeners = []
+
+        # Save the artist of the current track_id
+        if curr_artist != '-':
+            prev_artist = curr_artist
+
+        # Append a user to the listeners list
+        if user_id != '-':
+            prev_track_listeners.append((user_id, listen_count))
+
+        # Set the current track_id as the previous track_id for next iteration
+        prev_track = curr_track
+
+    # Print the current track's listeners
+    print_result(prev_track, prev_artist, prev_track_listeners)
+
+# Print track_id, artist, user_id, listen_count
+def print_result(track_id, artist, listeners):
+    for listener in listeners:
+        print("{0},{1},{2},{3}".format(track_id, artist, listener[0], listener[1]))
+```
+
+##### 1.1.4 Mapper 2
+
+```python
+def mapper():
+    for line in sys.stdin:
+        data = line.strip().split(',')
+
+        user_id = None
+        first_name = '-'
+        last_name = '-'
+        artist = '-'
+        listen_count = 0
+
+        if len(data) == 4: # output from the first mapper
+            track_id = data[0]
+            artist = data[1]
+            user_id = data[2]
+            listen_count = data[3]
+
+            if not user_id.isdigit() or not listen_count.isdigit():
+                continue
+        elif len(data) == 7: # people.csv
+            user_id = data[0]
+            first_name = data[1]
+            last_name = data[2]
+
+            # Skip header line
+            if user_id == 'id':
+                continue
+        else:
+            continue
+
+        print('{0},{1},{2},{3},{4}'.format(user_id, first_name, last_name, artist, listen_count))
+```
+
+##### 1.1.4 Reducer 2
+
+```python
+def reducer():
+    prev_user = None
+    curr_user = None
+    prev_first_name = None
+    prev_last_name = None
+    prev_user_artists = {}
+
+    for line in sys.stdin:
+        data = line.strip().split(',')
+        if len(data) != 5:
+            continue
+
+        curr_user, first_name, last_name, artist, listen_count = data
+
+        # If current user does not equal previous user
+        if prev_user and prev_user != curr_user:
+
+            # Print results
+            print_result(prev_first_name, prev_last_name, prev_user_artists)
+
+            # Reset vars
+            prev_first_name = None
+            prev_last_name = None
+            prev_user_artists.clear()
+
+        # First name visited
+        if prev_first_name == None and first_name != '-':
+            prev_first_name = first_name
+        # Last name visited
+        if prev_last_name == None and last_name != '-':
+            prev_last_name = last_name
+
+        # Increase count per artist if line contains an artist
+        if artist:
+            if not prev_user_artists.has_key(artist):
+                prev_user_artists[artist] = 0
+
+            prev_user_artists[artist] += int(listen_count)
+
+        # Set the current user as the previous user for next iteration
+        prev_user = curr_user
+
+    # Print the last user and its favourite artist
+    print_result(prev_first_name, prev_last_name, prev_user_artists)
+
+# Print the previous user and its favourite artist
+def print_result(first_name, last_name, dict):
+    favouriteTuple = sorted(dict.items(), key=lambda x:x[1], reverse=True)[0]
+    print("{0} {1}\t{2}\t{3}".format(first_name, last_name, favouriteTuple[0], favouriteTuple[1]))
+```
+
 Running a Hadoop job on the large data set resulted in the following output:
 
 First round results:

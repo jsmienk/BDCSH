@@ -26,7 +26,9 @@ def reducer():
             # Print results
             print_result(prev_first_name, prev_last_name, prev_user_artists)
 
-            # Reset dict
+            # Reset vars
+            prev_first_name = None
+            prev_last_name = None
             prev_user_artists.clear()
 
         # First name visited

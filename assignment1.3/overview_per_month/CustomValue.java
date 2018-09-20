@@ -29,7 +29,7 @@ class CustomValue implements Writable {
 
     @Override
     public String toString() {
-        return ip.toString();
+        return ip.toString() + "\t" + count.get();
     }
 
     @Override

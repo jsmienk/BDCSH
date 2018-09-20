@@ -9,21 +9,29 @@ import java.io.IOException;
 class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex> {
 
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        // Get the name of the file
         final Text work = new Text(((FileSplit) context.getInputSplit()).getPath().getName());
+        // Get the whole line
         final String line = value.toString();
 
+        // Save the line number for all words on this line
         IntWritable lineNumber = null;
+        // For every word in this line
         for (final String word : line.split("\\W+")) {
+            // If line number is null (first hit)
             if (lineNumber == null) {
+                // Check if it is the line number
                 try {
                     lineNumber = new IntWritable(Integer.parseInt(word));
                 } catch (NumberFormatException nfe) {
-                    // Oh oh. First word not a number!?
+                    // First word is not a line number!
                     System.out.println(line);
                     System.out.println(nfe.getMessage());
+                    // Skip this whole line
                     break;
                 }
             } else if (word.length() > 0) {
+                // Write every word with its work and line number
                 context.write(new Text(word.toLowerCase()), new InvertedIndex(work, lineNumber));
             }
         }

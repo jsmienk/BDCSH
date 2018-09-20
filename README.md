@@ -647,6 +647,51 @@ Titos Hordell             Ironik                    4
 >Hint: To get the name of the input file that is processed at a certain moment, the following statement can be used:
 `String fileName = ((FileSplit) context.getInputSplit()).getPath().getName();`
 
+#### 1.2 Mapper
+
+```java
+class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex> {
+
+    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        // Get the name of the file
+        final Text work = new Text(((FileSplit) context.getInputSplit()).getPath().getName());
+        // Get the whole line
+        final String line = value.toString();
+
+        // Save the line number for all words on this line
+        IntWritable lineNumber = null;
+        // For every word in this line
+        for (final String word : line.split("\\W+")) {
+            // If line number is null (first hit)
+            if (lineNumber == null) {
+                // Check if it is the line number
+                try {
+                    lineNumber = new IntWritable(Integer.parseInt(word));
+                } catch (NumberFormatException nfe) {
+                    // First word is not a line number!
+                    System.out.println(line);
+                    System.out.println(nfe.getMessage());
+                    // Skip this whole line
+                    break;
+                }
+            } else if (word.length() > 0) {
+                // Write every word with its work and line number
+                context.write(new Text(word.toLowerCase()), new InvertedIndex(work, lineNumber));
+            }
+        }
+    }
+}
+```
+
+##### InvertedIndex.java
+
+Writable custom class used as a value between te Mapper and Reducer.
+
+```java
+```
+
+#### 1.2 Reducer
+
 #### 1.2 Result
 
 Running a full Hadoop job results in the following output:
@@ -684,7 +729,13 @@ zwaggered   kinglear@4494
 >
 >Hint: Think of a solution where you have 12 reducers and make sure that every reducer handles all hits of one specific month. To do this you must define a partitioner.
 
-#### 1.3.1 IP Hit Administration
+#### 1.3.1 Total Hits per IP
+
+>A program that determines for each IP address how often a hit is administered.
+
+##### 1.3.1 Mapper
+
+##### 1.3.1 Reducer
 
 ##### 1.3.1 Result
 
@@ -711,6 +762,18 @@ zwaggered   kinglear@4494
 10.1.101.141    1
 ...
 ```
+
+#### 1.3.2 Total IP Hits per Month
+
+>We want to have an overview per month of the year that states per IP address, how often that particular month the website was visited from that IP address. Think of a solution that can help you achieve this.
+>
+>Hint: Think of a solution where you have 12 reducers and make sure that every reducer handles all hits of one specific month. To do this you must define a partitioner.
+
+##### 1.3.2 Mapper
+
+##### 1.3.2 Reducer
+
+##### 1.3.2 Result
 
 ## Udacity Course
 

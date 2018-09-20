@@ -10,15 +10,14 @@ class InvertedIndex implements Writable {
 
     private Text work;
     private IntWritable line;
-    private IntWritable count;
 
+    // Public empty constructor required for serialization
     public InvertedIndex() {
     }
 
     InvertedIndex(final Text work, final IntWritable line) {
         this.work = work;
         this.line = line;
-        this.count = new IntWritable(1);
     }
 
     Text getWork() {
@@ -29,10 +28,9 @@ class InvertedIndex implements Writable {
         return line;
     }
 
-    IntWritable getCount() {
-        return count;
-    }
-
+    /**
+     * Custom toString method to help printing the output in the reducer
+     */
     @Override
     public String toString() {
         return work.toString() + '@' + line.get();
@@ -41,14 +39,13 @@ class InvertedIndex implements Writable {
     @Override
     public void write(DataOutput out) throws IOException {
         out.writeInt(line.get());
-        out.writeInt(count.get());
         out.writeUTF(work.toString());
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
+        // Read in same order as write
         line = new IntWritable(in.readInt());
-        count = new IntWritable(in.readInt());
         work = new Text(in.readUTF());
     }
 }

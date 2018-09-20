@@ -685,9 +685,51 @@ class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex
 
 ##### InvertedIndex.java
 
-Writable custom class used as a value between te Mapper and Reducer.
+Writable custom class used as a value between te Mapper and Reducer. It implements `Writable` which required it to override `write(DataOutput)` and `readFields(DataInput)` for serialization. A custom `toString()` method is provided to help the Reducer print the output of this value.
 
 ```java
+class InvertedIndex implements Writable {
+
+    private Text work;
+    private IntWritable line;
+
+    // Public empty constructor required for serialization
+    public InvertedIndex() {}
+
+    InvertedIndex(final Text work, final IntWritable line) {
+        this.work = work;
+        this.line = line;
+    }
+
+    Text getWork() {
+        return work;
+    }
+
+    IntWritable getLine() {
+        return line;
+    }
+
+    /**
+     * Custom toString method to help printing the output in the reducer
+     */
+    @Override
+    public String toString() {
+        return work.toString() + '@' + line.get();
+    }
+
+    @Override
+    public void write(DataOutput out) throws IOException {
+        out.writeInt(line.get());
+        out.writeUTF(work.toString());
+    }
+
+    @Override
+    public void readFields(DataInput in) throws IOException {
+        // Read in same order as write
+        line = new IntWritable(in.readInt());
+        work = new Text(in.readUTF());
+    }
+}
 ```
 
 #### 1.2 Reducer

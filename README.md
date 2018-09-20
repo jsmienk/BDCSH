@@ -749,7 +749,9 @@ sudo yum update -y nss curl libcurl
 sudo yum install git
 ```
 
-### Mapper
+### Python
+
+#### Mapper.py
 
 ```python
 #!/usr/bin/python
@@ -763,7 +765,7 @@ def mapper():
 mapper()
 ```
 
-### Reducer
+#### Reducer.py
 
 ```python
 #!/usr/bin/python
@@ -777,7 +779,13 @@ def reducer():
 reducer()
 ```
 
-### Testing MapReduce in CentOS 7
+#### Hadoop Streaming with python.
+
+`hadoop jar usr/lib/hadoop-mapreduce/hadoop-streaming.jar -mapper mapper.py -reducer reducer.py -input <filename> -output <dirname>` to run a full Hadoop job on an input file that is in HDFS.
+
+`hs mapper.py reducer.py <input> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
+
+#### Testing MapReduce in CentOS 7
 
 `head -50 <inputfile> > <outputfile>` to create a test file of 50 lines.
 
@@ -787,9 +795,72 @@ reducer()
 
 Make sure to give `mapper.py` and `reducer.py` to correct file permissions by running `chmod +x <filename>`.
 
-## Hadoop Distributed File System (HDFS)
+### Java
 
-### Exploring
+Add the following libraries to your IDE:
+
+- [Hadoop HDFS](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs).
+- [Hadoop Common](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common).
+- [Hadoop Core](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-core).
+
+#### Driver.java
+
+```java
+public class Driver {
+
+    public static void main(String[] args) throws Exception {
+        final Job job = new Job();
+        job.setJarByClass(Driver.class);
+        job.setJobName("JobName");
+
+        job.setMapperClass(MyMapper.class);
+        job.setCombinerClass(MyReducer.class);
+        job.setReducerClass(MyReducer.class);
+
+        job.setOutputKeyClass(MyWritableKey.class);
+        job.setOutputValueClass(MyWritableValue.class);
+
+        FileInputFormat.addInputPath(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        System.exit(job.waitForCompletion(true) ? 0 : 1);
+    }
+}
+```
+
+#### Mapper.java
+
+```java
+def mapper():
+        # CODE HERE
+
+mapper()
+```
+
+#### Reducer.java
+
+```java
+#!/usr/bin/python
+"""reducer.py"""
+
+import sys
+
+def reducer():
+        # CODE HERE
+
+reducer()
+```
+
+#### Hadoop Streaming with Java
+
+`javac -classpath 'hadoop classpath' *.java` to compile class files.
+
+`jar cvf <name>.jar *.class` to create a .jar file using the compiled class files.
+
+`hadoop jar <name>.jar <main class name> <input> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
+
+### Hadoop Distributed File System (HDFS)
+
+#### Exploring
 
 `hadoop fs -ls (path)` to show the current files in the path.
 
@@ -800,9 +871,3 @@ Make sure to give `mapper.py` and `reducer.py` to correct file permissions by ru
 `hadoop fs -mv <oldfile> <newfile>` to rename files in HDFS.
 
 `hadoop fs -rmdir <dirname>` to remove old output directories.
-
-### Running jobs
-
-`hadoop jar usr/lib/hadoop-mapreduce/hadoop-streaming.jar -mapper mapper.py -reducer reducer.py -input <filename> -output <dirname>` to run a full Hadoop job on an input file that is in HDFS.
-
-`hs mapper.py reducer.py <inputfile> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.

@@ -37,15 +37,15 @@ class InvertedIndex implements Writable {
 
     @Override
     public void write(DataOutput out) throws IOException {
-        out.writeChars(work.toString());
         out.writeInt(line.get());
         out.writeInt(count.get());
+        out.writeUTF(work.toString());
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
-        work = new Text(in.readLine());
         line = new IntWritable(in.readInt());
         count = new IntWritable(in.readInt());
+        work = new Text(in.readUTF());
     }
 }

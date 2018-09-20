@@ -24,7 +24,7 @@ class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex
                     break;
                 }
             } else if (word.length() > 0) {
-                context.write(new Text(word), new InvertedIndex(work, lineNumber));
+                context.write(new Text(word.toLowerCase()), new InvertedIndex(work, lineNumber));
             }
         }
     }

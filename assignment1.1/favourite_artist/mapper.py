@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """mapper.py"""
 
-# Mapper prints user_id, (first_name, last_name), (track_id)
+# MonthMapper prints user_id, (first_name, last_name), (track_id)
 
 import sys
 

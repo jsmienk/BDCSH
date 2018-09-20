@@ -2,7 +2,7 @@
 """mapper.py"""
 
 # Input is track_id, artist, user_id, first_name, last_name, listen_count
-# Mapper prints user_id, first_name, last_name, artist, listen_count
+# MonthMapper prints user_id, first_name, last_name, artist, listen_count
 
 import sys
 

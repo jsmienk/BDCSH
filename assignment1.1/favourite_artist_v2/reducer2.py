@@ -3,7 +3,7 @@
 
 import sys
 
-# Mapper prints user_id, (first_name, last_name), (artist), listen_count
+# MonthMapper prints user_id, (first_name, last_name), (artist), listen_count
 # Reducer prints first_name, last_name, top_artist, listen_count
 
 def reducer():

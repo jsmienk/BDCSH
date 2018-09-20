@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """reducer.py"""
 
-# Mapper prints track_id, (artist), (user_id), listen_count
+# MonthMapper prints track_id, (artist), (user_id), listen_count
 # Reducer prints track_id, artist, user_id, listen_count
 
 import sys

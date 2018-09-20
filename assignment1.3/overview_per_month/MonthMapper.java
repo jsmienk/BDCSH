@@ -5,12 +5,12 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-class IPMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+class MonthMapper extends org.apache.hadoop.mapreduce.Mapper<LongWritable, Text, Text, IntWritable> {
 
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         final String line = value.toString();
 
-        String[] partials = line.split("\\s+");
+        String[] partials = line.split("\\W+");
 
         if (partials.length > 0) {
             Text ip = new Text(partials[0]);

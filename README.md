@@ -25,7 +25,7 @@
 >For each song how often was listened to that song in a certain month of a particular year,
 i.e. March 2015. Expected output: (SongId, number of times played in March 2015), ordered by SongID.
 
-##### 1.1.1 Mapper
+##### 1.1.1 MonthMapper
 
 Our mapper checks if the amount of columns is sufficient and skips the header of the `.csv`. We use the track id as the `key` to pass on to the reducer, because we want to know how often each song (track id) is listened to. It then gets the year and month from the timestamp and uses that as the first value. We provide `1` as the second value, because that is how often this song was listened to on that date.
 
@@ -173,7 +173,7 @@ TRATSCZ12903CDAF86    2018 08    8
 
 >For each user the hour of the day (s)he listened most often to songs. Expected output: (FirstName, LastName, hourOfday, numberOfTimesListened to a song in that hour of the day).
 
-##### 1.1.2 Mapper
+##### 1.1.2 MonthMapper
 
 The mapper's task is to combine data from two different sources. One being `playhistory.csv` and the other being `people.csv`. We need to combine the full name of the user with the amount of plays per hour of the day. The mapper does not know if it gets input from `playhistory.csv` or `people.csv`, but we can determine this by looking at the amount of columns. If the columns do not match either file, we skip that line. It is important that we have atleast one common value to be able to combine the data. In this case this common value is `user_id`. This column is present in both source files.
 
@@ -383,7 +383,7 @@ Combining play history and names.
 
 Reducing names and artists to the most favourite artist per user.
 
-##### 1.1.4 Mapper 1
+##### 1.1.4 MonthMapper 1
 
 ```python
 def mapper():
@@ -466,7 +466,7 @@ def print_result(track_id, artist, listeners):
         print("{0},{1},{2},{3}".format(track_id, artist, listener[0], listener[1]))
 ```
 
-##### 1.1.4 Mapper 2
+##### 1.1.4 MonthMapper 2
 
 ```python
 def mapper():
@@ -749,7 +749,7 @@ sudo yum update -y nss curl libcurl
 sudo yum install git
 ```
 
-### Mapper
+### MonthMapper
 
 ```python
 #!/usr/bin/python

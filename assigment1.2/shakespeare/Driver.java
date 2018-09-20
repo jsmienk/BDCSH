@@ -12,7 +12,7 @@ public class Driver {
         job.setJobName("Shakespeare");
 
         job.setMapperClass(InvertedIndexMapper.class);
-        job.setCombinerClass(InvertedIndexReducer.class);
+//        job.setCombinerClass(InvertedIndexReducer.class);
         job.setReducerClass(InvertedIndexReducer.class);
 
         job.setOutputKeyClass(Text.class);              // a word

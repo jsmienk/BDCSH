@@ -12,6 +12,9 @@ class InvertedIndex implements Writable {
     private IntWritable line;
     private IntWritable count;
 
+    public InvertedIndex() {
+    }
+
     InvertedIndex(final Text work, final IntWritable line) {
         this.work = work;
         this.line = line;

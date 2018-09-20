@@ -649,6 +649,30 @@ Titos Hordell             Ironik                    4
 
 #### 1.2 Result
 
+Running a full Hadoop job results in the following output:
+
+```java
+...
+youth       muchadoaboutnothing@3262, muchadoaboutnothing@710, muchadoaboutnothing@3591, muchadoaboutnothing@1894, muchadoaboutnothing@2602, muchadoaboutnothing@1601, muchadoaboutnothing@712, macbeth@2071, coriolanus@822, coriolanus@612, hamlet@1900, hamlet@3644, hamlet@1453, ...
+youths      macbeth@3324, troilusandcressida@3610, periclesprinceoftyre@2492, juliuscaesar@1145, kinghenryviii@4490
+zanies      twelfthnight@657
+zany        loveslabourslost@3609, glossary@2427
+zeal        troilusandcressida@3531, troilusandcressida@3676, 2kinghenryiv@3143, 2kinghenryiv@2073, 2kinghenryiv@4699, titusandronicus@684, merchantofvenice@3745, timonofathens@1809, timonofathens@3369, twogentlemenofverona@1416, kingrichardii@157, kingrichardii@3606, ...
+zealous     kingrichardiii@3440, allswellthatendswell@2315, kingjohn@474, kingjohn@1004, loveslabourslost@3024, sonnets@465
+zeals       timonofathens@746
+zed         kinglear@1843
+zenelophon  loveslabourslost@1674
+zenith      tempest@468
+zephyrs     cymbeline@3615
+zir         kinglear@4502, kinglear@4489
+zo          kinglear@4495
+zodiac      titusandronicus@802
+zodiacs     measureforemeasure@446
+zone        hamlet@5374
+zounds      1kinghenryiv@1271, 1kinghenryiv@1020, 1kinghenryiv@671, 1kinghenryiv@4370, 1kinghenryiv@348, 1kinghenryiv@1765, 1kinghenryiv@4321, 1kinghenryiv@3149, 1kinghenryiv@1153, 1kinghenryiv@1631, romeoandjuliet@2423, romeoandjuliet@2336, kingrichardiii@1462, ...
+zwaggered   kinglear@4494
+```
+
 ### 1.3 Web Log
 
 >In this assignment we take the accesslog data file from the Udacity course of assignment 1.1 as a starting point, in which it is registered which IP addresses have access on a website:
@@ -687,7 +711,7 @@ Titos Hordell             Ironik                    4
 
 ```text
 fantastic      345  [...]
-fantastically  4    [17583, 1007765, 1025821, 7004477, 9006895]
+fantastically  5    [17583, 1007765, 1025821, 7004477, 9006895]
 ```
 
 #### 9. Finding Mean
@@ -779,13 +803,7 @@ def reducer():
 reducer()
 ```
 
-#### Hadoop Streaming with python.
-
-`hadoop jar usr/lib/hadoop-mapreduce/hadoop-streaming.jar -mapper mapper.py -reducer reducer.py -input <filename> -output <dirname>` to run a full Hadoop job on an input file that is in HDFS.
-
-`hs mapper.py reducer.py <input> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
-
-#### Testing MapReduce in CentOS 7
+#### Testing MapReduce with Python
 
 `head -50 <inputfile> > <outputfile>` to create a test file of 50 lines.
 
@@ -794,6 +812,12 @@ reducer()
 `cat <testfile> | ./mapper.py | sort | ./reducer.py` to test the Hadoop workflow.
 
 Make sure to give `mapper.py` and `reducer.py` to correct file permissions by running `chmod +x <filename>`.
+
+#### Hadoop Streaming with Python
+
+`hadoop jar usr/lib/hadoop-mapreduce/hadoop-streaming.jar -mapper mapper.py -reducer reducer.py -input <filename> -output <dirname>` to run a full Hadoop job on an input file that is in HDFS.
+
+`hs mapper.py reducer.py <input> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
 
 ### Java
 
@@ -804,6 +828,9 @@ Add the following libraries to your IDE:
 - [Hadoop Core](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-core).
 
 #### Driver.java
+
+Code that runs on the client to configure and
+submit the job.
 
 ```java
 public class Driver {
@@ -830,24 +857,23 @@ public class Driver {
 #### Mapper.java
 
 ```java
-def mapper():
-        # CODE HERE
+public class MyMapper extends Mapper<LongWritable, Text, MyWritableKey, MyWritableValue> {
 
-mapper()
+    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        context.write(new MyWritableKey(), new MyWritableValue())
+    }
+}
 ```
 
 #### Reducer.java
 
 ```java
-#!/usr/bin/python
-"""reducer.py"""
+public class MyReducer extends Reducer<MyWritableKey, MyWritableValue, MyOtherWritableKey, MyOtherWritableValue> {
 
-import sys
-
-def reducer():
-        # CODE HERE
-
-reducer()
+    public void reduce(MyWritableKey key, Iterable<MyWritableValue> values, Context context) throws IOException, InterruptedException {
+        context.write(new MyOtherWritableKey(), new MyOtherWritableValue());
+    }
+}
 ```
 
 #### Hadoop Streaming with Java

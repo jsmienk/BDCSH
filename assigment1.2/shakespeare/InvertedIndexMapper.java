@@ -8,8 +8,6 @@ import java.io.IOException;
 
 class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex> {
 
-    private static final IntWritable ONE = new IntWritable(1);
-
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         final Text work = new Text(((FileSplit) context.getInputSplit()).getPath().getName());
         final String line = value.toString();
@@ -17,10 +15,16 @@ class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex
         IntWritable lineNumber = null;
         for (final String word : line.split("\\W+")) {
             if (lineNumber == null) {
-                lineNumber = new IntWritable(1);
-            }
-            if (word.length() > 0) {
-                context.write(new Text(word), new InvertedIndex());
+                try {
+                    lineNumber = new IntWritable(Integer.parseInt(word));
+                } catch (NumberFormatException nfe) {
+                    // Oh oh. First word not a number!?
+                    System.out.println(line);
+                    System.out.println(nfe.getMessage());
+                    break;
+                }
+            } else if (word.length() > 0) {
+                context.write(new Text(word), new InvertedIndex(work, lineNumber));
             }
         }
     }

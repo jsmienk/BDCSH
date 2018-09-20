@@ -8,9 +8,9 @@ import java.io.IOException;
 
 class InvertedIndex implements Writable {
 
-    private final Text work;
-    private final IntWritable line;
-    private final IntWritable count;
+    private Text work;
+    private IntWritable line;
+    private IntWritable count;
 
     InvertedIndex(final Text work, final IntWritable line) {
         this.work = work;
@@ -31,12 +31,21 @@ class InvertedIndex implements Writable {
     }
 
     @Override
-    public void write(DataOutput dataOutput) throws IOException {
-        work.write(dataOutput);
+    public String toString() {
+        return work.toString() + '@' + line.get();
     }
 
     @Override
-    public void readFields(DataInput dataInput) throws IOException {
-        work.readFields(dataInput);
+    public void write(DataOutput out) throws IOException {
+        out.writeChars(work.toString());
+        out.writeInt(line.get());
+        out.writeInt(count.get());
+    }
+
+    @Override
+    public void readFields(DataInput in) throws IOException {
+        work = new Text(in.readLine());
+        line = new IntWritable(in.readInt());
+        count = new IntWritable(in.readInt());
     }
 }

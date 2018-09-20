@@ -1,18 +1,18 @@
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
-class InvertedIndexReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
-    private IntWritable result = new IntWritable();
+class InvertedIndexReducer extends Reducer<Text, InvertedIndex, Text, Text> {
 
-    public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
-        int sum = 0;
-        for (IntWritable val : values) {
-            sum += val.get();
+    public void reduce(Text key, Iterable<InvertedIndex> values, Context context) throws IOException, InterruptedException {
+        final StringBuilder builder = new StringBuilder();
+        for (final InvertedIndex val : values) {
+            builder.append(val.toString());
+            if (values.iterator().hasNext()) {
+                builder.append(", ");
+            }
         }
-        result.set(sum);
-        context.write(key, result);
+        context.write(key, new Text(builder.toString()));
     }
 }

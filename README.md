@@ -25,7 +25,7 @@
 >For each song how often was listened to that song in a certain month of a particular year,
 i.e. March 2015. Expected output: (SongId, number of times played in March 2015), ordered by SongID.
 
-##### 1.1.1 MonthMapper
+##### 1.1.1 Mapper
 
 Our mapper checks if the amount of columns is sufficient and skips the header of the `.csv`. We use the track id as the `key` to pass on to the reducer, because we want to know how often each song (track id) is listened to. It then gets the year and month from the timestamp and uses that as the first value. We provide `1` as the second value, because that is how often this song was listened to on that date.
 
@@ -173,7 +173,7 @@ TRATSCZ12903CDAF86    2018 08    8
 
 >For each user the hour of the day (s)he listened most often to songs. Expected output: (FirstName, LastName, hourOfday, numberOfTimesListened to a song in that hour of the day).
 
-##### 1.1.2 MonthMapper
+##### 1.1.2 Mapper
 
 The mapper's task is to combine data from two different sources. One being `playhistory.csv` and the other being `people.csv`. We need to combine the full name of the user with the amount of plays per hour of the day. The mapper does not know if it gets input from `playhistory.csv` or `people.csv`, but we can determine this by looking at the amount of columns. If the columns do not match either file, we skip that line. It is important that we have atleast one common value to be able to combine the data. In this case this common value is `user_id`. This column is present in both source files.
 
@@ -383,7 +383,7 @@ Combining play history and names.
 
 Reducing names and artists to the most favourite artist per user.
 
-##### 1.1.4 MonthMapper 1
+##### 1.1.4 Mapper 1
 
 ```python
 def mapper():
@@ -466,7 +466,7 @@ def print_result(track_id, artist, listeners):
         print("{0},{1},{2},{3}".format(track_id, artist, listener[0], listener[1]))
 ```
 
-##### 1.1.4 MonthMapper 2
+##### 1.1.4 Mapper 2
 
 ```python
 def mapper():
@@ -610,7 +610,7 @@ Titos Hordell             Ironik                    4
 
 ### 1.2 Shakespeare
 
->For this assignment are given are works by Shakespeare, recorded in the `InvertedIndexInput.tgz` file. If you unpack this file you will have a directory with all the works of Shakespeare.
+>For this assignment are given are works by Shakespeare, recorded in the [`InvertedIndexInput.tgz`](https://leren.saxion.nl/bbcswebdav/pid-2157184-dt-content-rid-50887938_4/xid-50887938_4) file. If you unpack this file you will have a directory with all the works of Shakespeare.
 >
 >Each file contains a work by Shakespeare in the following format:
 >
@@ -649,9 +649,33 @@ Titos Hordell             Ironik                    4
 
 #### 1.2 Result
 
+Running a full Hadoop job results in the following output:
+
+```java
+...
+youth       muchadoaboutnothing@3262, muchadoaboutnothing@710, muchadoaboutnothing@3591, muchadoaboutnothing@1894, muchadoaboutnothing@2602, muchadoaboutnothing@1601, muchadoaboutnothing@712, macbeth@2071, coriolanus@822, coriolanus@612, hamlet@1900, hamlet@3644, hamlet@1453, ...
+youths      macbeth@3324, troilusandcressida@3610, periclesprinceoftyre@2492, juliuscaesar@1145, kinghenryviii@4490
+zanies      twelfthnight@657
+zany        loveslabourslost@3609, glossary@2427
+zeal        troilusandcressida@3531, troilusandcressida@3676, 2kinghenryiv@3143, 2kinghenryiv@2073, 2kinghenryiv@4699, titusandronicus@684, merchantofvenice@3745, timonofathens@1809, timonofathens@3369, twogentlemenofverona@1416, kingrichardii@157, kingrichardii@3606, ...
+zealous     kingrichardiii@3440, allswellthatendswell@2315, kingjohn@474, kingjohn@1004, loveslabourslost@3024, sonnets@465
+zeals       timonofathens@746
+zed         kinglear@1843
+zenelophon  loveslabourslost@1674
+zenith      tempest@468
+zephyrs     cymbeline@3615
+zir         kinglear@4502, kinglear@4489
+zo          kinglear@4495
+zodiac      titusandronicus@802
+zodiacs     measureforemeasure@446
+zone        hamlet@5374
+zounds      1kinghenryiv@1271, 1kinghenryiv@1020, 1kinghenryiv@671, 1kinghenryiv@4370, 1kinghenryiv@348, 1kinghenryiv@1765, 1kinghenryiv@4321, 1kinghenryiv@3149, 1kinghenryiv@1153, 1kinghenryiv@1631, romeoandjuliet@2423, romeoandjuliet@2336, kingrichardiii@1462, ...
+zwaggered   kinglear@4494
+```
+
 ### 1.3 Web Log
 
->In this assignment we take the accesslog data file from the Udacity course of assignment 1.1 as a starting point, in which it is registered which IP addresses have access on a website:
+>In this assignment we take the [accesslog data file](https://leren.saxion.nl/bbcswebdav/pid-2157184-dt-content-rid-50887939_4/xid-50887939_4) from the Udacity course of assignment 1.1 as a starting point, in which it is registered which IP addresses have access on a website:
 >
 >Program the following map-reduce programs in Java:
 >
@@ -660,7 +684,33 @@ Titos Hordell             Ironik                    4
 >
 >Hint: Think of a solution where you have 12 reducers and make sure that every reducer handles all hits of one specific month. To do this you must define a partitioner.
 
-#### 1.3 Result
+#### 1.3.1 IP Hit Administration
+
+##### 1.3.1 Result
+
+```text
+10.1.1.113      1
+10.1.1.125      12
+10.1.1.144      1
+10.1.1.195      4
+10.1.1.236      12
+10.1.1.5        1
+10.1.10.155     2
+10.1.10.197     2
+10.1.10.198     1
+10.1.10.48      1
+10.1.10.5       1
+10.1.100.104    1
+10.1.100.13     1
+10.1.100.138    1
+10.1.100.183    14
+10.1.100.199    35
+10.1.100.5      1
+10.1.101.135    29
+10.1.101.140    1
+10.1.101.141    1
+...
+```
 
 ## Udacity Course
 
@@ -687,7 +737,7 @@ Titos Hordell             Ironik                    4
 
 ```text
 fantastic      345  [...]
-fantastically  4    [17583, 1007765, 1025821, 7004477, 9006895]
+fantastically  5    [17583, 1007765, 1025821, 7004477, 9006895]
 ```
 
 #### 9. Finding Mean
@@ -749,7 +799,9 @@ sudo yum update -y nss curl libcurl
 sudo yum install git
 ```
 
-### MonthMapper
+### Python
+
+#### Mapper.py
 
 ```python
 #!/usr/bin/python
@@ -763,7 +815,7 @@ def mapper():
 mapper()
 ```
 
-### Reducer
+#### Reducer.py
 
 ```python
 #!/usr/bin/python
@@ -777,7 +829,7 @@ def reducer():
 reducer()
 ```
 
-### Testing MapReduce in CentOS 7
+#### Testing MapReduce with Python
 
 `head -50 <inputfile> > <outputfile>` to create a test file of 50 lines.
 
@@ -787,9 +839,80 @@ reducer()
 
 Make sure to give `mapper.py` and `reducer.py` to correct file permissions by running `chmod +x <filename>`.
 
-## Hadoop Distributed File System (HDFS)
+#### Hadoop Streaming with Python
 
-### Exploring
+`hadoop jar usr/lib/hadoop-mapreduce/hadoop-streaming.jar -mapper mapper.py -reducer reducer.py -input <filename> -output <dirname>` to run a full Hadoop job on an input file that is in HDFS.
+
+`hs mapper.py reducer.py <input> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
+
+### Java
+
+Add the following libraries to your IDE:
+
+- [Hadoop HDFS](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs).
+- [Hadoop Common](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common).
+- [Hadoop Core](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-core).
+
+#### Driver.java
+
+Code that runs on the client to configure and
+submit the job.
+
+```java
+public class Driver {
+
+    public static void main(String[] args) throws Exception {
+        final Job job = new Job();
+        job.setJarByClass(Driver.class);
+        job.setJobName("JobName");
+
+        job.setMapperClass(MyMapper.class);
+        job.setCombinerClass(MyReducer.class);
+        job.setReducerClass(MyReducer.class);
+
+        job.setOutputKeyClass(MyWritableKey.class);
+        job.setOutputValueClass(MyWritableValue.class);
+
+        FileInputFormat.addInputPath(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        System.exit(job.waitForCompletion(true) ? 0 : 1);
+    }
+}
+```
+
+#### Mapper.java
+
+```java
+public class MyMapper extends Mapper<LongWritable, Text, MyWritableKey, MyWritableValue> {
+
+    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        context.write(new MyWritableKey(), new MyWritableValue())
+    }
+}
+```
+
+#### Reducer.java
+
+```java
+public class MyReducer extends Reducer<MyWritableKey, MyWritableValue, MyOtherWritableKey, MyOtherWritableValue> {
+
+    public void reduce(MyWritableKey key, Iterable<MyWritableValue> values, Context context) throws IOException, InterruptedException {
+        context.write(new MyOtherWritableKey(), new MyOtherWritableValue());
+    }
+}
+```
+
+#### Hadoop Streaming with Java
+
+`javac -classpath 'hadoop classpath' *.java` to compile class files.
+
+`jar cvf <name>.jar *.class` to create a .jar file using the compiled class files.
+
+`hadoop jar <name>.jar <main class name> <input> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
+
+### Hadoop Distributed File System (HDFS)
+
+#### Exploring
 
 `hadoop fs -ls (path)` to show the current files in the path.
 
@@ -800,9 +923,3 @@ Make sure to give `mapper.py` and `reducer.py` to correct file permissions by ru
 `hadoop fs -mv <oldfile> <newfile>` to rename files in HDFS.
 
 `hadoop fs -rmdir <dirname>` to remove old output directories.
-
-### Running jobs
-
-`hadoop jar usr/lib/hadoop-mapreduce/hadoop-streaming.jar -mapper mapper.py -reducer reducer.py -input <filename> -output <dirname>` to run a full Hadoop job on an input file that is in HDFS.
-
-`hs mapper.py reducer.py <inputfile> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.

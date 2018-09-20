@@ -610,7 +610,7 @@ Titos Hordell             Ironik                    4
 
 ### 1.2 Shakespeare
 
->For this assignment are given are works by Shakespeare, recorded in the `InvertedIndexInput.tgz` file. If you unpack this file you will have a directory with all the works of Shakespeare.
+>For this assignment are given are works by Shakespeare, recorded in the [`InvertedIndexInput.tgz`](https://leren.saxion.nl/bbcswebdav/pid-2157184-dt-content-rid-50887938_4/xid-50887938_4) file. If you unpack this file you will have a directory with all the works of Shakespeare.
 >
 >Each file contains a work by Shakespeare in the following format:
 >
@@ -675,7 +675,7 @@ zwaggered   kinglear@4494
 
 ### 1.3 Web Log
 
->In this assignment we take the accesslog data file from the Udacity course of assignment 1.1 as a starting point, in which it is registered which IP addresses have access on a website:
+>In this assignment we take the [accesslog data file](https://leren.saxion.nl/bbcswebdav/pid-2157184-dt-content-rid-50887939_4/xid-50887939_4) from the Udacity course of assignment 1.1 as a starting point, in which it is registered which IP addresses have access on a website:
 >
 >Program the following map-reduce programs in Java:
 >

@@ -20,14 +20,6 @@ class InvertedIndex implements Writable {
         this.line = line;
     }
 
-    Text getWork() {
-        return work;
-    }
-
-    IntWritable getLine() {
-        return line;
-    }
-
     /**
      * Custom toString method to help printing the output in the reducer
      */

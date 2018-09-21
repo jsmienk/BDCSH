@@ -18,7 +18,7 @@ public class Driver {
 
         job.setNumReduceTasks(12);
         job.setOutputKeyClass(IntWritable.class);   // month of the year
-        job.setOutputValueClass(IntWritable.class); // the hit count
+        job.setOutputValueClass(IPOccurrence.class); // the hit count
 
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));

@@ -10,7 +10,6 @@ import java.util.Calendar;
 
 class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> {
 
-    private static final IntWritable ONE = new IntWritable(1);
     private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MMM/YYYY:HH:mm:ss");
     private static final Calendar CAL = Calendar.getInstance();
 
@@ -23,7 +22,7 @@ class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> 
         if (partials.length > 3) {
 
             // Value
-            final IPOccurrence ipCount = new IPOccurrence(new Text(partials[0]), ONE);
+            final IPOccurrence ipCount = new IPOccurrence(partials[0], 1);
 
             // Cutting the '[' of the front
             final String dateString = partials[3].substring(1);

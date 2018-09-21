@@ -1,5 +1,4 @@
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
@@ -11,23 +10,23 @@ class MonthReducer extends Reducer<IntWritable, IPOccurrence, IntWritable, IPOcc
 
         // For every month create dictionary of ip's and count ip address
         final Iterator<IPOccurrence> it = values.iterator();
-        final Map<Text, Integer> map = new HashMap<>();
+        final Map<String, Integer> map = new HashMap<>();
 
         while (it.hasNext()) {
             final IPOccurrence occurrence = it.next();
-            final Text ipAddress = occurrence.getIp();
+            final String ipAddress = occurrence.getIp();
             if (!map.containsKey(ipAddress)) {
                 map.put(ipAddress, 0);
             }
-            map.put(ipAddress, map.get(ipAddress) + occurrence.getCount().get());
+            map.put(ipAddress, map.get(ipAddress) + occurrence.getCount());
         }
 
         // Increase month int by 1 for printing (instead of 0-indexed)
         month.set(month.get() + 1);
 
-        final SortedSet<Text> ipAddresses = new TreeSet<>(map.keySet());
-        for (final Text ipAddress : ipAddresses) {
-            context.write(month, new IPOccurrence(ipAddress, new IntWritable(map.get(ipAddress))));
+        final SortedSet<String> ipAddresses = new TreeSet<>(map.keySet());
+        for (final String ipAddress : ipAddresses) {
+            context.write(month, new IPOccurrence(ipAddress, map.get(ipAddress)));
         }
     }
 }

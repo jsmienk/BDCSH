@@ -1,5 +1,3 @@
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 
 import java.io.DataInput;
@@ -8,39 +6,39 @@ import java.io.IOException;
 
 class IPOccurrence implements Writable {
 
-    private Text ip;
-    private IntWritable count;
+    private String ip;
+    private int count;
 
     public IPOccurrence() {
     }
 
-    IPOccurrence(final Text ip, final IntWritable count) {
+    IPOccurrence(final String ip, final int count) {
         this.ip = ip;
         this.count = count;
     }
 
-    Text getIp() {
+    String getIp() {
         return ip;
     }
 
-    IntWritable getCount() {
+    int getCount() {
         return count;
     }
 
     @Override
     public String toString() {
-        return ip.toString() + "\t" + count.get();
+        return ip + "\t" + count;
     }
 
     @Override
     public void write(DataOutput out) throws IOException {
-        out.writeInt(count.get());
-        out.writeUTF(ip.toString());
+        out.writeInt(count);
+        out.writeUTF(ip);
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
-        count = new IntWritable(in.readInt());
-        ip = new Text(in.readUTF());
+        count = in.readInt();
+        ip = in.readUTF();
     }
 }

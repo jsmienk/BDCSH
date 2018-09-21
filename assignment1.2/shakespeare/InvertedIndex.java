@@ -1,5 +1,3 @@
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 
 import java.io.DataInput;
@@ -8,14 +6,14 @@ import java.io.IOException;
 
 class InvertedIndex implements Writable {
 
-    private Text work;
-    private IntWritable line;
+    private String work;
+    private int line;
 
     // Public empty constructor required for serialization
     public InvertedIndex() {
     }
 
-    InvertedIndex(final Text work, final IntWritable line) {
+    InvertedIndex(final String work, final int line) {
         this.work = work;
         this.line = line;
     }
@@ -25,19 +23,19 @@ class InvertedIndex implements Writable {
      */
     @Override
     public String toString() {
-        return work.toString() + '@' + line.get();
+        return work + '@' + line;
     }
 
     @Override
     public void write(DataOutput out) throws IOException {
-        out.writeInt(line.get());
-        out.writeUTF(work.toString());
+        out.writeInt(line);
+        out.writeUTF(work);
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
         // Read in same order as write
-        line = new IntWritable(in.readInt());
-        work = new Text(in.readUTF());
+        line = in.readInt();
+        work = in.readUTF();
     }
 }

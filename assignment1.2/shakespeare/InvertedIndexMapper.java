@@ -1,4 +1,3 @@
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -10,19 +9,19 @@ class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex
 
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         // Get the name of the file
-        final Text work = new Text(((FileSplit) context.getInputSplit()).getPath().getName());
+        final String work = ((FileSplit) context.getInputSplit()).getPath().getName();
         // Get the whole line
         final String line = value.toString();
 
         // Save the line number for all words on this line
-        IntWritable lineNumber = null;
+        int lineNumber = -1;
         // For every word in this line
         for (final String word : line.split("\\W+")) {
             // If line number is null (first hit)
-            if (lineNumber == null) {
+            if (lineNumber == -1) {
                 // Check if it is the line number
                 try {
-                    lineNumber = new IntWritable(Integer.parseInt(word));
+                    lineNumber = Integer.parseInt(word);
                 } catch (NumberFormatException nfe) {
                     // First word is not a line number!
                     System.out.println(line);

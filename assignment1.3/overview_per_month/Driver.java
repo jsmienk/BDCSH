@@ -16,6 +16,7 @@ public class Driver {
         job.setReducerClass(MonthReducer.class);
         job.setPartitionerClass(MonthPartitioner.class);
 
+        job.setNumReduceTasks(12);
         job.setOutputKeyClass(IntWritable.class);   // month of the year
         job.setOutputValueClass(IntWritable.class); // the hit count
 

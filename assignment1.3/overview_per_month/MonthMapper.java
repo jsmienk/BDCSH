@@ -11,7 +11,7 @@ import java.util.Calendar;
 class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> {
 
     private static final IntWritable ONE = new IntWritable(1);
-    private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss Z");
+    private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MMM/YYYY:HH:mm:ss");
     private static final Calendar CAL = Calendar.getInstance();
 
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
@@ -20,26 +20,24 @@ class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> 
         final String[] partials = line.split("\\s+");
 
         // Check argument count
-        if (partials.length > 4) {
+        if (partials.length > 3) {
 
             // Value
             final IPOccurrence ipCount = new IPOccurrence(new Text(partials[0]), ONE);
 
-            // We had cut the line on whitespace. Putting the date back together
-            final StringBuilder builder = new StringBuilder(partials[3]);
-            builder.append(' ').append(partials[4]);
-            // Cut of the brackets '[]' on both sides
-            final String dateString = builder.substring(1, builder.length() - 1);
+            // Cutting the '[' of the front
+            final String dateString = partials[3].substring(1);
 
             // Try to parse the date and extract the month
             try {
                 // Key
                 CAL.setTime(SDF.parse(dateString));
-                final IntWritable date = new IntWritable(CAL.get(Calendar.MONTH));
+                final IntWritable month = new IntWritable(CAL.get(Calendar.MONTH));
 
                 // Write output
-                context.write(date, ipCount);
+                context.write(month, ipCount);
             } catch (ParseException pex) {
+                // SDF does not match real date string
                 System.err.println(pex.getMessage());
                 System.err.println(line);
             }

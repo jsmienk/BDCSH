@@ -7,39 +7,42 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
-class MonthMapper extends org.apache.hadoop.mapreduce.Mapper<LongWritable, Text, Text, CustomValue> {
+class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> {
+
+    private static final IntWritable ONE = new IntWritable(1);
+    private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss Z");
+    private static final Calendar CAL = Calendar.getInstance();
 
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-
+        // Split on whitespace
         final String line = value.toString();
-        String[] partials = line.split("\\s+");
+        final String[] partials = line.split("\\s+");
 
+        // Check argument count
         if (partials.length > 4) {
 
-            // Variables to return
-            Text date;
-            CustomValue ipAndCount = new CustomValue(new Text(partials[0]), new IntWritable(1));
+            // Value
+            final IPOccurrence ipCount = new IPOccurrence(new Text(partials[0]), ONE);
 
-            String d = partials[3] + " " + partials[4]; // We cut the line on whitespace. Putting the date back together
-            d = d.substring(1, d.length()-1); // Cut of the brackets '[]' on both sides
+            // We had cut the line on whitespace. Putting the date back together
+            final StringBuilder builder = new StringBuilder(partials[3]);
+            builder.append(' ').append(partials[4]);
+            // Cut of the brackets '[]' on both sides
+            final String dateString = builder.substring(1, builder.length() - 1);
 
+            // Try to parse the date and extract the month
             try {
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss Z");
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(df.parse(d));
+                // Key
+                CAL.setTime(SDF.parse(dateString));
+                final IntWritable date = new IntWritable(CAL.get(Calendar.MONTH));
 
-                date = new Text(Integer.toString(cal.get(Calendar.MONTH))); // Get only the MM part
-
+                // Write output
+                context.write(date, ipCount);
             } catch (ParseException pex) {
                 System.err.println(pex.getMessage());
                 System.err.println(line);
-
-                throw new IOException("Line couldn't be processed :(");
             }
-
-            context.write(date, ipAndCount);
         }
     }
 }

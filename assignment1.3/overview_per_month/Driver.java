@@ -1,6 +1,5 @@
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -17,8 +16,8 @@ public class Driver {
         job.setReducerClass(MonthReducer.class);
         job.setPartitionerClass(MonthPartitioner.class);
 
-        job.setOutputKeyClass(Text.class);              // month of the year
-        job.setOutputValueClass(IntWritable.class);   // the hit count
+        job.setOutputKeyClass(IntWritable.class);   // month of the year
+        job.setOutputValueClass(IntWritable.class); // the hit count
 
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));

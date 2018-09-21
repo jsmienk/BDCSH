@@ -3,31 +3,28 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
-class MonthReducer extends Reducer<Text, CustomValue, Text, CustomValue> {
+class MonthReducer extends Reducer<IntWritable, IPOccurrence, IntWritable, IPOccurrence> {
 
-    public void reduce(Text key, Iterable<CustomValue> values, Context context) throws IOException, InterruptedException {
+    public void reduce(IntWritable month, Iterable<IPOccurrence> values, Context context) throws IOException, InterruptedException {
 
         // For every month create dictionary of ip's and count ip address
-        Iterator<CustomValue> it = values.iterator();
-        HashMap<Text, Integer> valueMap = new HashMap<>();
+        final Iterator<IPOccurrence> it = values.iterator();
+        final Map<Text, Integer> map = new HashMap<>();
 
-        while(it.hasNext()) {
-            CustomValue next = it.next();
-
-            valueMap.putIfAbsent(next.getIp(), 0);
-            valueMap.put(next.getIp(), valueMap.get(next.getIp()) + next.getCount().get());
+        while (it.hasNext()) {
+            final IPOccurrence occurrence = it.next();
+            final Text ipAddress = occurrence.getIp();
+            if (!map.containsKey(ipAddress)) {
+                map.put(ipAddress, 0);
+            }
+            map.put(ipAddress, map.get(ipAddress) + occurrence.getCount().get());
         }
 
-        SortedSet<Text> keys = new TreeSet<>(valueMap.keySet());
-
-        for (Text text : keys) {
-            context.write(key, new CustomValue(text, new IntWritable(valueMap.get(text))));
+        final SortedSet<Text> ipAddresses = new TreeSet<>(map.keySet());
+        for (final Text ipAddress : ipAddresses) {
+            context.write(month, new IPOccurrence(ipAddress, new IntWritable(map.get(ipAddress))));
         }
-
     }
 }

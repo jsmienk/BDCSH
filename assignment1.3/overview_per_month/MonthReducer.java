@@ -21,9 +21,6 @@ class MonthReducer extends Reducer<IntWritable, IPOccurrence, IntWritable, IPOcc
             map.put(ipAddress, map.get(ipAddress) + occurrence.getCount());
         }
 
-        // Increase month int by 1 for printing (instead of 0-indexed)
-        month.set(month.get() + 1);
-
         final SortedSet<String> ipAddresses = new TreeSet<>(map.keySet());
         for (final String ipAddress : ipAddresses) {
             context.write(month, new IPOccurrence(ipAddress, map.get(ipAddress)));

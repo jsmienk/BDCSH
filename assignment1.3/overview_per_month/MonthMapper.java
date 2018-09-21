@@ -35,10 +35,9 @@ class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> 
 
                 // Write output
                 context.write(month, ipCount);
-            } catch (ParseException pex) {
+            } catch (IOException | ParseException e) {
                 // SDF does not match real date string
-                System.err.println(pex.getMessage());
-                System.err.println(line);
+                throw new IOException("Line: " + line + "\nMessage: " + e.getMessage());
             }
         }
     }

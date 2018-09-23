@@ -10,7 +10,7 @@ import java.util.Calendar;
 
 class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> {
 
-    private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MMM/YYYY:HH:mm:ss");
+    private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss");
     private static final Calendar CAL = Calendar.getInstance();
 
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {

@@ -29,7 +29,7 @@
 
 ## Introduction
 
-// TODO
+The first assignment aims to become familiar with Hadoop and the map - reduce programming paradigm. The first assignment contains 3 sub assignments; 1.1 in Python (2 weeks), 1.2 in Java (0.5 weeks), 1.3 in Java (0.5 weeks). In this document we will describe our written code, the outcomes and the choices we made.
 
 ## Preparation
 
@@ -918,6 +918,10 @@ Titos Hordell             Ironik                    4
 
 #### 1.2 Mapper
 
+The task of the mapper was to spit out for every word in a "work" (=document) and append it with the line number in which that word would appear. A for-loop was necessary to read a line in a work. The first word of a line would be the line number so we added a condition to check if the first word was already initialized. 
+
+If the word that was being read in the for-loop wasn't the first word (a.k.a. the line number), the word would be spit out as a key,value pair. The key was the word (as a `Text` object) and the value was a combination of the name of the work and the line number. The combination was saved within a custom `Writable` class called `InvertedIndex`.
+
 ```java
 class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex> {
 
@@ -988,6 +992,10 @@ class InvertedIndex implements Writable {
 
 #### 1.2 Reducer
 
+The reducer in the Java version of Hadoop works a bit differently than the Python version. In Java we got an Iterable list of values per key. It was very easy to extract the right data from the reduce function.
+
+We created a `StringBuilder` that would append every work including a `@` sign followed by the line number. This list of different works would than be written as a value in the key,value pair of `word work01@1234...work99@5678`
+
 ```java
 class InvertedIndexReducer extends Reducer<Text, InvertedIndex, Text, Text> {
 
@@ -1056,6 +1064,8 @@ e.g.: `10.223.157.186 - - [15/Jul/2009:14:58:59 -0700] "GET / HTTP/1.1" 403 202`
 
 ##### 1.3.1 Mapper
 
+The goal of this mapper is to split the input value on whitespace and then to check if the string array is long enough to be processed. If that is the case, the mapper will write a key,value. The key being the IP as `Text` and the value being `1`
+
 ```java
 class IPMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
@@ -1073,7 +1083,7 @@ class IPMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
 ##### 1.3.1 Reducer
 
-The reducer calculates the sum of an IP address' hits.
+The reducer calculates the sum of an IP address' hits. It iterates through the values that correspond to a certain key which is the IP. When it is done it will write the IP and the total sum.
 
 ```java
 class IPReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
@@ -1125,6 +1135,8 @@ Running a full Hadoop job results in the following output:
 One difference in the driver of this solution is that we use one reducer for every month of the year. We set this by using: `job.setNumReduceTasks(12);`.
 
 ##### 1.3.2 Mapper
+
+The mapper extracts the right data from the value that is parsed into the map function. It will split the line of text that is inserted on whitespace. Once the line is splitted it will run a validity check and then a `IPOccurrence` which includes an IP and a `1` as the count is created. It then extracts the date from the splitted line which will be parsed using the Java build-in `SimpleDateFormat` class. If all steps are successful, the month and IPOccurrence will be written.
 
 ```java
 class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> {
@@ -1197,6 +1209,8 @@ class IPOccurrence implements Writable {
 
 ##### 1.3.2 Partitioner
 
+The partitioner will send the values that come out of the mapper to different reducers based on their key's value. It also uses the modulo to ensure that the key is not sent to an unknown reducer number.
+
 ```java
 public class MonthPartitioner extends Partitioner<IntWritable, IPOccurrence> {
     public int getPartition(final IntWritable key, final IPOccurrence _, final int numReduceTasks) {
@@ -1206,6 +1220,8 @@ public class MonthPartitioner extends Partitioner<IntWritable, IPOccurrence> {
 ```
 
 ##### 1.3.2 Reducer
+
+The reducer will calculate the total occurrences of an IP address in a particular month. It will do this by retrieving all the IPOccerrences of all ip addresses of a month and making a sum for every seperate IP Address in a `HashMap`. When that is done the IP addressed saved in the HashMap will be sorted using a `SortedMap` to get the fastest sorting performance. 
 
 ```java
 class MonthReducer extends Reducer<IntWritable, IPOccurrence, IntWritable, IPOccurrence> {

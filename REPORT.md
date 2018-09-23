@@ -1,27 +1,184 @@
-# Big Data Computing & Storage with Hadoop
+# Big Data Computing & Storage with Hadoop 1
 
 *Big Data Assignments in Python and Java, 23 sept. 2018*
 
-**Marnick van der Arend**
-**Jeroen Smienk 422516**
-**EHI4VBDa**
+**Authors: Marnick van der Arend 415010, Jeroen Smienk 422516, EHI4VBDa.**
+
+**Lecturer: Jan Stroet**
 
 ## Table of Contents
 
-- 1 Assignments
-  - 1.1 Music Streaming
-    - 1.1.1 Play Count per Song per Month
-- as
+- [Introduction](#introduction)
+- [Preparation](#preparation)
+  - [Python](#python)
+    - [Testing & Streaming](#testing--streaming)
+  - [Java](#java)
+    - [Testing & Streaming](#testing--streaming-1)
+  - [Hadoop Distributed File System](#hadoop-distributed-file-system)
+- [Assignments](#assignments)
+  - [1.1 Music Streaming](#11-music-streaming)
+    - [1.1.1 Play Count per Song per Month](#111-play-count-per-song-per-month)
+    - [1.1.2 Songs Listened to per User per Hour of the Day](#112-songs-listened-to-per-user-per-hour-of-the-day)
+    - [1.1.3 Top 5 Songs Played at Hour of the Day](#113-top-5-songs-played-at-hour-of-the-day)
+    - [1.1.4 Favourite Artist per User](#114-favourite-artist-per-user)
+  - [1.2 Shakespeare](#12-shakespeare)
+  - [1.3 Web Log](#13-web-log)
+    - [1.3.1 Total Hits per IP](#131-total-hits-per-ip)
+    - [1.3.2 Total IP Hits per Month](#132-total-ip-hits-per-month)
+- [Problems & Solutions](#problems--solutions)
+
+## Introduction
+
+// TODO
+
+## Preparation
+
+We were provided with a CentOS Virtual Machine (VM) image that had Hadoop installed. After updating Git we were able to write code on our own machines and pull and test it on the VM.
+
+### Python
+
+This was our first experience with the Python programming language. It is pretty straightforward, but some research had to be done considering the format of the file to be able to make it work.
+
+Input for both the mapper and reducer comes from 'standard input' (`sys.in`).
+
+An empty mapper script in Python would look like this:
+
+```python
+#!/usr/bin/python
+"""mapper.py"""
+
+import sys
+
+def mapper():
+    for line in sys.in:
+
+mapper()
+```
+
+An empty reducer script in Python would look like this:
+
+```python
+#!/usr/bin/python
+"""reducer.py"""
+
+import sys
+
+def reducer():
+    for line in sys.in:
+
+reducer()
+```
+
+Except for naming, they are identical.
+
+#### Testing & Streaming
+
+In order to test a mapper and/or reducer on a smaller sample of the dataset without having to run a full Hadoop job we used the following commands:
+
+- `head -<N> <inputfile> > <outputfile>` to create a test file of N lines.
+- `cat <testfile> | ./mapper.py | sort` to test the mapper alone.
+- `cat <testfile> | ./mapper.py | sort | ./reducer.py` to test the Hadoop workflow.
+
+To run the mapper and reducer Python scripts, its file permissions had to be explicitly changed using: `chmod +x <filename>`.
+
+To run a full Hadoop job the following command and its shortcut exist:
+
+- `hadoop jar usr/lib/hadoop-mapreduce/hadoop-streaming.jar -mapper mapper.py -reducer reducer.py -input <filename> -output <dirname>` (full)
+- `hs mapper.py reducer.py <input> <outputdir>` (shortcut)
+
+### Java
+
+In order to develop a solution on our own machines without any errors the following libraries have to be added to the project. This allows us to build our code and spot compile errors before trying to create and run a JAR file and the VM.
+
+- [Hadoop HDFS](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs).
+- [Hadoop Common](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common).
+- [Hadoop Core](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-core).
+
+Because Java is a very different programming language than Python, it also requires a somewhat different file structure. One big difference is the need for a 'driver'. The driver configures, submits and controls our job and its mapper(s) and reducer(s).
+
+_Hadoop takes care of providing the input and output files as arguments to the main method._
+
+```java
+public class Driver {
+
+    public static void main(String[] args) throws Exception {
+        final Job job = new Job();
+        job.setJarByClass(Driver.class);
+        job.setJobName("JobName");
+
+        job.setMapperClass(MyMapper.class);
+        job.setCombinerClass(MyReducer.class);
+        job.setReducerClass(MyReducer.class);
+
+        job.setOutputKeyClass(MyWritableKey.class);
+        job.setOutputValueClass(MyWritableValue.class);
+
+        FileInputFormat.addInputPath(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        System.exit(job.waitForCompletion(true) ? 0 : 1);
+    }
+}
+```
+
+The mapper class extends from `Mapper` from one of the Hadoop libraries. It requires us to fill in four generics. The input key and value and the output key and value. The default input key and value for the mapper are `LongWritable` and `Text`. The libraries use their own boxed variants of basic data types for serialization. You can also write your own by implementing `Writable`.
+
+_You choose the output key and value yourself. The input key and value for the mapper are in our assignments always the default. This is dependent on the source files._
+
+One more important difference compared to using Python is that instead of iterating over `sys.in` the `map(Key, Value, Context)` method is called once for every line in the source file(s).
+
+```java
+public class MyMapper extends Mapper<LongWritable, Text, MyWritableKey, MyWritableValue> {
+
+    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        context.write(new MyWritableKey(), new MyWritableValue())
+    }
+}
+```
+
+The reducer class extends from `Reducer` from one of the Hadoop libraries. It also requires us to fill in four 'key value' generics. The input key and value should of course be of the same data type as the output key and value of its corresponding mapper. Its output key and value depend on the problem you are solving.
+
+Like the mapper we are not iterating over `sys.in`. Instead the `reduce(Key, Iterable<Value>, Context)` method is called once for every key the reducer receives. This is an even bigger difference than Python, because we get all the values for one key at once.
+
+```java
+public class MyReducer extends Reducer<MyWritableKey, MyWritableValue, MyOtherWritableKey, MyOtherWritableValue> {
+
+    public void reduce(MyWritableKey key, Iterable<MyWritableValue> values, Context context) throws IOException, InterruptedException {
+        context.write(new MyOtherWritableKey(), new MyOtherWritableValue());
+    }
+}
+```
+
+#### Testing & Streaming
+
+We did not find a quicker and easier way to test 'Java Hadoop' with smaller sample datasets than running a full Hadoop job.
+
+- `javac -classpath 'hadoop classpath' *.java` to compile class files.
+- `jar cvf <name>.jar *.class` to create a .jar file using the compiled class files.
+- `hadoop jar <name>.jar <main class name> <input> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
+
+### Hadoop Distributed File System
+
+We are of course using Hadoop Distributed File System (HDFS) on the VM and this requires us to interact with it in specific ways. All the commands we needed to use Hadoop were:
+
+- `hadoop fs -ls (path)` to show the current files in the path.
+- `hadoop fs -get <dirname> (outputfile)` to get files from HDFS.
+- `hadoop fs -put <filename> (path)` to move files to HDFS.
+- `hadoop fs -mv <oldfile> <newfile>` to rename or move files in HDFS.
+- `hadoop fs -rm -r <dirname>` to remove old output directories.
 
 ## Assignments
 
->After you have completed lessons 1 through 7 of the Udacity Course, mentioned in the introduction the following assignments have to be done:
+The first three assignments of this course are covered in this report:
 
-1. Written in Python (2 weeks).
-2. Written in Java (0.5 week).
-3. Written in Java (0.5 week).
+1. Music Streaming written in Python (2 weeks).
+2. Shakespeare written in Java (0.5 week).
+3. Web Log written in Java (0.5 week).
+
+Per (sub)assignment we will explain how our code works and why we choose to use certain solutions.
 
 ### 1.1 Music Streaming
+
+This first assignment consists of four subassignments. Each one increases in difficulty. Three `.csv` files are provided in both small and very large sizes to use for testing and the full Hadoop job.
 
 >The `songplayhistory.zip` which contains 3 files in which the listening history of users of a Spotify-like channel are included:
 >
@@ -30,8 +187,8 @@
 >- `playhistory.csv`
 >
 >Write mappers and reducers to solve the following four problems (1.1.1, 1.1.2, 1.1.3 and 1.1.4):
->
->You should hand in the source code of the mappers and the reducers and a (small) report in which you explain your solution and display the results of your solution for the [large dataset](https://leren.saxion.nl/bbcswebdav/pid-2157184-dt-content-rid-51191183_4/xid-51191183_4).
+
+Each problem will be individually discussed in the next sections.
 
 #### 1.1.1 Play Count per Song per Month
 
@@ -1025,136 +1182,14 @@ Month integers are zero indexed.
 ...
 ```
 
-## Technical Help & Commands
+## Problems & Solutions
 
-CentOS 6 VM git fix:
+Finding out file formats.
 
-```text
-sudo yum update -y nss curl libcurl
-sudo yum install git
-```
+Adding Java .jar libraries.
 
-### Python
+File permissions.
 
-#### Mapper.py
+Git on CentOS
 
-```python
-#!/usr/bin/python
-"""mapper.py"""
-
-import sys
-
-def mapper():
-        # CODE HERE
-
-mapper()
-```
-
-#### Reducer.py
-
-```python
-#!/usr/bin/python
-"""reducer.py"""
-
-import sys
-
-def reducer():
-        # CODE HERE
-
-reducer()
-```
-
-#### Testing MapReduce with Python
-
-`head -50 <inputfile> > <outputfile>` to create a test file of 50 lines.
-
-`cat <testfile> | ./mapper.py | sort` to test the mapper alone.
-
-`cat <testfile> | ./mapper.py | sort | ./reducer.py` to test the Hadoop workflow.
-
-Make sure to give `mapper.py` and `reducer.py` to correct file permissions by running `chmod +x <filename>`.
-
-#### Hadoop Streaming with Python
-
-`hadoop jar usr/lib/hadoop-mapreduce/hadoop-streaming.jar -mapper mapper.py -reducer reducer.py -input <filename> -output <dirname>` to run a full Hadoop job on an input file that is in HDFS.
-
-`hs mapper.py reducer.py <input> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
-
-### Java
-
-Add the following libraries to your IDE:
-
-- [Hadoop HDFS](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs).
-- [Hadoop Common](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common).
-- [Hadoop Core](https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-core).
-
-#### Driver.java
-
-Code that runs on the client to configure and
-submit the job.
-
-```java
-public class Driver {
-
-    public static void main(String[] args) throws Exception {
-        final Job job = new Job();
-        job.setJarByClass(Driver.class);
-        job.setJobName("JobName");
-
-        job.setMapperClass(MyMapper.class);
-        job.setCombinerClass(MyReducer.class);
-        job.setReducerClass(MyReducer.class);
-
-        job.setOutputKeyClass(MyWritableKey.class);
-        job.setOutputValueClass(MyWritableValue.class);
-
-        FileInputFormat.addInputPath(job, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job, new Path(args[1]));
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
-    }
-}
-```
-
-#### Mapper.java
-
-```java
-public class MyMapper extends Mapper<LongWritable, Text, MyWritableKey, MyWritableValue> {
-
-    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        context.write(new MyWritableKey(), new MyWritableValue())
-    }
-}
-```
-
-#### Reducer.java
-
-```java
-public class MyReducer extends Reducer<MyWritableKey, MyWritableValue, MyOtherWritableKey, MyOtherWritableValue> {
-
-    public void reduce(MyWritableKey key, Iterable<MyWritableValue> values, Context context) throws IOException, InterruptedException {
-        context.write(new MyOtherWritableKey(), new MyOtherWritableValue());
-    }
-}
-```
-
-#### Hadoop Streaming with Java
-
-`javac -classpath 'hadoop classpath' *.java` to compile class files.
-
-`jar cvf <name>.jar *.class` to create a .jar file using the compiled class files.
-
-`hadoop jar <name>.jar <main class name> <input> <outputdir>` to run a full Hadoop job on an input file that is in HDFS.
-
-### Hadoop Distributed File System (HDFS)
-
-#### Exploring
-
-`hadoop fs -ls (path)` to show the current files in the path.
-
-`hadoop fs -get <dirname> (outputfile)` to get files from HDFS.
-
-`hadoop fs -put <filename> (path)` to move files to HDFS.
-
-`hadoop fs -mv <oldfile> <newfile>` to rename files in HDFS.
-
-`hadoop fs -rmdir <dirname>` to remove old output directories.
+Testing just the mapper in Java or the complete workflow.

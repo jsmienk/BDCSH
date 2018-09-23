@@ -195,14 +195,14 @@ Each problem will be individually discussed in the next sections.
 >For each song how often was listened to that song in a certain month of a particular year,
 i.e. March 2015. Expected output: (SongId, number of times played in March 2015), ordered by SongID.
 
+The assignment is to find the total play count for every song per month. We worked by first creating psuedo code as comments for both the mapper and reducer. We both individually worked out one of either scripts.
+
 ##### 1.1.1 Mapper
 
 Our mapper checks if the amount of columns is sufficient and skips the header of the `.csv`. We use the track id as the `key` to pass on to the reducer, because we want to know how often each song (track id) is listened to. It then gets the year and month from the timestamp and uses that as the first value. We provide `1` as the second value, because that is how often this song was listened to on that date.
 
 ```python
 def mapper():
-    LISTEN_COUNT = 1
-
     for line in sys.stdin:
         data = line.strip().split(',')
         if len(data) < 3:
@@ -216,7 +216,7 @@ def mapper():
         # Reformat date to lose useless time
         date = datetime.strptime(date_string.strip(), '%Y-%m-%d %H:%M:%S').strftime('%Y %m')
 
-        print('{0},{1},{2}'.format(track_id, date, LISTEN_COUNT))
+        print('{0},{1},{2}'.format(track_id, date, 1))
 ```
 
 ##### 1.1.1 Reducer
@@ -342,6 +342,8 @@ TRATSCZ12903CDAF86    2018 08    8
 #### 1.1.2 Songs Listened to per User per Hour of the Day
 
 >For each user the hour of the day (s)he listened most often to songs. Expected output: (FirstName, LastName, hourOfday, numberOfTimesListened to a song in that hour of the day).
+
+For this assignment we need to combine data from two different sources for the first time. The way this works using Python is to feed both sources to the mapper after each other. Determining which line is from which source can be done by comparing the amount of columns in the CSV file.
 
 ##### 1.1.2 Mapper
 
@@ -1138,7 +1140,7 @@ class MonthReducer extends Reducer<IntWritable, IPOccurrence, IntWritable, IPOcc
 
 Running a full Hadoop job results in the following output:
 
-Month integers are zero indexed.
+_Month integers are zero indexed._
 
 **May**:
 

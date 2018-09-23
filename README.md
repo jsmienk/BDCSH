@@ -679,7 +679,7 @@ class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex
 
 ##### InvertedIndex.java
 
-Writable custom class used as a value between te Mapper and Reducer. It implements `Writable` which required it to override `write(DataOutput)` and `readFields(DataInput)` for serialization. A custom `toString()` method is provided to help the Reducer print the output of this value.
+Writable custom class used as a value between te mapper and reducer. It implements `Writable` which required it to override `write(DataOutput)` and `readFields(DataInput)` for serialization. A custom `toString()` method is provided to help the reducer print the output of this value.
 
 ```java
 class InvertedIndex implements Writable {
@@ -888,6 +888,8 @@ class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> 
 ```
 
 ###### IPOccurrence.java
+
+Writable custom class used as a value between te mapper and reducer. It implements `Writable` which required it to override `write(DataOutput)` and `readFields(DataInput)` for serialization. A custom `toString()` method is provided to help the reducer print the output of this value.
 
 ```java
 class IPOccurrence implements Writable {

@@ -29,7 +29,7 @@
 
 ## Introduction
 
-// TODO
+The first assignment aims to become familiar with Hadoop and the map - reduce programming paradigm. The first assignment contains 3 sub assignments; 1.1 in Python (2 weeks), 1.2 in Java (0.5 weeks), 1.3 in Java (0.5 weeks). In this document we will describe our written code, the outcomes and the choices we made.
 
 ## Preparation
 
@@ -821,6 +821,10 @@ Titos Hordell             Ironik                    4
 
 #### 1.2 Mapper
 
+The task of the mapper was to spit out for every word in a "work" (=document) and append it with the line number in which that word would appear. A for-loop was necessary to read a line in a work. The first word of a line would be the line number so we added a condition to check if the first word was already initialized. 
+
+If the word that was being read in the for-loop wasn't the first word (a.k.a. the line number), the word would be spit out as a key,value pair. The key was the word (as a `Text` object) and the value was a combination of the name of the work and the line number. The combination was saved within a custom `Writable` class called `InvertedIndex`.
+
 ```java
 class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex> {
 
@@ -890,6 +894,8 @@ class InvertedIndex implements Writable {
 ```
 
 #### 1.2 Reducer
+
+In the reducer the 
 
 ```java
 class InvertedIndexReducer extends Reducer<Text, InvertedIndex, Text, Text> {

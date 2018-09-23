@@ -654,24 +654,18 @@ class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex
 
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         // Get the name of the file
-        final Text work = new Text(((FileSplit) context.getInputSplit()).getPath().getName());
-        // Get the whole line
-        final String line = value.toString();
-
+        final String work = ((FileSplit) context.getInputSplit()).getPath().getName();
         // Save the line number for all words on this line
-        IntWritable lineNumber = null;
+        int lineNumber = -1;
         // For every word in this line
-        for (final String word : line.split("\\W+")) {
+        for (final String word : value.toString().split("\\W+")) {
             // If line number is null (first hit)
-            if (lineNumber == null) {
+            if (lineNumber == -1) {
                 // Check if it is the line number
                 try {
-                    lineNumber = new IntWritable(Integer.parseInt(word));
-                } catch (NumberFormatException nfe) {
-                    // First word is not a line number!
-                    System.out.println(line);
-                    System.out.println(nfe.getMessage());
-                    // Skip this whole line
+                    lineNumber = Integer.parseInt(word);
+                } catch (NumberFormatException ignored) {
+                    // Skip line
                     break;
                 }
             } else if (word.length() > 0) {
@@ -689,14 +683,13 @@ Writable custom class used as a value between te Mapper and Reducer. It implemen
 
 ```java
 class InvertedIndex implements Writable {
-
-    private Text work;
-    private IntWritable line;
+    private String work;
+    private int line;
 
     // Public empty constructor required for serialization
     public InvertedIndex() {}
 
-    InvertedIndex(final Text work, final IntWritable line) {
+    InvertedIndex(final String work, final int line) {
         this.work = work;
         this.line = line;
     }
@@ -706,20 +699,20 @@ class InvertedIndex implements Writable {
      */
     @Override
     public String toString() {
-        return work.toString() + '@' + line.get();
+        return work + '@' + line;
     }
 
     @Override
     public void write(DataOutput out) throws IOException {
-        out.writeInt(line.get());
-        out.writeUTF(work.toString());
+        out.writeInt(line);
+        out.writeUTF(work);
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
         // Read in same order as write
-        line = new IntWritable(in.readInt());
-        work = new Text(in.readUTF());
+        line = in.readInt();
+        work = in.readUTF();
     }
 }
 ```
@@ -782,7 +775,11 @@ zwaggered   kinglear@4494
 >1. A program that determines for each IP address how often a hit is administered.
 >2. We want to have an overview per month of the year that states per IP address, how often that particular month the website was visited from that IP address. Think of a solution that can help you achieve this.
 >
->Hint: Think of a solution where you have 12 reducers and make sure that every reducer handles all hits of one specific month. To do this you must define a partitioner.
+> Hint: Think of a solution where you have 12 reducers and make sure that every reducer handles all hits of one specific month. To do this you must define a partitioner.
+
+Every line in the input file named `access_log` consists of an IP address, a date and the request details.
+
+e.g.: `10.223.157.186 - - [15/Jul/2009:14:58:59 -0700] "GET / HTTP/1.1" 403 202`.
 
 #### 1.3.1 Total Hits per IP
 
@@ -790,9 +787,41 @@ zwaggered   kinglear@4494
 
 ##### 1.3.1 Mapper
 
+```java
+class IPMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+
+    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        // Split on whitespace
+        final String[] partials = value.toString().split("\\s+");
+
+        if (partials.length > 0) {
+            // Write output
+            context.write(new Text(partials[0]), new IntWritable(1));
+        }
+    }
+}
+```
+
 ##### 1.3.1 Reducer
 
+The reducer calculates the sum of an IP address' hits.
+
+```java
+class IPReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+
+    public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+        int count = 0;
+        while (values.iterator().hasNext()) {
+            count += values.iterator().next().get();
+        }
+        context.write(key, new IntWritable(count));
+    }
+}
+```
+
 ##### 1.3.1 Result
+
+Running a full Hadoop job results in the following output:
 
 ```text
 10.1.1.113      1
@@ -824,11 +853,162 @@ zwaggered   kinglear@4494
 >
 >Hint: Think of a solution where you have 12 reducers and make sure that every reducer handles all hits of one specific month. To do this you must define a partitioner.
 
+One difference in the driver of this solution is that we use one reducer for every month of the year. We set this by using: `job.setNumReduceTasks(12);`.
+
 ##### 1.3.2 Mapper
+
+```java
+class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> {
+
+    private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss");
+    private static final Calendar CAL = Calendar.getInstance();
+
+    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        // Split on whitespace
+        final String[] partials = value.toString().split("\\s+");
+
+        // Check argument count
+        if (partials.length > 3) {
+            // Use the IP address as the value
+            final IPOccurrence ipCount = new IPOccurrence(partials[0], 1);
+            // Cutting the '[' of the front
+            final String dateString = partials[3].substring(1);
+
+            // Try to parse the date and extract the month
+            try {
+                // Use month as key
+                CAL.setTime(SDF.parse(dateString));
+                final IntWritable month = new IntWritable(CAL.get(Calendar.MONTH));
+                // Write output
+                context.write(month, ipCount);
+            } catch (ParseException ignored) {}
+        }
+    }
+}
+```
+
+###### IPOccurrence.java
+
+```java
+class IPOccurrence implements Writable {
+    private String ip;
+    private int count;
+
+    public IPOccurrence() {}
+
+    IPOccurrence(final String ip, final int count) {
+        this.ip = ip;
+        this.count = count;
+    }
+
+    String getIp() { return ip; }
+
+    int getCount() { return count; }
+
+    @Override
+    public String toString() {
+        return ip + "\t" + count;
+    }
+
+    @Override
+    public void write(DataOutput out) throws IOException {
+        out.writeInt(count);
+        out.writeUTF(ip);
+    }
+
+    @Override
+    public void readFields(DataInput in) throws IOException {
+        count = in.readInt();
+        ip = in.readUTF();
+    }
+}
+```
+
+##### 1.3.2 Partitioner
+
+```java
+public class MonthPartitioner extends Partitioner<IntWritable, IPOccurrence> {
+    public int getPartition(final IntWritable key, final IPOccurrence _, final int numReduceTasks) {
+        return key.get() % numReduceTasks; // Get the remainder to safely pass the key,value on.
+    }
+}
+```
 
 ##### 1.3.2 Reducer
 
+```java
+class MonthReducer extends Reducer<IntWritable, IPOccurrence, IntWritable, IPOccurrence> {
+
+    public void reduce(IntWritable month, Iterable<IPOccurrence> values, Context context) throws IOException, InterruptedException {
+        // For every month create dictionary of ip's and count ip address
+        final Iterator<IPOccurrence> it = values.iterator();
+        final Map<String, Integer> map = new HashMap<>();
+
+        while (it.hasNext()) {
+            final IPOccurrence occurrence = it.next();
+            final String ipAddress = occurrence.getIp();
+            if (!map.containsKey(ipAddress)) {
+                map.put(ipAddress, 0);
+            }
+            map.put(ipAddress, map.get(ipAddress) + occurrence.getCount());
+        }
+
+        // Sort on IP address and output total hits per IP for this reducer's month
+        final SortedSet<String> ipAddresses = new TreeSet<>(map.keySet());
+        for (final String ipAddress : ipAddresses) {
+            context.write(month, new IPOccurrence(ipAddress, map.get(ipAddress)));
+        }
+    }
+}
+```
+
 ##### 1.3.2 Result
+
+Running a full Hadoop job results in the following output:
+
+Month integers are zero indexed.
+
+**May**:
+
+```text
+4    10.1.1.125      12
+4    10.1.100.13     1
+4    10.1.100.138    1
+4    10.1.101.92     1
+4    10.1.11.81      69
+4    10.1.111.244    1
+4    10.1.112.22     23
+4    10.1.12.172     54
+4    10.1.120.14     14
+4    10.1.122.3      2
+4    10.1.123.140    1
+4    10.1.125.31     1
+4    10.1.126.88     21
+4    10.1.13.175     3
+4    10.1.131.59     1
+...
+```
+
+**December**:
+
+```text
+11    10.1.115.106    1
+11    10.1.115.114    1
+11    10.1.116.146    1
+11    10.1.12.137     1
+11    10.1.120.14     19
+11    10.1.123.207    1
+11    10.1.131.59     1
+11    10.1.133.149    1
+11    10.1.138.236    1
+11    10.1.14.196     1
+11    10.1.141.120    2
+11    10.1.143.54     2
+11    10.1.144.192    1
+11    10.1.15.51      1
+11    10.1.161.229    1
+...
+```
 
 ## Udacity Course
 

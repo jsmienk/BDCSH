@@ -1041,7 +1041,7 @@ One difference in the driver of this solution is that we use one reducer for eve
 
 ##### 1.3.2 Mapper
 
-The mapper
+The mapper extracts the right data from the value that is parsed into the map function. It will split the line of text that is inserted on whitespace. Once the line is splitted it will run a validity check and then a `IPOccurrence` which includes an IP and a `1` as the count is created. It then extracts the date from the splitted line which will be parsed using the Java build-in `SimpleDateFormat` class. If all steps are successful, the month and IPOccurrence will be written.
 
 ```java
 class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> {
@@ -1114,6 +1114,8 @@ class IPOccurrence implements Writable {
 
 ##### 1.3.2 Partitioner
 
+The partitioner will send the values that come out of the mapper to different reducers based on their key's value. It also uses the modulo to ensure that the key is not sent to an unknown reducer number.
+
 ```java
 public class MonthPartitioner extends Partitioner<IntWritable, IPOccurrence> {
     public int getPartition(final IntWritable key, final IPOccurrence _, final int numReduceTasks) {
@@ -1123,6 +1125,8 @@ public class MonthPartitioner extends Partitioner<IntWritable, IPOccurrence> {
 ```
 
 ##### 1.3.2 Reducer
+
+The reducer will calculate the total occurrences of an IP address in a particular month. It will do this by retrieving all the IPOccerrences of all ip addresses of a month and making a sum for every seperate IP Address in a `HashMap`. When that is done the IP addressed saved in the HashMap will be sorted using a `SortedMap` to get the fastest sorting performance. 
 
 ```java
 class MonthReducer extends Reducer<IntWritable, IPOccurrence, IntWritable, IPOccurrence> {

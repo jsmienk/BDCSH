@@ -29,7 +29,9 @@
 
 ## Introduction
 
-The first assignment aims to become familiar with Hadoop and the map - reduce programming paradigm. The first assignment contains 3 sub assignments; 1.1 in Python (2 weeks), 1.2 in Java (0.5 weeks), 1.3 in Java (0.5 weeks). In this document we will describe our written code, the outcomes and the choices we made.
+The first assignment aims to become familiar with Hadoop and the mapreduce programming paradigm. The first assignment contains three subassignments: 1.1 in Python (2 weeks), 1.2 in Java (0.5 weeks), 1.3 in Java (0.5 weeks).
+
+This document will describe the steps we took in preparation, development and testing, but also what problems we ran into and how we solved them.
 
 ## Preparation
 
@@ -646,13 +648,9 @@ Me culpas de todo         Medina Azahara                        26
 
 We need to find the most favourite artist of every user by combining the user's name, their history and track info. This requires a solution using two rounds of mapreduce.
 
-Combining play history and names.
-
-Combining play history and artists.
-
-Reducing names and artists to the most favourite artist per user.
-
 ##### 1.1.4 Mapper 1
+
+The first mapper combines data from `playhistory.csv` and `tracks.csv` to provide the artist names and listen counts.
 
 ```python
 def mapper():
@@ -686,6 +684,8 @@ def mapper():
 
 ##### 1.1.4 Reducer 1
 
+The first reducer saves all user ids and listen counts to later combine and print them with the single artist. We can not print every line at once, because the artist name only occurs once in the list of input lines from the mapper.
+
 ```python
 def reducer():
     prev_track = None
@@ -695,19 +695,15 @@ def reducer():
 
     for line in sys.stdin:
         data = line.strip().split(',')
-
         if len(data) != 4:
             continue
 
         curr_track, curr_artist, user_id, listen_count = data
-
-        # Check argument type
         if not listen_count.isdigit():
             continue
 
         # If current track_id does not equal previous track_id
         if prev_track and prev_track != curr_track:
-
             # Print the previous track's listeners
             print_result(prev_track, prev_artist, prev_track_listeners)
 
@@ -736,6 +732,8 @@ def print_result(track_id, artist, listeners):
 ```
 
 ##### 1.1.4 Mapper 2
+
+The second mapper combines the result of the first round with `people.csv` to get the names of the users.
 
 ```python
 def mapper():
@@ -771,6 +769,12 @@ def mapper():
 ```
 
 ##### 1.1.4 Reducer 2
+
+The second and final reducer does not only combine the names of the users but also keeps a dictionary of all artist for the current user. The current user is the user we are currently 'visiting'.
+
+Because we choose to sort on user id we can not just combine the data in the second round but also calculate everyone's favourite artist. This would not be possible if we choose to combine user ids and names in the first round and artist names in the second. This would require a third mapreduce round to calculate the favourite artist.
+
+So the dictionary's key is the artist name and its value is the listen count for that user. When every line of play history has been processed, the result is printed by reverse sorting the key value pairs using `dict.items()` and taking the first item. This is a tuple with the most favourite user for the current user and its listen count.
 
 ```python
 def reducer():
@@ -918,9 +922,9 @@ Titos Hordell             Ironik                    4
 
 #### 1.2 Mapper
 
-The task of the mapper was to spit out for every word in a "work" (=document) and append it with the line number in which that word would appear. A for-loop was necessary to read a line in a work. The first word of a line would be the line number so we added a condition to check if the first word was already initialized. 
+The task of the mapper was to spit out for every word in a "work" (document) and append it with the line number in which that word would appear. A for-loop was necessary to read a line in a work. The first word of a line would be the line number so we added a condition to check if the first word was already initialized.
 
-If the word that was being read in the for-loop wasn't the first word (a.k.a. the line number), the word would be spit out as a key,value pair. The key was the word (as a `Text` object) and the value was a combination of the name of the work and the line number. The combination was saved within a custom `Writable` class called `InvertedIndex`.
+If the word that is being read in the for-loop is not the first word (a.k.a. the line number), the word would be spit out as a key,value pair. The key was the word (as a `Text` object) and the value was a combination of the name of the work and the line number. The combination was saved within a custom `Writable` class called `InvertedIndex`.
 
 ```java
 class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, InvertedIndex> {
@@ -992,9 +996,11 @@ class InvertedIndex implements Writable {
 
 #### 1.2 Reducer
 
-The reducer in the Java version of Hadoop works a bit differently than the Python version. In Java we got an Iterable list of values per key. It was very easy to extract the right data from the reduce function.
+The reducer in the Java version of Hadoop works a bit differently than the Python version. In Java we got an iterable list of values per key. It was very easy to extract the right data from the reduce function.
 
-We created a `StringBuilder` that would append every work including a `@` sign followed by the line number. This list of different works would than be written as a value in the key,value pair of `word work01@1234...work99@5678`
+We created a `StringBuilder` that would append every work including a `@` sign followed by the line number. This list of different works would than be written as a value in the key,value pair of `word work@linenumber, ..., work@linenumber`
+
+The custom `toString()` method helps reduce the code in this class and keeping the responsibilities separated.
 
 ```java
 class InvertedIndexReducer extends Reducer<Text, InvertedIndex, Text, Text> {
@@ -1062,9 +1068,11 @@ e.g.: `10.223.157.186 - - [15/Jul/2009:14:58:59 -0700] "GET / HTTP/1.1" 403 202`
 
 >A program that determines for each IP address how often a hit is administered.
 
+A hit is just a request to a webserver. This is a single line in the source file. For this assignment we just count all IP occurrences in the access log file that is always in the first position.
+
 ##### 1.3.1 Mapper
 
-The goal of this mapper is to split the input value on whitespace and then to check if the string array is long enough to be processed. If that is the case, the mapper will write a key,value. The key being the IP as `Text` and the value being `1`
+The goal of this mapper is to split the input value on whitespace and then to check if the string array is long enough to be processed. Splitting on words does not work, because it will spit the IP address in four partials. If that is the case, the mapper will write a key,value. The key being the IP as `Text` and the value being `1`, an `IntWritable`.
 
 ```java
 class IPMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
@@ -1136,7 +1144,7 @@ One difference in the driver of this solution is that we use one reducer for eve
 
 ##### 1.3.2 Mapper
 
-The mapper extracts the right data from the value that is parsed into the map function. It will split the line of text that is inserted on whitespace. Once the line is splitted it will run a validity check and then a `IPOccurrence` which includes an IP and a `1` as the count is created. It then extracts the date from the splitted line which will be parsed using the Java build-in `SimpleDateFormat` class. If all steps are successful, the month and IPOccurrence will be written.
+The mapper extracts the right data from the value that is parsed into the map function. It will split the line of text that is inserted on whitespace. Once the line is split it will run a validity check and then a `IPOccurrence` which includes an IP and a `1` as the count is created. It then extracts the date from the split line which will be parsed using the Java build-in `SimpleDateFormat` class. If all steps are successful, the month and IPOccurrence will be written.
 
 ```java
 class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> {
@@ -1209,7 +1217,7 @@ class IPOccurrence implements Writable {
 
 ##### 1.3.2 Partitioner
 
-The partitioner will send the values that come out of the mapper to different reducers based on their key's value. It also uses the modulo to ensure that the key is not sent to an unknown reducer number.
+The partitioner will send the values that come out of the mapper to different reducers based on the key's value. It also uses the modulo to ensure that the key is not sent to a reducer that does not exist. It limits the function to the amount of reducers.
 
 ```java
 public class MonthPartitioner extends Partitioner<IntWritable, IPOccurrence> {
@@ -1221,7 +1229,7 @@ public class MonthPartitioner extends Partitioner<IntWritable, IPOccurrence> {
 
 ##### 1.3.2 Reducer
 
-The reducer will calculate the total occurrences of an IP address in a particular month. It will do this by retrieving all the IPOccerrences of all ip addresses of a month and making a sum for every seperate IP Address in a `HashMap`. When that is done the IP addressed saved in the HashMap will be sorted using a `SortedMap` to get the fastest sorting performance. 
+The reducer will calculate the total occurrences of an IP address in a particular month. It will do this by retrieving all the IPOccerrences of all ip addresses of a month and making a sum for every seperate IP Address in a `HashMap`. When that is done the IP addressed saved in the HashMap will be sorted using a `SortedMap` to get the fastest sorting performance.
 
 ```java
 class MonthReducer extends Reducer<IntWritable, IPOccurrence, IntWritable, IPOccurrence> {

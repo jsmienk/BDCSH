@@ -897,7 +897,9 @@ class InvertedIndex implements Writable {
 
 #### 1.2 Reducer
 
-In the reducer the 
+The reducer in the Java version of Hadoop works a bit differently than the Python version. In Java we got an Iterable list of values per key. It was very easy to extract the right data from the reduce function.
+
+We created a `StringBuilder` that would append every work including a `@` sign followed by the line number. This list of different works would than be written as a value in the key,value pair of `word work01@1234...work99@5678`
 
 ```java
 class InvertedIndexReducer extends Reducer<Text, InvertedIndex, Text, Text> {
@@ -967,6 +969,8 @@ e.g.: `10.223.157.186 - - [15/Jul/2009:14:58:59 -0700] "GET / HTTP/1.1" 403 202`
 
 ##### 1.3.1 Mapper
 
+The goal of this mapper is to split the input value on whitespace and then to check if the string array is long enough to be processed. If that is the case, the mapper will write a key,value. The key being the IP as `Text` and the value being `1`
+
 ```java
 class IPMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
@@ -984,7 +988,7 @@ class IPMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
 ##### 1.3.1 Reducer
 
-The reducer calculates the sum of an IP address' hits.
+The reducer calculates the sum of an IP address' hits. It iterates through the values that correspond to a certain key which is the IP. When it is done it will write the IP and the total sum.
 
 ```java
 class IPReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
@@ -1036,6 +1040,8 @@ Running a full Hadoop job results in the following output:
 One difference in the driver of this solution is that we use one reducer for every month of the year. We set this by using: `job.setNumReduceTasks(12);`.
 
 ##### 1.3.2 Mapper
+
+The mapper
 
 ```java
 class MonthMapper extends Mapper<LongWritable, Text, IntWritable, IPOccurrence> {

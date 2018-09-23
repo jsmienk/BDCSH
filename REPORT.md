@@ -276,6 +276,8 @@ def print_result(track_id, dict):
         print("{0}\t{1}\t{2}".format(track_id, month, dict[month]))
 ```
 
+##### 1.1.1 Results
+
 Running a Hadoop job on the large data set resulted in the following output:
 
 ```text
@@ -1192,12 +1194,10 @@ _Month integers are zero indexed._
 
 ## Problems & Solutions
 
-Finding out file formats.
+In the beginning it was not entirely clear how to structure and edit the Python script files to make them run properly. We figured out we had to give the file executable permissions and that we forgot to call the mapper/reducer function we declared. This was not initially clear from the MOOC.
 
-Adding Java .jar libraries.
+When we started on the Java portion of the assignments we had no idea what we needed and how the files should look. After searching online, we found which JAR libraries to add and how to develop custom drivers, mappers and reducers.
 
-File permissions.
+We wanted to work with Git so we could both develop from our own machines and not in the slow VM. Unfortunately Git and/or one of its dependencies were not up to date on the provided VM image. After some tinkering we got Git to work too.
 
-Git on CentOS
-
-Testing just the mapper in Java or the complete workflow.
+Testing the Python mapper individually or the whole mapreduce was really easy by simulating the Hadoop workflow in the command line. Unfortunately we did not find such a 'shotcut' when developing in Java. We had to run a full Hadoop job to test the Java code. At least using Java produced error messages when running a Hadoop job. Using Python did not do this.

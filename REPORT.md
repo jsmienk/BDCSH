@@ -534,6 +534,99 @@ Rhys Pearne        23    35
 
 >The 5 songs played most often in a specific hour of the day i.e. between 7AM and 8AM. Expected output: 5 lines containing (Songtitle, ArtistName, NumberOfTimesPlayed).
 
+In this assignment the goal is to find the five songs users most listened in one specific hour.
+
+##### 1.1.3 Mapper
+
+The mapper combines data from both `playhistory.csv` and `tracks.csv` and filters out lines that are not in the chosen hour. Combining works the same as in the previous mapreduce subassignment.
+
+```python
+def mapper():
+    HOUR_OF_DAY_CONST = 12
+
+    for line in sys.stdin:
+        data = line.strip().split(',')
+        if data[0] == 'track_id':
+            continue
+
+        track_id = None
+        title = '-'
+        artist = '-'
+        listened_count = 0
+
+        if len(data) == 3: # playhistory.csv
+            track_id = data[0]
+            time_stamp = data[2]
+
+            # Extract the hour of the day from the datetime
+            hour_of_day = datetime.strptime(time_stamp.strip(), '%Y-%m-%d %H:%M:%S').hour
+            if hour_of_day != HOUR_OF_DAY_CONST:
+                continue
+
+            listened_count = 1
+        elif len(data) == 4: # tracks.csv
+            track_id = data[0]
+            artist = data[1]
+            title = data[2]
+        else:
+            continue
+
+        print('{0},{1},{2},{3}'.format(track_id, title, artist, listened_count))
+```
+
+##### 1.1.3 Reducer
+
+The reducer combines all data the same way we did last time. Because we used the track id as key, all tracks come in in order and we do not have to use a map for counting the play count. We can just keep track with a local variable and save the total to an array together with the track's title and artist.
+
+After all tracks have been visited the array is sorted in reverse using the listen count as key and cut to only print the five most played tracks.
+
+```python
+def reducer():
+    prev_track = None
+    curr_track = None
+    curr_track_title = None
+    curr_track_artist = None
+    curr_track_listened_count = 0
+    all_tracks = []
+
+    for line in sys.stdin:
+        data = line.strip().split(',')
+        if len(data) != 4:
+            continue
+
+        curr_track, title, artist, listened_count = data
+        if not listened_count.isdigit():
+            continue
+
+        if curr_track_title == None and title != '-':
+            curr_track_title = title
+        if curr_track_artist == None and artist != '-':
+            curr_track_artist = artist
+
+        # If current track_id does not equal previous track_id
+        if prev_track and prev_track != curr_track:
+            # Print the previous track information
+            all_tracks.append([curr_track_title, curr_track_artist, curr_track_listened_count])
+
+            # Reset variables
+            curr_track_title = None
+            curr_track_artist = None
+            curr_track_listened_count = 0
+
+        # Increase listen count
+        curr_track_listened_count += int(listened_count)
+        # Set the current track_id as the previous track_id for next iteration
+        prev_track = curr_track
+
+    # Print the current user's playhistory
+    all_tracks.append([curr_track_title, curr_track_artist, curr_track_listened_count])
+
+    for track in sorted(all_tracks, key = lambda x : x[2], reverse = True)[:5]:
+        print("{0}\t{1}\t{2}".format(track[0], track[1], track[2]))
+```
+
+##### 1.1.3 Result
+
 We choose to find songs between 12:00 and 13:00.
 
 Running a Hadoop job on the large data set resulted in the following output:
@@ -551,9 +644,11 @@ Me culpas de todo         Medina Azahara                        26
 
 >For each user, the artist (s)he listen to most often. Expected output: (FirstName, LastName, Artist, NrofTimes listened to that artist) (Hint: you need a cascade of mappers and reducers. Explain why!).
 
-Combining play history and artists.
+We need to find the most favourite artist of every user by combining the user's name, their history and track info. This requires a solution using two rounds of mapreduce.
 
 Combining play history and names.
+
+Combining play history and artists.
 
 Reducing names and artists to the most favourite artist per user.
 
